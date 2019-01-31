@@ -4,15 +4,19 @@ public class Board
 {
     private int[3][3] board;
 
-    void set(int player,   // the player's symbol
-             int x, int y) // position where to place player's symbol
+    boolean set(int player,   // the player's symbol
+                int x, int y) // position where to place player's symbol
     {
         if(board[x][y] == 0) // if this board space is empty
         {
             board[x][y] = player; // set board
-            // !! Update Something to show that the player's turn is over !!
+            return true; // return that the player has used his turn
         }
-        // else the player entered an illigal move and his turn is not over
+        else // else the player entered an illigal move and his turn is not over
+        {
+            return false;
+        }
+
     }
 
     public Board(int a, int b, int c,
