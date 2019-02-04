@@ -1,4 +1,4 @@
-package cs4b.proj1;
+package sample;
 
 public class Controller {
 }
