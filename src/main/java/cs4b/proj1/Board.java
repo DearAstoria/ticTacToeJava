@@ -1,19 +1,22 @@
 package cs4b.proj1;
 
-public class Board
+public class Board implements java.io.Serializable
 {
     private int[3][3] board;
 
-    public void consolPrint() // print the board to the consol for debuging purposes
+    @Override
+    public String toString() // returns a string of the bord to print in the consol for debuging purposes
     {
+        StringBuilder str;
         for(int y = 0; y < 3; y++)
         {
             for(int x = 0; x < 3; x++)
             {
-                System.out.print(board[y][x] + ", ");
+                str.append(board[y][x]).append(", ");
             }
-            System.out.print("\n");
+            str.append("\n");
         }
+        return str.toString();
     }
 
     public int checkForWin()
