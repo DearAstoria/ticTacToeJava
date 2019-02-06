@@ -1,4 +1,4 @@
-package sample;
+package cs4b.proj1;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

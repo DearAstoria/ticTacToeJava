@@ -1,4 +1,4 @@
-package sample;
+package cs4b.proj1;
 
 import javafx.scene.image.ImageView;
 
@@ -15,8 +15,10 @@ public class Cpu extends Player {
     }
     @Override
     void move(){
-        if(game.gameIsOver() )
+        if(game.gameIsOver() ) {
+            board.removeGameControls();
             return;
+        }
         int []m = {0,0};
         try{ TimeUnit.SECONDS.sleep(1); }
         catch(Exception e){e.printStackTrace();}
@@ -25,13 +27,10 @@ public class Cpu extends Player {
             while (game.occupied(m[0], m[1]));
         }
         else {
-            do m = randomMove();
+            do m = bestMove();
             while (game.occupied(m[0], m[1]));
         }
-        game.board[m[0]][m[1]] = getIcon();
-        board.location[m[0]][m[1]].getChildren().add(new ImageView(iconImage));
-        //swapTurns();
-        opponent.move();
+        execute(m[0],m[1]);
 
     }
     static int[] randomMove(){

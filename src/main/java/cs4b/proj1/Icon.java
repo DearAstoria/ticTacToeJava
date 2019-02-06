@@ -1,4 +1,4 @@
-package sample;
+package cs4b.proj1;
 
 public class Icon {
           char icon(){return 0;}   // purpose: to avoid the use of char literals when constructing Player objects

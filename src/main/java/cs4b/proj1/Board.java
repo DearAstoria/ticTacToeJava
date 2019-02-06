@@ -1,4 +1,4 @@
-package sample;
+package cs4b.proj1;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,18 +12,15 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
+import java.io.Serializable;
 
-public class Board {
+public class Board implements Serializable {
 
-    private Game publisher;
-    private Image image[] = new Image[2];
-    private int currentPlayer;
     GridPane board;
     StackPane [][] location;
 
 
-    Board(Game publisher){
-        this.publisher = publisher;
+    Board(){
         board = new GridPane();
         location = new StackPane[3][3];
         Rectangle rectangle;
@@ -37,7 +34,7 @@ public class Board {
             }
     }
 
-    void play(Player[] players, int current){
+    void show(Player[] players, int current){
         Stage stage = new Stage();
 
 
@@ -45,5 +42,10 @@ public class Board {
         stage.setScene(scene);
         stage.show();
 
+    }
+    public void removeGameControls() {
+        for(int i=0;i<3;i++)
+            for(int j=0;j<3;++j)
+                location[i][j].setOnMouseClicked(null);
     }
 }

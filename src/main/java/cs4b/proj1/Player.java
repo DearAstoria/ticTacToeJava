@@ -1,6 +1,7 @@
-package sample;
+package cs4b.proj1;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.FileInputStream;
 
@@ -27,8 +28,16 @@ public class Player {
         else {} //    error must be X or Y
     }
 
+    public void execute(int r, int c){
+        game.board[r][c] = getIcon();
+        System.out.println(getIcon() + "  " + "[" + r + "," + c + "]");
+        board.location[r][c].getChildren().add(new ImageView(iconImage));
+        opponent.move();
+    }
 
     public char getIcon() { return icon; }
+
+
     public Image getIconImage() {
         return iconImage;
     }
@@ -47,6 +56,12 @@ public class Player {
     void setOpponent(Player enemy){ opponent = enemy; }
 
     void setUp() {
+    }
+
+    @Override
+    public String toString(){
+        String str = name += " ";
+        return str += icon;
     }
 
 }
