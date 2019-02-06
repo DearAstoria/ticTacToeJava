@@ -60,7 +60,7 @@ public class Main extends Application {
 
         HBox cpuSetting = new HBox();
         Label cpuLable = new Label("CPU mode:  ");
-        ComboBox<String> cpuMode = new ComboBox<>();  // like ChoiceBox, but does not need listener, you can use setOnAction
+        ComboBox<String> cpuMode = new ComboBox<>();
         cpuMode.getItems().addAll("easy", "hard");
         cpuSetting.getChildren().addAll(cpuLable, cpuMode);
 
