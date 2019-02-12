@@ -31,8 +31,8 @@ public class Board {
 
         for(int i=0;i<3;++i)
             for(int j=0;j<3;++j){
-                rectangle = new Rectangle(100,100, Paint.valueOf("BEIGE"));
-                rectangle.setStroke(Paint.valueOf("BLACK"));
+                rectangle = new Rectangle(100,100, Paint.valueOf("BLACK"));
+                rectangle.setStroke(Paint.valueOf("WHITE"));
                 location[i][j] = new StackPane(rectangle);
                 board.add(location[i][j],j,i,1,1);
                 if(!game.isNewGame && game.board[i][j] != 0)
