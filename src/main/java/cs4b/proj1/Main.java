@@ -9,6 +9,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 
+import java.io.*;
+import java.util.Optional;
+
 public class Main extends Application {
     private Scene mainMenu;
     private Scene playerMode;
@@ -17,6 +20,40 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
+        if(Game.savedGame.isFile()){
+            //System.out.println(Game.savedGame.isFile());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("restore game");
+            alert.setHeaderText("The previous game was not finished.");
+            alert.setContentText("Would you like to restore the last game?");
+
+            ButtonType buttonTypeOne = new ButtonType("Yes");
+            ButtonType buttonTypeCancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeOne){
+                // restore game
+                Game.restore().play();
+                return;
+            }  else {
+                // ... user chose CANCEL or closed the dialog
+            }
+
+
+        }
+
+
+
+
+
+        // back to main menu
+
+
+
+
         primaryStage.setTitle("Hello World");
 
         Button newGame = new Button("New Game");

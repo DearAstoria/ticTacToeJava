@@ -4,38 +4,35 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.FileInputStream;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable {
 
     Player opponent;
     boolean myTurn;
-    Image iconImage;
-    private char icon;
+    transient Image iconImage;
+    private Icon icon;
     private String name;
-    protected Board board;
+    transient protected Board board;
     protected Game game;
 
     public Player(String name, Icon iconParam, Game g) {
         game = g;
         this.name = name;
-        this.icon = iconParam.icon();
-        if(icon == Icon.Xchar){
-            try{iconImage = new Image(new FileInputStream("src/graphics/X.png"),10,10,false,false);}
-            catch(Exception e){e.printStackTrace();}    }
-        else if(icon == Icon.Ochar){
-        try{iconImage = new Image(new FileInputStream("src/graphics/O.png"),10,10,false,false);}
-        catch(Exception e){e.printStackTrace();}    }
-        else {} //    error must be X or Y
+        icon = iconParam;
     }
 
-    public void execute(int r, int c){
+    public void execute(int r, int c) {
         game.board[r][c] = getIcon();
         System.out.println(getIcon() + "  " + "[" + r + "," + c + "]");
-        board.location[r][c].getChildren().add(new ImageView(iconImage));
+        board.location[r][c].getChildren().add(icon.newImageView());
+        game.current = opponent;
+        try{                 Game.save(game);     }
+        catch(Exception e){  e.printStackTrace(); }
         opponent.move();
     }
 
-    public char getIcon() { return icon; }
+    public char getIcon() { return icon.icon(); }
 
 
     public Image getIconImage() {
@@ -60,8 +57,10 @@ public class Player {
 
     @Override
     public String toString(){
-        String str = name += " ";
-        return str += icon;
+        String str = "";
+        str += name;
+        str += ", playing as ";
+        return str += icon.icon();
     }
 
 }

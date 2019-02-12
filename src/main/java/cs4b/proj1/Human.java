@@ -9,7 +9,7 @@ public class Human extends Player {
 
 
         @Override
-        void move(){
+        void move() {
         if(game.gameIsOver()) {
             board.removeGameControls();
             return;

@@ -2,48 +2,60 @@ package cs4b.proj1;
 
 import javafx.scene.image.ImageView;
 
-public class Game {
-    Player [] p;         // players[0] is always Player.X,  players[1] is Player.Y
-    Player winner = null;
-    int current = 0;
-    Board boardUi;
+import java.io.*;
+
+
+public class Game implements Serializable{
+    boolean isNewGame = true;
+    //Player [] p;         // players[0] is always Player.X,  players[1] is Player.Y
+    Player  x_Player = null,
+            o_Player = null,
+            winner = null,
+            current = null;
+
+    transient Board boardUi;
     char [][]board = {{0,0,0},{0,0,0},{0,0,0}};
     boolean gameOver = false;
+    static final File savedGame = new File("savedGame.bin");
     Game(){}
-    Game(String humanPlayer, Icon icon, Icon firstMover){
-        p  = new Player[2];
-        if(icon.icon() == Icon.Xchar) {
-            p[0] = new Human(humanPlayer, icon, this);
-            p[1] = new Cpu(new O(), this);
+    Game(String humanPlayer, Icon playersIcon, Icon firstMover){
+        //p  = new Player[2];
+        if(playersIcon.icon() == Icon.Xchar) {
+            x_Player = new Human(humanPlayer, playersIcon, this);
+            o_Player = new Cpu(new O(), this);
 
         }
         else
-        {   p[0] = new Cpu(new X(), this);
-            p[1] = new Human(humanPlayer, icon, this);
+        {   x_Player = new Cpu(new X(), this);
+            o_Player = new Human(humanPlayer, playersIcon, this);
         }
-        p[0].setOpponent(p[1]);
-        p[1].setOpponent(p[0]);
-        if(firstMover.icon() == Icon.Ochar)
-            current = 1;
+        x_Player.setOpponent(o_Player);
+        o_Player.setOpponent(x_Player);
+        if(firstMover.icon() == Icon.Xchar)
+            current = x_Player;
+        else
+            current = o_Player;
     }
 
     Game(String xPlayer, String yPlayer, Icon firstMover){
 
-        p = new Player[2];
-        p[0] = new Human(xPlayer, new X(), this);
-        p[1] = new Human(yPlayer, new O(), this);
-        p[0].setOpponent(p[1]);
-        p[1].setOpponent(p[0]);
-        if(firstMover.icon() == Icon.Ochar)
-            current = 1;
+        //p = new Player[2];
+        x_Player = new Human(xPlayer, new X(), this);
+        o_Player = new Human(yPlayer, new O(), this);
+        x_Player.setOpponent(o_Player);
+        o_Player.setOpponent(x_Player);
+        if(firstMover.icon() == Icon.Xchar)
+            current = x_Player;
+        else
+            current = o_Player;
     }
 
     public void play(){
-        boardUi = new Board();
-        boardUi.show(p, current);
-        p[0].setGame(boardUi);
-        p[1].setGame(boardUi);
-        p[current].move();
+        boardUi = new Board(this);
+        boardUi.show();
+        x_Player.setGame(boardUi);
+        o_Player.setGame(boardUi);
+        current.move();
 
         }
 
@@ -56,6 +68,7 @@ public class Game {
     boolean gameIsOver(){
         if(updateWinner() != null) {  // if there is a winner, return true
             System.out.println("Winner is " + winner);
+            savedGame.delete();
             return true;
         }
 
@@ -65,10 +78,25 @@ public class Game {
                     return gameOver = false;
 
         System.out.println("no winner");
+        savedGame.delete();
         return gameOver = true;
     }
 
+    public static Game restore() throws Exception{
+        FileInputStream fileInput = new FileInputStream(savedGame);
+        ObjectInputStream objInput = new ObjectInputStream((fileInput));
+        return (Game)objInput.readObject();
 
+
+    }
+
+    public static void save(Game game) throws Exception{
+        //if(savedGame.)
+        game.isNewGame = false;
+        FileOutputStream fileOutput = new FileOutputStream(savedGame, false);
+        ObjectOutputStream objOutput = new ObjectOutputStream((fileOutput));
+        objOutput.writeObject(game);
+    }
 
     @Override
     public String toString() // returns a string of the bord to print in the consol for debuging purposes
@@ -112,10 +140,10 @@ public class Game {
     }
 
     private Player playerOf(char c){
-        if (c == p[0].getIcon())
-            return winner = p[0];
-        else if (c == p[1].getIcon())
-            return winner = p[1];
+        if (c == x_Player.getIcon())
+            return winner = x_Player;
+        else if (c == o_Player.getIcon())
+            return winner = o_Player;
         return null;
     }
 }
