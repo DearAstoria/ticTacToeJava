@@ -80,12 +80,16 @@ public class Main extends Application {
         Button twoPlayer = new Button("two-player mode");
         Button back = new Button("back");
         options.getChildren().addAll(singleMode, twoPlayer);
+
         options.getChildren().get(0).setOnMouseClicked(e -> { singleMode(primary); } );
         options.getChildren().get(1).setOnMouseClicked(e -> { twoPlayerMode(primary); } );
+
         BorderPane borderPane = new BorderPane(options, null, null, back, null);
         mainMenu = new Scene(borderPane, 600, 600);
+
         back.setOnMouseClicked(e -> { try{ start(primary);}
                                         catch (Exception ex ){ ex.printStackTrace();  }} );
+
         options.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(back, Pos.BOTTOM_CENTER);
         primary.setScene(mainMenu);
@@ -99,6 +103,7 @@ public class Main extends Application {
         Label cpuLable = new Label("CPU mode:  ");
         ComboBox<String> cpuMode = new ComboBox<>();
         cpuMode.getItems().addAll("easy", "hard");
+        cpuMode.getSelectionModel().selectFirst();
         cpuSetting.getChildren().addAll(cpuLable, cpuMode);
 
 
@@ -106,6 +111,7 @@ public class Main extends Application {
         Label humanLabel = new Label("Human plays:  ");
         ComboBox<String> humanTeam = new ComboBox<>();
         humanTeam.getItems().addAll("X", "O");
+        humanTeam.getSelectionModel().selectFirst();
         Button begin = new Button("begin");
         humanSetting.getChildren().addAll(humanLabel, humanTeam);
         TextField humanName = new TextField("Player1");
@@ -114,6 +120,7 @@ public class Main extends Application {
 
         ComboBox<String> firstMover = new ComboBox<>();
         firstMover.getItems().addAll("X goes first", "O goes first");
+        firstMover.getSelectionModel().selectFirst();
 
         menu.getChildren().addAll(cpuSetting, humanSetting, humanName, firstMover, begin);
 
@@ -134,6 +141,7 @@ public class Main extends Application {
         BorderPane parent = new BorderPane();
         ComboBox<String> firstMover = new ComboBox<>();
         firstMover.getItems().addAll("X goes first", "O goes first");
+        firstMover.getSelectionModel().selectFirst();
         TextField player1 = new TextField("Player1");
         TextField player2 = new TextField("Player2");
         Button begin = new Button("begin");
