@@ -6,13 +6,15 @@ import javafx.scene.Parent;
 import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 
 import java.io.*;
 import java.util.Optional;
 
-public class Main extends Application {
+    public class Main extends Application {
     private Scene mainMenu;
     private Scene playerMode;
 
@@ -21,29 +23,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
-        if(Game.savedGame.isFile()){
-            //System.out.println(Game.savedGame.isFile());
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("restore game");
-            alert.setHeaderText("The previous game was not finished.");
-            alert.setContentText("Would you like to restore the last game?");
 
-            ButtonType buttonTypeOne = new ButtonType("Yes");
-            ButtonType buttonTypeCancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonTypeOne){
-                // restore game
-                Game.restore().play();
-                return;
-            }  else {
-                // ... user chose CANCEL or closed the dialog
-            }
-
-
-        }
+        if(checkForSavedGame())
+            return;
 
 
 
@@ -105,16 +87,24 @@ public class Main extends Application {
         cpuMode.getItems().addAll("easy", "hard");
         cpuMode.getSelectionModel().selectFirst();
         cpuSetting.getChildren().addAll(cpuLable, cpuMode);
+        //cpuSetting.setAlignment(Pos.CENTER);
 
 
-        HBox humanSetting = new HBox();
-        Label humanLabel = new Label("Human plays:  ");
+
+
         ComboBox<String> humanTeam = new ComboBox<>();
         humanTeam.getItems().addAll("X", "O");
         humanTeam.getSelectionModel().selectFirst();
         Button begin = new Button("begin");
-        humanSetting.getChildren().addAll(humanLabel, humanTeam);
+                begin.setPrefSize(100,50);
         TextField humanName = new TextField("Player1");
+        HBox nameSetting = new HBox(new Label("Player Name:  "), humanName);
+             //nameSetting.setAlignment(Pos.CENTER);
+        HBox playerIcon = new HBox(new Label("plays as:  "), humanTeam);
+             //playerIcon.setAlignment(Pos.CENTER);
+        Button back = new Button("back");
+        back.setAlignment(Pos.BOTTOM_LEFT);
+        menu.setSpacing(50);
 
 
 
@@ -122,7 +112,11 @@ public class Main extends Application {
         firstMover.getItems().addAll("X goes first", "O goes first");
         firstMover.getSelectionModel().selectFirst();
 
-        menu.getChildren().addAll(cpuSetting, humanSetting, humanName, firstMover, begin);
+        menu.getChildren().addAll(cpuSetting, nameSetting, playerIcon, firstMover, begin, back);
+        //menu.setAlignment(Pos.CENTER);
+        HBox master = new HBox(menu);
+        master.setAlignment(Pos.CENTER);
+        //master.setTranslateY(50);
 
 
         begin.setOnMouseClicked(e ->{
@@ -131,10 +125,12 @@ public class Main extends Application {
             game.play();
         });
 
-        Scene scene = new Scene(menu, 600, 600);
+        back.setOnMouseClicked(e -> { try{ playerMode(primary);}
+                                      catch (Exception ex ){ ex.printStackTrace();  }} );
+
+        Scene scene = new Scene(master, 600, 600);
         primary.setScene(scene);
         primary.show();
-
 
     }
     private void twoPlayerMode(Stage primary){
@@ -145,16 +141,20 @@ public class Main extends Application {
         TextField player1 = new TextField("Player1");
         TextField player2 = new TextField("Player2");
         Button begin = new Button("begin");
+        Button back = new Button("back");
         parent.setTop(firstMover);
         parent.setLeft(player1);
         parent.setRight(player2);
-        parent.setBottom(begin);
+        parent.setBottom(new HBox(begin,back));
 
         begin.setOnMouseClicked(e ->{ primary.close();
                                       Game game = new Game(player1.getText(), player2.getText(), Icon.toIcon(firstMover.getValue().charAt(0)));
                                       game.play();
 
         });
+
+        back.setOnMouseClicked(e -> { try{ playerMode(primary);}
+                                      catch (Exception ex ){ ex.printStackTrace();  }} );
 
 
         Scene scene = new Scene(parent, 600, 600);
@@ -165,5 +165,30 @@ public class Main extends Application {
 
 
 
+    }
+
+    public boolean checkForSavedGame() throws Exception{
+        if (Game.savedGame.isFile()) {
+            //System.out.println(Game.savedGame.isFile());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("restore game");
+            alert.setHeaderText("The previous game was not finished.");
+            alert.setContentText("Would you like to restore it?");
+
+            ButtonType buttonTypeOne = new ButtonType("Yes");
+            ButtonType buttonTypeCancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeOne) {
+                // restore game
+                Game.restore().play();
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 }

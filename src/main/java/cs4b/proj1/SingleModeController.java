@@ -18,8 +18,10 @@ public class SingleModeController {
 
         firstMover.getItems().addAll("X goes first", "O goes first");
         firstMover.getSelectionModel().selectFirst();
+
         cpuMode.getItems().addAll("easy", "hard");
         cpuMode.getSelectionModel().selectFirst();
+
         humanTeam.getItems().addAll("X", "O");
         humanTeam.getSelectionModel().selectFirst();
 

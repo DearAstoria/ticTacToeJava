@@ -19,14 +19,18 @@ import java.io.Serializable;
 public class Board {
 
     GridPane board;
+    Button exitGame;
     StackPane [][] location;
+    Stage stage = new Stage();
 
 
     Board(Game game){
         board = new GridPane();
+        exitGame = new Button("exit game");
         location = new StackPane[3][3];
         Rectangle rectangle;
         board.setAlignment(Pos.CENTER);
+        //exitGame.setAlignment(Pos.CENTER);
 
 
         for(int i=0;i<3;++i)
@@ -37,13 +41,17 @@ public class Board {
                 board.add(location[i][j],j,i,1,1);
                 if(!game.isNewGame && game.board[i][j] != 0)
                         location[i][j].getChildren().add(Icon.toIcon(game.board[i][j]).newImageView());
-
             }
+        exitGame.setOnMouseClicked( e -> {  stage.close();
+                                            Main main = new Main();
+                                            try {main.start(new Stage());}
+                                            catch(Exception er){er.printStackTrace();}   });
     }
 
     void show(){
-        Stage stage = new Stage();
-        Scene scene = new Scene(board, 600, 600);
+        VBox vbox = new VBox(board, exitGame);
+        vbox.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(vbox, 600, 600);
         stage.setScene(scene);
         stage.show();
 
