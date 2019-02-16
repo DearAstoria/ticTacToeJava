@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.YooController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="200.0" spacing="3.0" style="-fx-background-color: black; -fx-border-color: red;">
+         <children>
+            <Button fx:id="resume" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#onHovered" onMouseExited="#mouseExit" prefWidth="140.0" style="-fx-background-radius: 90; -fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 90; -fx-border-width: 2;" text="resume">
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="newGame" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#newGameClicked" onMouseEntered="#onHovered" onMouseExited="#mouseExit" prefWidth="140.0" style="-fx-background-radius: 90; -fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 90; -fx-border-width: 2;" text="new game">
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font>
+            </Button>
+         </children></VBox>
+   </children>
+</StackPane>

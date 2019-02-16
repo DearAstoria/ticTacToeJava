@@ -5,7 +5,7 @@ package sample;
 // the game
 public class GameState
 {
-    private boolean playerTurn = false; // who's turn is it, either X (true) or O (false)
+    private boolean xPlayersTurn = false; // who's turn is it, either X (true) or O (false)
     private int[][] boardSpaces = new int[][]{ { 0, 0, 0 },
                                                { 0, 0, 0 },
                                                { 0, 0, 0 } };
@@ -65,12 +65,12 @@ public class GameState
 
     public boolean getTurn()
     {
-        return playerTurn;
+        return xPlayersTurn;
     }
 
     public void changeTurn()
     {
-        playerTurn = !playerTurn;
+        xPlayersTurn = !xPlayersTurn;
     }
 
     private boolean matching(int a, int b, int c)

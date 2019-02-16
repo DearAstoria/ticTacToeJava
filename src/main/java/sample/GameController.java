@@ -136,7 +136,7 @@ public class GameController
     public void restart(ActionEvent click) throws java.io.IOException
     {
         // load the next scene
-        Parent GameScreenParent = FXMLLoader.load(getClass().getResource("StartupMenu.fxml"));
+        Parent GameScreenParent = FXMLLoader.load(getClass().getResource("Yoo.fxml"));
         Scene GameScreenScene = new Scene(GameScreenParent);
 
         // get the stage... getSource = get object that was clicked on (the button) from the event, getScene = get the scene the button is a part of, getWindow = get the stage the scene is a part of
