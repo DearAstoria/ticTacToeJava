@@ -1,16 +1,22 @@
 package sample;
 
+import java.util.Random;
+
 // an object of this class stores all raw data about the game (who's turn it currently is, the spaces on the board) and
 // the methods for deciding a computer opponent's next move (either random, or intelligent), and deciding the winner of
 // the game
 public class GameState
 {
-    private boolean xPlayersTurn = false; // who's turn is it, either X (true) or O (false)
+    private boolean playerTurn = true; // who's turn is it, either X (true) or O (false)
     private int[][] boardSpaces = new int[][]{ { 0, 0, 0 },
                                                { 0, 0, 0 },
                                                { 0, 0, 0 } };
 
     public GameState() {}
+    public GameState(String ply1, String ply2, char firstMover) {
+        playerTurn = firstMover == 'X';
+
+    }
 
     public int checkForWin()
     {
@@ -36,9 +42,9 @@ public class GameState
         {
             return boardSpaces[0][0];
         }
-        else if(boardSpaces[2][2] != 0 && matching(boardSpaces[2][2], boardSpaces[1][1], boardSpaces[0][0]))
+        else if(boardSpaces[2][0] != 0 && matching(boardSpaces[2][0], boardSpaces[1][1], boardSpaces[0][2]))
         {
-            return boardSpaces[2][2];
+            return boardSpaces[2][0];
         }
         else // if no winner is found, then determine if there is still a playable/empty space
         {
@@ -63,14 +69,19 @@ public class GameState
         boardSpaces[x][y] = player;
     }
 
+    public int get(int x, int y)
+    {
+        return boardSpaces[x][y];
+    }
+
     public boolean getTurn()
     {
-        return xPlayersTurn;
+        return playerTurn;
     }
 
     public void changeTurn()
     {
-        xPlayersTurn = !xPlayersTurn;
+        playerTurn = !playerTurn;
     }
 
     private boolean matching(int a, int b, int c)

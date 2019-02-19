@@ -16,37 +16,45 @@ import javafx.event.ActionEvent;
 public class GameController
 {
     private GameState game = new GameState(); // the state of the game: board spaces, and who's turn it is
+ //   private OpponentAI opponent = new OponnentAI("easy"); //
     public Button RESTART; // a prompt to restart the game once it is over (as defined in GameScreen.fxml)
 
+    // highlight the space the mouse is over with the player's symbol
     public void mouseOver(MouseEvent event)
     {
         Pane space = (Pane)event.getSource(); // get the board space that detected this event
 
+        // determine if the space should be highlighted, and what symbol should be used
         if(space.getChildren().isEmpty()) // if this space is empty then add a highlight of the player's token
         {
             if(game.getTurn()) // if it is the player's turn add a X
             {
+                // Create a X
                 Text x = new Text("X");
                 x.setTextAlignment(TextAlignment.CENTER);
                 x.setFont(new Font(64));
                 x.setOpacity(0.25);
                 x.setId("Temporary");
 
+                // Put the X in this space
                 space.getChildren().add(x);
             }
             else // else add an O
             {
+                // Create an O
                 Text o = new Text("O");
                 o.setTextAlignment(TextAlignment.CENTER);
                 o.setFont(new Font(64));
                 o.setOpacity(0.25);
                 o.setId("Temporary");
 
+                // Put the O in this space
                 space.getChildren().add(o);
             }
         }
     }
 
+    // Clear the highlighted symbol if the mouse moves out of a space
     public void mouseOut(MouseEvent event)
     {
         Pane space = (Pane)event.getSource(); // get the board space that detected this event
@@ -75,7 +83,7 @@ public class GameController
             switch(space.getId())
             {
                 case "cell00":
-                    game.set(game.getTurn() ? 1 : 2, 0, 0);
+                    game.set(game.getTurn() ? 1 : 2, 0, 0); // if O's turn, put an O at (0,0) else put an X at (0,0)
                     break;
                 case "cell01":
                     game.set(game.getTurn() ? 1 : 2, 1, 0);
@@ -116,9 +124,11 @@ public class GameController
                     break;
                 case 1: // O win
                     outputWinner("O wins"); // return to main menu
+                    // highlight winning group
                     break;
                 case 2: // X wins
                     outputWinner("X wins"); // return to main menu
+                    // highlight winning group
                     break;
             }
         }
@@ -136,7 +146,7 @@ public class GameController
     public void restart(ActionEvent click) throws java.io.IOException
     {
         // load the next scene
-        Parent GameScreenParent = FXMLLoader.load(getClass().getResource("Yoo.fxml"));
+        Parent GameScreenParent = FXMLLoader.load(getClass().getResource("StartupMenu.fxml"));
         Scene GameScreenScene = new Scene(GameScreenParent);
 
         // get the stage... getSource = get object that was clicked on (the button) from the event, getScene = get the scene the button is a part of, getWindow = get the stage the scene is a part of

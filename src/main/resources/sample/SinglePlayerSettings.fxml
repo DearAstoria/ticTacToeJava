@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SingleSettingsController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="220.0" style="-fx-border-color: gray;">
+               <children>
+                  <Text fill="#fcfafa" strokeType="OUTSIDE" strokeWidth="0.0" text="CPU">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="-34.0" right="5.0" />
+                     </HBox.margin>
+                  </Text>
+                  <Button fx:id="easy" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#cpuField" prefHeight="30.0" prefWidth="55.0" style="-fx-background-color: #2b2a2a; -fx-border-color: white;" text="easy" textFill="WHITE" />
+                  <Button fx:id="hard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#cpuField" prefHeight="30.0" prefWidth="55.0" style="-fx-border-color: gray; -fx-background-color: black;" text="hard" textFill="#909090" />
+               </children>
+               <VBox.margin>
+                  <Insets left="40.0" right="40.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="220.0" style="-fx-border-color: gray;">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
+               </VBox.margin>
+               <children>
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="400.0">
+                     <children>
+                        <Text fill="#fcfafa" strokeType="OUTSIDE" strokeWidth="0.0" text="Player">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Text>
+                        <TextField alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="146.0" promptText="Name" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="-90.0" top="-10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="80.0">
+                     <children>
+                        <Text fill="#fcf8f8" strokeType="OUTSIDE" strokeWidth="0.0" text="plays">
+                           <HBox.margin>
+                              <Insets left="8.0" right="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Verdana" size="13.0" />
+                           </font>
+                        </Text>
+                        <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#playerField" prefHeight="26.0" prefWidth="24.0" style="-fx-background-color: #2b2a2a; -fx-border-color: white; -fx-background-radius: 0; -fx-background-insets: 0px;" text="X" textFill="WHITE" fx:id="x1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
+                           </padding>
+                        </Button>
+                        <Button fx:id="o1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#playerField" prefHeight="26.0" prefWidth="24.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-insets: 0px; -fx-background-radius: 0;" text="O" textFill="#909090">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" style="-fx-border-color: black;">
+               <children>
+                  <Text fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Who Moves First?   ">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin></Text>
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#firstMoverField" prefHeight="26.0" prefWidth="24.0" style="-fx-background-color: #2b2a2a; -fx-border-color: white; -fx-background-radius: 0; -fx-background-insets: 0px;" text="X" textFill="WHITE" fx:id="x2">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="o2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#firstMoverField" prefHeight="26.0" prefWidth="24.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-insets: 0px; -fx-background-radius: 0;" text="O" textFill="#909090">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
+                     </padding>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="134.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#back" style="-fx-background-color: black; -fx-border-color: black;" text="&lt;-- back" textFill="#b2b2b2">
+                     <font>
+                        <Font name="Verdana Italic" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="-220.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="begin" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#beginGame" prefHeight="40.0" prefWidth="100.0" style="-fx-background-radius: 90; -fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 90; -fx-border-width: 2;" text="begin">
+                     <font>
+                        <Font name="Verdana Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>
