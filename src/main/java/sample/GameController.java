@@ -14,6 +14,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.Font;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -25,7 +26,8 @@ public class GameController
 
     @FXML  public StackPane cell00, cell01, cell02, cell10, cell11, cell12, cell20, cell21, cell22;
     @FXML  public Button RESTART; // a prompt to restart the game once it is over (as defined in GameScreen.fxml)
-
+    @FXML  public BorderPane screen;
+    @FXML  public Text xBox, oBox;
     // indeces for current mover and winner   can only be 0 or 1 in a two player game
     public  int currentMover = 0;
     public int winnerIndex = -1;
@@ -33,8 +35,9 @@ public class GameController
     // parallel arrays   -  index with currentMover or winnerIndex above
     char [] pIcon  = {'x','o'};
     private Player [] p = new Player[2];
+    //
 
-    // lets OpponentAI access desired board space
+    // lets OpponentAI access desired board space  - used in the AI's move methods
     private StackPane [][] location = new StackPane[3][3];
 
     private GameState game = new GameState(); // the state of the game: board spaces, and who's turn it is
@@ -44,15 +47,28 @@ public class GameController
 
     public GameController()
     {
+        //init();
+        //screen.setMouseTransparent(true);
 
-       this("justis", 'X', "easy", 'O');
+
+
+        //this("justis", 'X', "easy", 'O');
         //initialize();
         //firstMove();
     }
 
-    public GameController(boolean t/*String xPlayer, String oPlayer, char firtmover*/) { System.out.println("yes"); }
-    public GameController(String humanName, char playerChoice, String easyMode, char firstmover)  // Single Player Mode
+    public void setTwoPlayerMode(String xPlayer, String oPlayer, char firstmover) {
+        currentMover = firstmover == 'X' ? 0 : 1;
+        p[0] = new Human(xPlayer);
+        p[1] = new Human(oPlayer);
+        xBox.setText(p[0].name);
+        oBox.setText(p[1].name);
+        init();
+    }
+    public void setSingleMode(String humanName, char playerChoice, String easyMode, char firstmover)  // Single Player Mode
     {
+        //p = new Player[2];
+        //location = new StackPane[3][3];
         System.out.println("GameController(" + humanName + ", " + playerChoice + ", " + easyMode + ", " + firstmover + ")..");
                 currentMover = firstmover == 'X' ? 0 : 1;
                 if(playerChoice == 'X'){
@@ -63,14 +79,21 @@ public class GameController
                     p[1] = new Human(humanName);
                     p[0] = new OpponentAI(easyMode);
                 }
-                //System.out.println(p[0].name + " " + p[1].name);
-                //System.out.println(p[0] instanceof Human);
-                //System.out.println(currentMover);
-        //firstMove();
+
+        xBox.setText(p[0].name);
+        oBox.setText(p[1].name);
+                System.out.println(p[0].name + " " + p[1].name);
+                System.out.println(p[0] instanceof Human);
+                System.out.println(currentMover);
+
+        //screen.setMouseTransparent(false);
+        init();
+        firstMove();
 
 
     }
-    @FXML public void initialize(){
+    //@FXML public void initialize()
+      public void init(){
 
         System.out.println("@FXML initialize()..");
 
@@ -84,7 +107,8 @@ public class GameController
         location[2][1]  = cell21;
         location[2][2]  = cell22;
 
-        firstMove();   // in case computer gets the first move
+        //screen.setMouseTransparent(true);
+        //firstMove();   // in case computer gets the first move
 
     }
 

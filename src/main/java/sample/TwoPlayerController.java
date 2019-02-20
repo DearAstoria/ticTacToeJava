@@ -16,12 +16,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.text.FontWeight;
+import javafx.scene.control.TextField;
 
 
 public class TwoPlayerController {
 
 
     public Button firstMover, x, o;
+    public TextField xName, oName;
 
     @FXML public void initialize(){
         firstMover = x;
@@ -48,9 +50,20 @@ public class TwoPlayerController {
 
     public void nextWindow(MouseEvent click, String xmlFile) throws java.io.IOException
     {
+        // initialize loader
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(xmlFile));
+
+        Scene GameScreenScene = new Scene((Pane)loader.load());
+
+        GameController game;
+        if(xmlFile.equals("GameScreen.fxml")) {
+            game = loader.<GameController>getController();//(new GameController(name.getText().equals("") ? "player" : name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0)));
+            System.out.println(game == null);
+            game.setTwoPlayerMode(xName.getText(),oName.getText(),firstMover.getText().charAt(0));
+        }
+
         // load the next scene
-        Parent GameScreenParent = FXMLLoader.load(getClass().getResource(xmlFile));
-        Scene GameScreenScene = new Scene(GameScreenParent);
+
 
         // get the stage... getSource = get object that was clicked on (the button) from the event, getScene = get the scene the button is a part of, getWindow = get the stage the scene is a part of
         Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();

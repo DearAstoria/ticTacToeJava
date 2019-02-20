@@ -2,8 +2,9 @@ package sample;
 
 public class Human extends Player {
 
-    //Human(){ this("player");}
+    Human(){ this("player");}
     Human(String str){
-        name = str;
+        if((name = str).equals(""))
+            name = str + "player";
     }
 }

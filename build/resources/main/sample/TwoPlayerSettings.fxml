@@ -22,7 +22,7 @@
                         <Insets top="-10.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="Player1" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;">
+                  <TextField alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="Player X" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;" fx:id="xName">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -42,7 +42,7 @@
                         <Insets top="-10.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="Player2" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;">
+                  <TextField fx:id="oName" alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="Player O" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

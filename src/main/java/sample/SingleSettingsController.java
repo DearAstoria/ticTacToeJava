@@ -58,14 +58,19 @@ public class SingleSettingsController {
     public void nextWindow(MouseEvent click, String xmlFile) throws java.io.IOException
     {
         // initialize loader
-        FXMLLoader loader = new FXMLLoader();
-        Parent GameScreenParent = loader.load(getClass().getResource(xmlFile));
-        //loader.setControllerFactory(c -> {
-        //    return new GameController(name.getText().equals("") ? "player" : name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0)); });
-        //loader.setController(new GameController(name.getText().equals("") ? "player" : name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0)));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(xmlFile));
+
+        Scene GameScreenScene = new Scene((Pane)loader.load());
+        System.out.println(name.getText());
+        GameController game;
+        if(xmlFile.equals("GameScreen.fxml")) {
+            game = loader.<GameController>getController();//(new GameController(name.getText().equals("") ? "player" : name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0)));
+            System.out.println(game == null);
+            game.setSingleMode(name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0));
+        }
 
         // load the next scene
-        Scene GameScreenScene = new Scene(GameScreenParent);
+
 
         // get the stage... getSource = get object that was clicked on (the button) from the event, getScene = get the scene the button is a part of, getWindow = get the stage the scene is a part of
         Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();

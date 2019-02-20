@@ -18,14 +18,14 @@ public class OpponentAI extends Player
     {
 
         if(thisTurn.isOver()) return;
-        if(difficulty == "easy")
+        if(difficulty.equals("easy"))
             randomMove(thisTurn, controller);
-        //else bestMove
+        else System.out.println("shit");
         controller.changeTurn();
 
     }
 
-    private int randomMove(GameState thisTurn, GameController controller)
+    private int randomMove(GameState gs, GameController gc)
     {
         Random generator = new Random();
         int x, y;
@@ -35,11 +35,15 @@ public class OpponentAI extends Player
             y = generator.nextInt(3);
 
         }
-        while(thisTurn.occupied(x,y));
+        while(gs.occupied(x,y));
 
-        thisTurn.set(controller.pIcon[controller.currentMover], x, y);
-        controller.atLocation(x,y).getChildren().add(new Text(Character.toString(controller.pIcon[controller.currentMover])));
-        controller.atLocation(x,y).setId("Permanent");
+        gs.set(gc.pIcon[gc.currentMover], x, y);  // game state
+
+        // UI
+        Text t = new Text(Character.toString(gc.pIcon[gc.currentMover]));
+        t.setStyle("-fx-font: 64 System;");
+        gc.atLocation(x,y).getChildren().add(t);
+        gc.atLocation(x,y).setId("Permanent");
 
         return 0;
     }
