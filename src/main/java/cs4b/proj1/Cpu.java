@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Cpu extends Player {
 
-    boolean easy = true;
+    boolean easy = false;
 
     Cpu(Icon icon, Game g){
 
@@ -15,13 +15,9 @@ public class Cpu extends Player {
     }
     @Override
     void move(){
-        if(game.gameIsOver() ) {
-            board.removeGameControls();
-            return;
-        }
+        if(game.gameIsOver() ) { board.removeGameControls(); return; }
+
         int []m = {0,0};
-        try{ TimeUnit.SECONDS.sleep(1); }
-        catch(Exception e){e.printStackTrace();}
         if(easy) {
             do m = randomMove();
             while (game.occupied(m[0], m[1]));
@@ -40,11 +36,8 @@ public class Cpu extends Player {
         return choice;
 
     }
-    static int[] bestMove(){
-        try{ TimeUnit.SECONDS.sleep(1); }
-        catch(Exception e){e.printStackTrace();}
-        int[] choice = {0,0};
-        return choice;
+    static int[] bestMove(){   //    needs actual best move
+        return randomMove();
     }
     void setUp(){}
 }
