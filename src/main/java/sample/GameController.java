@@ -1,62 +1,124 @@
 package sample;
 
+
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.Font;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.scene.text.FontWeight;
 
 public class GameController
 {
-    private GameState game = new GameState(); // the state of the game: board spaces, and who's turn it is
- //   private OpponentAI opponent = new OponnentAI("easy"); //
-    public Button RESTART; // a prompt to restart the game once it is over (as defined in GameScreen.fxml)
 
-    // highlight the space the mouse is over with the player's symbol
+
+    @FXML  public StackPane cell00, cell01, cell02, cell10, cell11, cell12, cell20, cell21, cell22;
+    @FXML  public Button RESTART; // a prompt to restart the game once it is over (as defined in GameScreen.fxml)
+
+    // indeces for current mover and winner   can only be 0 or 1 in a two player game
+    public  int currentMover = 0;
+    public int winnerIndex = -1;
+
+    // parallel arrays   -  index with currentMover or winnerIndex above
+    char [] pIcon  = {'x','o'};
+    private Player [] p = new Player[2];
+
+    // lets OpponentAI access desired board space
+    private StackPane [][] location = new StackPane[3][3];
+
+    private GameState game = new GameState(); // the state of the game: board spaces, and who's turn it is
+
+
+
+
+    public GameController()
+    {
+
+       this("justis", 'X', "easy", 'O');
+        //initialize();
+        //firstMove();
+    }
+
+    public GameController(boolean t/*String xPlayer, String oPlayer, char firtmover*/) { System.out.println("yes"); }
+    public GameController(String humanName, char playerChoice, String easyMode, char firstmover)  // Single Player Mode
+    {
+        System.out.println("GameController(" + humanName + ", " + playerChoice + ", " + easyMode + ", " + firstmover + ")..");
+                currentMover = firstmover == 'X' ? 0 : 1;
+                if(playerChoice == 'X'){
+                    p[0] = new Human(humanName);
+                    p[1] = new OpponentAI(easyMode);
+                }
+                else{
+                    p[1] = new Human(humanName);
+                    p[0] = new OpponentAI(easyMode);
+                }
+                //System.out.println(p[0].name + " " + p[1].name);
+                //System.out.println(p[0] instanceof Human);
+                //System.out.println(currentMover);
+        //firstMove();
+
+
+    }
+    @FXML public void initialize(){
+
+        System.out.println("@FXML initialize()..");
+
+        location[0][0]  = cell00;
+        location[0][1]  = cell01;
+        location[0][2]  = cell02;
+        location[1][0]  = cell10;
+        location[1][1]  = cell11;
+        location[1][2]  = cell12;
+        location[2][0]  = cell20;
+        location[2][1]  = cell21;
+        location[2][2]  = cell22;
+
+        firstMove();   // in case computer gets the first move
+
+    }
+
+    void firstMove(){ //System.out.println("firstMove()");  // debug
+        if(p[currentMover] instanceof OpponentAI)           // if mover is CPU, call it's nextMove()
+            ((OpponentAI) p[currentMover]).nextMove(game, this);
+    }
+
+
     public void mouseOver(MouseEvent event)
     {
-        Pane space = (Pane)event.getSource(); // get the board space that detected this event
+        if(game.isOver() || (p[currentMover] instanceof OpponentAI))
+            return;
+        Pane space = (Pane)event.getSource();
 
-        // determine if the space should be highlighted, and what symbol should be used
-        if(space.getChildren().isEmpty()) // if this space is empty then add a highlight of the player's token
+        if(space.getChildren().isEmpty())
         {
-            if(game.getTurn()) // if it is the player's turn add a X
-            {
-                // Create a X
-                Text x = new Text("X");
-                x.setTextAlignment(TextAlignment.CENTER);
-                x.setFont(new Font(64));
-                x.setOpacity(0.25);
-                x.setId("Temporary");
+            // Create a icon
+            Text icon = new Text(Character.toString(pIcon[currentMover]));
+            icon.setTextAlignment(TextAlignment.CENTER);
+            icon.setFont(new Font(64));
+            icon.setOpacity(0.25);
+            icon.setId("Temporary");
 
-                // Put the X in this space
-                space.getChildren().add(x);
-            }
-            else // else add an O
-            {
-                // Create an O
-                Text o = new Text("O");
-                o.setTextAlignment(TextAlignment.CENTER);
-                o.setFont(new Font(64));
-                o.setOpacity(0.25);
-                o.setId("Temporary");
-
-                // Put the O in this space
-                space.getChildren().add(o);
-            }
+            // Put the icon in this space
+            space.getChildren().add(icon);
         }
     }
 
     // Clear the highlighted symbol if the mouse moves out of a space
     public void mouseOut(MouseEvent event)
     {
+        if(game.isOver() || (p[currentMover] instanceof OpponentAI))
+            return;
         Pane space = (Pane)event.getSource(); // get the board space that detected this event
 
         if(space.getChildren().get(0).getId() == "Temporary") // if the symbol on the space was temporary when the mouse was moved off of it
@@ -65,80 +127,43 @@ public class GameController
         }
     }
 
+
     public void onClick(MouseEvent event) throws java.io.IOException
     {
+        if(game.isOver()) return;
+        if(p[currentMover] instanceof OpponentAI) {
+            return;
+        }
+
         Pane space = (Pane)event.getSource(); // get the board space that detected this event
         Text token = (Text)space.getChildren().get(0); // get the symbol in this space (because mouseOver event is guaranteed to occur first, we can be sure the space is not empty when calling it's children)
 
         if(token.getId() != "Permanent") // if the text object is not permanently on the space (the space has not been taken yet), then then take this space
         {
+
             // set properties so that the text generated in the mouseOver event opaque and permanent on the space
             token.setOpacity(1);
             token.setId("Permanent");
 
-            // change playerTurn so that it is the next player's turn
-            game.changeTurn();
+            //
+            int x,y;
+            x = GridPane.getRowIndex(space) != null ? GridPane.getRowIndex(space) : 0;
+            y = GridPane.getColumnIndex(space) != null ? GridPane.getColumnIndex(space) : 0;
+            game.set(pIcon[currentMover], x, y);
+            //
 
-            // update the raw board data (0 == free space, 1 == O, 2 == X)
-            switch(space.getId())
-            {
-                case "cell00":
-                    game.set(game.getTurn() ? 1 : 2, 0, 0); // if O's turn, put an O at (0,0) else put an X at (0,0)
-                    break;
-                case "cell01":
-                    game.set(game.getTurn() ? 1 : 2, 1, 0);
-                    break;
-                case "cell02":
-                    game.set(game.getTurn() ? 1 : 2, 2, 0);
-                    break;
-                case "cell10":
-                    game.set(game.getTurn() ? 1 : 2, 0, 1);
-                    break;
-                case "cell11":
-                    game.set(game.getTurn() ? 1 : 2, 1, 1);
-                    break;
-                case "cell12":
-                    game.set(game.getTurn() ? 1 : 2, 2, 1);
-                    break;
-                case "cell20":
-                    game.set(game.getTurn() ? 1 : 2, 0, 2);
-                    break;
-                case "cell21":
-                    game.set(game.getTurn() ? 1 : 2, 1, 2);
-                    break;
-                case "cell22":
-                    game.set(game.getTurn() ? 1 : 2, 2, 2);
-                    break;
-            }
-
-            // Compare the game board and look for a win
-            switch(game.checkForWin())
-            {
-                case -1: // draw
-                    outputWinner("Draw"); // return to main menu
-                    break;
-                case 0:
-                    // do nothing, game is not over, there are still empty spaces on the board
-                    // if playing against a computer player calculate the computer's next move here and change
-                    // the playerTurn again so that it is the Human player's turn again
-                    break;
-                case 1: // O win
-                    outputWinner("O wins"); // return to main menu
-                    // highlight winning group
-                    break;
-                case 2: // X wins
-                    outputWinner("X wins"); // return to main menu
-                    // highlight winning group
-                    break;
-            }
+            changeTurn();
         }
     }
 
     // reveals hidden button in this scene that displays who won the game and prompts the user to click it to restart
-    private void outputWinner(String winningMessage)
+    private void outputWinner(/*String winningMessage*/)
     {
+        game.setGameOver();
         // overwrite initial properties on the button which made it hidden
-        RESTART.setText(winningMessage);    // replace initial message with an end game message
+
+
+        RESTART.setText(winnerIndex == -1 ? "Draw" : Character.toString(pIcon[winnerIndex]) + ", " + p[winnerIndex].name + " wins");    // replace initial message with an end game message
         RESTART.setOpacity(1);              // make the hidden button visible
         RESTART.setMouseTransparent(false); // make false so that the hidden button can detect mouse events again
     }
@@ -156,4 +181,71 @@ public class GameController
         window.setScene(GameScreenScene);
         window.show();
     }
+
+
+    public StackPane atLocation(int x, int y){   //used in OpponentAI.randomMove()
+
+        return location[x][y];
+
+    }
+
+
+    public void  changeTurn(){     // called each time a player has made a move
+        updateWinner();
+        currentMover = (++currentMover % 2);
+        if(p[currentMover] instanceof OpponentAI)
+            ((OpponentAI)p[currentMover]).nextMove(game, this);
+    }
+
+
+    public int playerOf(char c){ //returns index associated with the a players symbol;  used by updateWinner()
+
+        return  c == 'x' ? 0 : 1;
+
+    }
+
+    public void updateWinner() {
+        for (int x = 0; x < 3; x++) // check all horizontal groups
+        {
+            // if there is a horizontal match AND that match is not empty spaces (empty space = 0)
+            if (game.boardSpaces[0][x] != 0 && game.boardSpaces[0][x] == game.boardSpaces[1][x] && game.boardSpaces[1][x] == game.boardSpaces[2][x]) {
+                winnerIndex = playerOf(game.boardSpaces[0][x]); // then return the winning token
+                outputWinner();
+                return;
+            }
+        }
+
+        for (int y = 0; y < 3; y++) // check all vertical groups
+        {
+            // if there is a vertical match AND that match is not empty spaces
+            if (game.boardSpaces[y][0] != 0 && game.boardSpaces[y][0] == game.boardSpaces[y][1] && game.boardSpaces[y][1] == game.boardSpaces[y][2]) {
+                winnerIndex = playerOf(game.boardSpaces[y][0]); // then return the winning token
+                outputWinner();
+                return;
+            }
+        }
+
+        if (game.boardSpaces[0][0] != 0 && game.boardSpaces[0][0] == game.boardSpaces[1][1] && game.boardSpaces[1][1] == game.boardSpaces[2][2]) // check both diagonal groups
+        {
+            winnerIndex = playerOf(game.boardSpaces[0][0]);
+            outputWinner();
+            return;
+        }
+        else if (game.boardSpaces[2][0] != 0 && game.boardSpaces[2][0] == game.boardSpaces[1][1] && game.boardSpaces[1][1] == game.boardSpaces[0][2]) {
+                  winnerIndex = playerOf(game.boardSpaces[2][0]);
+                  outputWinner();
+                  return;
+        }
+
+        for(int i=0; i<3;++i)
+            for(int j=0; j<3; ++j)
+                if(!game.occupied(i,j))
+                    return;
+         outputWinner();
+
+
+
+
+    }
+    //public char playerToken(Player p) {return (p == xPlayer) ? 'x' : 'o';}
 }

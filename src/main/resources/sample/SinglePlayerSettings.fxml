@@ -45,7 +45,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Text>
-                        <TextField alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="146.0" promptText="Name" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;">
+                        <TextField fx:id="name" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="146.0" promptText="Name" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

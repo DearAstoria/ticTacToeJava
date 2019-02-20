@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.text.FontWeight;
+import javafx.scene.control.TextField;
 
 public class SingleSettingsController {
 
@@ -22,6 +23,7 @@ public class SingleSettingsController {
     public Button cpu, easy, hard,  // cpu references the currently selected button,  easy and hard are buttons in the fxml file
                   playerChoice, x1, o1, // playerChoice references the currently selected button, x1 and o1 are buttons in the fxml file
                   firstMover, x2, o2;   // first mover references the currently selected button, x2 and o2 are buttons in the fxml file
+    public TextField name;
     @FXML public void initialize(){
         // setting defaults
         cpu = easy;
@@ -55,8 +57,14 @@ public class SingleSettingsController {
 
     public void nextWindow(MouseEvent click, String xmlFile) throws java.io.IOException
     {
+        // initialize loader
+        FXMLLoader loader = new FXMLLoader();
+        Parent GameScreenParent = loader.load(getClass().getResource(xmlFile));
+        //loader.setControllerFactory(c -> {
+        //    return new GameController(name.getText().equals("") ? "player" : name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0)); });
+        //loader.setController(new GameController(name.getText().equals("") ? "player" : name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0)));
+
         // load the next scene
-        Parent GameScreenParent = FXMLLoader.load(getClass().getResource(xmlFile));
         Scene GameScreenScene = new Scene(GameScreenParent);
 
         // get the stage... getSource = get object that was clicked on (the button) from the event, getScene = get the scene the button is a part of, getWindow = get the stage the scene is a part of
@@ -67,5 +75,4 @@ public class SingleSettingsController {
 
         window.show();
     }
-
 }
