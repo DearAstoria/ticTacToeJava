@@ -37,6 +37,28 @@ public class OpponentAI extends Player
         }
         while(gs.occupied(x,y));
 
+        update(x, y, gs, gc);
+
+
+        return 0;
+    }
+
+    private void bestMove(GameState gs, GameController gc)  // (variable "game" in GameController,  "this" in GameController)
+    {
+        int x = 0, y =0;
+        /* Algorythm
+        .
+        .
+        .
+        .
+        .
+        .
+        */
+        update(x,y, gs, gc);
+    }
+
+    
+    void update(int x, int y,GameState gs, GameController gc){
         gs.set(gc.pIcon[gc.currentMover], x, y);  // game state
 
         // UI
@@ -44,12 +66,6 @@ public class OpponentAI extends Player
         t.setStyle("-fx-font: 64 System;");
         gc.atLocation(x,y).getChildren().add(t);
         gc.atLocation(x,y).setId("Permanent");
-
-        return 0;
     }
 
-    private int calculatedMove()
-    {
-        return 0;
-    }
 }
