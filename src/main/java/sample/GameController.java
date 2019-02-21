@@ -145,7 +145,7 @@ public class GameController
         // overwrite initial properties on the button which made it hidden
 
 
-        RESTART.setText(game.winnerIndex == -1 ? "Draw" : Character.toString(game.pIcon[game.winnerIndex]) + ", " + game.p[game.winnerIndex].name + " wins");    // replace initial message with an end game message
+        RESTART.setText(game.winnerIndex == -1 ? "Draw" : game.p[game.winnerIndex].name + " (" + Character.toString(game.pIcon[game.winnerIndex]) + ") " + " wins");    // replace initial message with an end game message
         RESTART.setOpacity(1);              // make the hidden button visible
         RESTART.setMouseTransparent(false); // make false so that the hidden button can detect mouse events again
     }

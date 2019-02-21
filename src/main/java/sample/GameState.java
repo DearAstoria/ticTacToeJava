@@ -54,7 +54,6 @@ public class GameState implements Serializable {
     public GameState(String humanName, char playerChoice, String easyMode, char firstmover)  // Single Player Mode
     {
 
-        System.out.println("GameController(" + humanName + ", " + playerChoice + ", " + easyMode + ", " + firstmover + ")..");
         currentMover = firstmover == 'X' ? 0 : 1;
         if(playerChoice == 'X'){
             p[0] = new Human(humanName);
@@ -64,16 +63,6 @@ public class GameState implements Serializable {
             p[1] = new Human(humanName);
             p[0] = new OpponentAI(easyMode);
         }
-
-
-        System.out.println(p[0].name + " " + p[1].name);
-        System.out.println(p[0] instanceof Human);
-        System.out.println(currentMover);
-
-        //screen.setMouseTransparent(false);
-        //init();
-
-
     }
 
     public GameState(String xPlayer, String oPlayer, char firstmover) {
@@ -95,7 +84,7 @@ public class GameState implements Serializable {
         firstMove();
     }
 
-    void firstMove(){ //System.out.println("firstMove()");  // debug
+    void firstMove(){
         if(p[currentMover] instanceof OpponentAI)           // if mover is CPU, call it's nextMove()
             ((OpponentAI) p[currentMover]).nextMove(this);
     }
@@ -119,9 +108,6 @@ public class GameState implements Serializable {
         return boardSpaces[x][y];
     }
 
-   /* public char getTurn() {
-        return 0;//playerTurn;
-    }*/
 
 
     boolean occupied(int i, int j){
@@ -131,8 +117,6 @@ public class GameState implements Serializable {
     private boolean matching(int a, int b, int c) {
         return a == b && b == c;
     }
-
-    //public char [][] getBoard(){ return boardSpaces;}
 
     public void updateWinner() {
         for (int x = 0; x < 3; x++) // check all horizontal groups
@@ -212,6 +196,4 @@ public class GameState implements Serializable {
         ObjectOutputStream objOutput = new ObjectOutputStream((fileOutput));
         objOutput.writeObject(game);
     }
-
-
 }
