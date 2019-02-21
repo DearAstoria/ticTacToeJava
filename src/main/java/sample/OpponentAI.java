@@ -52,13 +52,15 @@ public class OpponentAI extends Player implements Serializable{
 
         ScoredMove bm = minmax(gs);
 
+        System.out.println(gs.pIcon[gs.currentMover] + ": (" + bm.x + ',' + bm.y + ')');
+
         update(bm.x,bm.y, gs);
     }
 
     private ScoredMove minmax(GameState gs)
     {
         // check if the minmax method has reached it's recursive endstate
-        int winner = gs.checkForWin();
+        char winner = gs.checkForWin();
         if( winner == 'x') { // x wins
             return new ScoredMove(10);
         } else if ( winner == 'o') { // o wins
@@ -76,27 +78,26 @@ public class OpponentAI extends Player implements Serializable{
                 if(gs.boardSpaces[x][y] == 0) { // if this board space is empty then add it to the potential moves list
 
                     gs.boardSpaces[x][y] = gs.pIcon[gs.currentMover];// temporarly set this space for evaluation
+                    gs.tempChangeTurn(); // temporarly change the current turn so that it is the next player's turn
 
                     ScoredMove move = new ScoredMove(); // initialize a record of this potential move
                     move.x = x;
                     move.y = y;
 
                     // RECURSIVE CALL HERE: set the score of this potential move to the score of the best move the next player can make on his turn
-                    gs.changeTurn(); // temporarly change the current turn so that it is the next player's turn
                     move.score = minmax(gs).score;
-
 
                     moves.add(move); // add this potential move to the list of all potential moves
 
                     gs.boardSpaces[x][y] = 0; // restore this space back to it's empty state
-                    gs.changeTurn(); // restore the turn to the current player
+                    gs.tempChangeTurn(); // restore the turn to the current player
                 }
             }
         }
 
         // pick the best move out of all the available moves found
         int bestMove = 0;
-        if(gs.p[gs.currentMover] instanceof OpponentAI) {
+        if(gs.pIcon[gs.currentMover] == 'x') { //gs.p[gs.currentMover] instanceof OpponentAI) {
             int bestScore = -1000000;
             for (int i = 0; i < moves.size(); i++) {
                 if(moves.get(i).score > bestScore) {

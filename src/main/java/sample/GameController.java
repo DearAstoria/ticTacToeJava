@@ -115,7 +115,7 @@ public class GameController
         if(game.isOver() || game.p[game.currentMover] instanceof OpponentAI)
             return;
 
-
+        System.out.println(game.toString()); // DEBUG
         Pane space = (Pane)event.getSource(); // get the board space that detected this event
         Text token = (Text)space.getChildren().get(0); // get the symbol in this space (because mouseOver event is guaranteed to occur first, we can be sure the space is not empty when calling it's children)
 
@@ -132,8 +132,9 @@ public class GameController
             y = GridPane.getColumnIndex(space) != null ? GridPane.getColumnIndex(space) : 0;
             game.set(game.pIcon[game.currentMover], x, y);
             //
-
+            System.out.println(game.toString()); // DEBUG
             game.changeTurn();
+            System.out.println(game.toString()); // DEBUG
         }
     }
 
