@@ -55,6 +55,15 @@ public class SingleSettingsController {
         return bt;
     }
 
+    public void beginHovered(MouseEvent e){
+        ((Button)e.getSource()).setStyle("-fx-border-width: 2; -fx-background-insets: 3;   -fx-border-radius: 90; -fx-background-radius: 90; -fx-text-fill: black; -fx-border-color: black; -fx-background-color: white;");
+
+
+    }
+    public void beginExit(MouseEvent e){
+        ((Button)e.getSource()).setStyle("-fx-background-radius: 90; -fx-background-insets: 3;   -fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 90; -fx-border-width: 2;");
+    }
+
     public void nextWindow(MouseEvent click, String xmlFile) throws java.io.IOException
     {
         // initialize loader

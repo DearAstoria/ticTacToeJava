@@ -163,8 +163,14 @@ public class GameController
         window.setScene(GameScreenScene);
         window.show();
     }
-
-
+    public void exit(MouseEvent click) throws java.io.IOException
+    {
+        Parent GameScreenParent = FXMLLoader.load(getClass().getResource("StartupMenu.fxml"));
+        Scene GameScreenScene = new Scene(GameScreenParent);
+        Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
+        window.setScene(GameScreenScene);
+        window.show();
+    }
 
 
 

@@ -100,4 +100,14 @@
          </padding>
       </HBox>
    </top>
+   <bottom>
+      <Button mnemonicParsing="false" onMouseClicked="#exit" style="-fx-background-color: black; -fx-border-color: black;" text="&lt;-- exit" textFill="#b2b2b2" BorderPane.alignment="TOP_LEFT">
+         <font>
+            <Font name="Verdana Italic" size="13.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>
