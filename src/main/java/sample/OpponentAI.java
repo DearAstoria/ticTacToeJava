@@ -6,12 +6,17 @@ import java.io.*;
 
 public class OpponentAI extends Player implements Serializable{
 
-    String difficulty; // "easy" or "hard"
+    String difficulty;
+    GameState gamestate;
+    char seed;
 
-    public OpponentAI(String difficulty)
+    public OpponentAI(String difficulty)//, char seed, GameState gs)
     {
         this.difficulty = difficulty;
         name = "CPU";
+        //this.seed = seed;
+        //gamestate = gs;
+
     }
 
     public void nextMove(GameState thisTurn)
@@ -67,5 +72,10 @@ public class OpponentAI extends Player implements Serializable{
         gs.atLocation(x,y).getChildren().add(t);
         gs.atLocation(x,y).setId("Permanent");
     }
+
+
+
+
+
 
 }

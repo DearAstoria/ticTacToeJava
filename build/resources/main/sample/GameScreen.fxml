@@ -67,11 +67,6 @@
                               <Font size="20.0" />
                            </font>
                         </Text>
-                        <Text fill="#81ffa4" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
                      </children>
                   </HBox>
                </children>
@@ -84,11 +79,6 @@
                      </VBox.margin>
                      <children>
                         <Text fx:id="oBox" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="player2">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Text>
-                        <Text fill="#81ffa4" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
                            <font>
                               <Font size="20.0" />
                            </font>

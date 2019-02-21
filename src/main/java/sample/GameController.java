@@ -28,7 +28,7 @@ public class GameController
     @FXML  public Button RESTART; // a prompt to restart the game once it is over (as defined in GameScreen.fxml)
     @FXML  public BorderPane screen;
     @FXML  public Text xBox, oBox;
-
+    public Text [] playerDisplay;
 
 
     public GameState game;// = new GameState(); // the state of the game: board spaces, and who's turn it is
@@ -55,10 +55,14 @@ public class GameController
         game.location[2][2]  = cell22;
 
 
-        xBox.setText(game.p[0].name);
-        oBox.setText(game.p[1].name);
+        xBox.setText(game.p[0].name + " (" + game.pIcon[0] + ")");
+        oBox.setText(game.p[1].name + " (" + game.pIcon[1] + ")");
+        playerDisplay = new Text[2];
+        playerDisplay[0] = xBox;
+        playerDisplay[1] = oBox;
+        playerDisplay[(gamestate.currentMover + 1) % 2].setOpacity(.5);
 
-        Text t;
+          Text t;
         if(!gamestate.isNewGame)
             for(int i = 0; i<3; ++i)
                 for(int j=0; j<3; ++j){
@@ -145,7 +149,7 @@ public class GameController
         // overwrite initial properties on the button which made it hidden
 
 
-        RESTART.setText(game.winnerIndex == -1 ? "Draw" : game.p[game.winnerIndex].name + " (" + Character.toString(game.pIcon[game.winnerIndex]) + ") " + " wins");    // replace initial message with an end game message
+        RESTART.setText(game.winnerIndex == -1 ? "Draw" : playerDisplay[game.winnerIndex].getText() + " wins");    // replace initial message with an end game message
         RESTART.setOpacity(1);              // make the hidden button visible
         RESTART.setMouseTransparent(false); // make false so that the hidden button can detect mouse events again
     }

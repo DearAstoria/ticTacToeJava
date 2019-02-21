@@ -166,8 +166,11 @@ public class GameState implements Serializable {
 
         public void  changeTurn(){     // called each time a player has made a move
             updateWinner();
+            controller.playerDisplay[currentMover].setOpacity(.5);
             currentMover = (++currentMover % 2);
+
             if(!gameOver){
+                controller.playerDisplay[currentMover].setOpacity(1);
                 try{    save(this);     }
                 catch(Exception e){  e.printStackTrace(); }
             }
