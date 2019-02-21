@@ -55,12 +55,18 @@ public class TwoPlayerController {
 
         Scene GameScreenScene = new Scene((Pane)loader.load());
 
-        GameController game;
+
+
+        GameState game = new GameState(xName.getText(),oName.getText(),firstMover.getText().charAt(0));
+        GameController gameUI;
         if(xmlFile.equals("GameScreen.fxml")) {
-            game = loader.<GameController>getController();//(new GameController(name.getText().equals("") ? "player" : name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0)));
-            System.out.println(game == null);
-            game.setTwoPlayerMode(xName.getText(),oName.getText(),firstMover.getText().charAt(0));
+            gameUI = loader.<GameController>getController();
+            game.setUI(gameUI);
         }
+
+
+
+
 
         // load the next scene
 

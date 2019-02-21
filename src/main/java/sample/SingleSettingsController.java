@@ -62,11 +62,11 @@ public class SingleSettingsController {
 
         Scene GameScreenScene = new Scene((Pane)loader.load());
         System.out.println(name.getText());
-        GameController game;
+        GameState game = new GameState(name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0));
+        GameController gameUI;
         if(xmlFile.equals("GameScreen.fxml")) {
-            game = loader.<GameController>getController();//(new GameController(name.getText().equals("") ? "player" : name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0)));
-            System.out.println(game == null);
-            game.setSingleMode(name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0));
+            gameUI = loader.<GameController>getController();
+            game.setUI(gameUI);
         }
 
         // load the next scene

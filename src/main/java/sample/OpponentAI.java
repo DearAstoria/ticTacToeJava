@@ -14,18 +14,18 @@ public class OpponentAI extends Player
         name = "CPU";
     }
 
-    public void nextMove(GameState thisTurn, GameController controller)
+    public void nextMove(GameState thisTurn)
     {
 
         if(thisTurn.isOver()) return;
         if(difficulty.equals("easy"))
-            randomMove(thisTurn, controller);
+            randomMove(thisTurn);
         else System.out.println("shit");
-        controller.changeTurn();
+        thisTurn.changeTurn();
 
     }
 
-    private int randomMove(GameState gs, GameController gc)
+    private int randomMove(GameState gs)
     {
         Random generator = new Random();
         int x, y;
@@ -37,13 +37,13 @@ public class OpponentAI extends Player
         }
         while(gs.occupied(x,y));
 
-        update(x, y, gs, gc);
+        update(x, y, gs);
 
 
         return 0;
     }
 
-    private void bestMove(GameState gs, GameController gc)  // (variable "game" in GameController,  "this" in GameController)
+    private void bestMove(GameState gs)  // (variable "game" in GameController,  "this" in GameController)
     {
         int x = 0, y =0;
         /* Algorythm
@@ -54,18 +54,18 @@ public class OpponentAI extends Player
         .
         .
         */
-        update(x,y, gs, gc);
+        update(x,y, gs);
     }
 
-    
-    void update(int x, int y,GameState gs, GameController gc){
-        gs.set(gc.pIcon[gc.currentMover], x, y);  // game state
+
+    void update(int x, int y,GameState gs){
+        gs.set(gs.pIcon[gs.currentMover], x, y);  // game state
 
         // UI
-        Text t = new Text(Character.toString(gc.pIcon[gc.currentMover]));
+        Text t = new Text(Character.toString(gs.pIcon[gs.currentMover]));
         t.setStyle("-fx-font: 64 System;");
-        gc.atLocation(x,y).getChildren().add(t);
-        gc.atLocation(x,y).setId("Permanent");
+        gs.atLocation(x,y).getChildren().add(t);
+        gs.atLocation(x,y).setId("Permanent");
     }
 
 }
