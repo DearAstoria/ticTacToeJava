@@ -35,13 +35,16 @@
             <StackPane fx:id="cell20" layoutX="10.0" layoutY="10.0" onMouseEntered="#mouseOver" onMouseExited="#mouseOut" onMouseReleased="#onClick" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2" />
             <StackPane fx:id="cell21" layoutX="10.0" layoutY="10.0" onMouseEntered="#mouseOver" onMouseExited="#mouseOut" onMouseReleased="#onClick" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <StackPane fx:id="cell22" layoutX="10.0" layoutY="10.0" onMouseEntered="#mouseOver" onMouseExited="#mouseOut" onMouseReleased="#onClick" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="RESTART" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" mouseTransparent="true" onAction="#restart" opacity="0.0" prefHeight="100.0" prefWidth="100.0" text="Restart" textAlignment="CENTER" translateY="220.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+            <Button fx:id="RESTART" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" mouseTransparent="true" onAction="#restart" opacity="0.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: black; -fx-border-color: gray; -fx-border-radius: 40;" text="Restart" textAlignment="CENTER" textFill="WHITE" translateY="220.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                <font>
-                  <Font size="10.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
                <GridPane.margin>
-                  <Insets />
+                  <Insets left="-54.0" />
                </GridPane.margin>
+               <padding>
+                  <Insets left="-20.0" right="-20.0" />
+               </padding>
             </Button>
          </children>
          <BorderPane.margin>
@@ -100,4 +103,14 @@
          </padding>
       </HBox>
    </top>
+   <bottom>
+      <Button mnemonicParsing="false" onMouseClicked="#exit" style="-fx-background-color: black; -fx-border-color: black;" text="&lt;-- exit" textFill="#b2b2b2" BorderPane.alignment="TOP_LEFT">
+         <font>
+            <Font name="Verdana Italic" size="13.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>

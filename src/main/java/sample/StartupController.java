@@ -33,10 +33,7 @@ public class StartupController {
     }
 
     public void onHovered(MouseEvent e){
-        //if(((Button)e.getSource()).getOpacity() == 1.0)
         ((Button)e.getSource()).setStyle("-fx-border-width: 2; -fx-background-insets: 0; -fx-border-radius: 90; -fx-background-radius: 90; -fx-text-fill: black; -fx-border-color: black; -fx-background-color: white;");
-        //resume.setOpacity(.2);
-
     }
     public void mouseExit(MouseEvent e){
         ((Button)e.getSource()).setStyle("-fx-border-width: 2; -fx-border-radius: 90; -fx-background-radius: 90; -fx-text-fill: white; -fx-border-color: white; -fx-background-color: black;");
@@ -61,9 +58,7 @@ public class StartupController {
         Scene GameScreenScene = new Scene((Pane)loader.load());
 
         GameState game = GameState.restore();
-       // GameController gameUI;
-            //gameUI = loader.<GameController>getController();
-            game.setUI(loader.<GameController>getController());
+        game.setUI(loader.<GameController>getController());
 
 
 

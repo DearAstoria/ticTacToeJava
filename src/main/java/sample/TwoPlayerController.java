@@ -49,6 +49,15 @@ public class TwoPlayerController {
         }
     }
 
+    public void beginHovered(MouseEvent e){
+        ((Button)e.getSource()).setStyle("-fx-border-width: 2; -fx-background-insets: 3;   -fx-border-radius: 90; -fx-background-radius: 90; -fx-text-fill: black; -fx-border-color: black; -fx-background-color: white;");
+
+
+    }
+    public void beginExit(MouseEvent e){
+        ((Button)e.getSource()).setStyle("-fx-background-radius: 90; -fx-background-insets: 3;   -fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 90; -fx-border-width: 2;");
+    }
+
     public void nextWindow(MouseEvent click, String xmlFile) throws java.io.IOException
     {
         // initialize loader
@@ -56,21 +65,10 @@ public class TwoPlayerController {
 
         Scene GameScreenScene = new Scene((Pane)loader.load());
 
-
-
         GameState game = new GameState(xName.getText(),oName.getText(),firstMover.getText().charAt(0));
-        GameController gameUI;
-        if(xmlFile.equals("GameScreen.fxml")) {
-            gameUI = loader.<GameController>getController();
-            game.setUI(gameUI);
-        }
 
-
-
-
-
-        // load the next scene
-
+        if(xmlFile.equals("GameScreen.fxml"))
+            game.setUI(loader.<GameController>getController());
 
         // get the stage... getSource = get object that was clicked on (the button) from the event, getScene = get the scene the button is a part of, getWindow = get the stage the scene is a part of
         Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
