@@ -132,6 +132,50 @@ public class GameState implements Serializable {
         return a == b && b == c;
     }
 
+    public char checkForWin()
+    {
+        for(int x = 0; x < 3; x++) // check all horizontal groups
+        {
+            // if there is a horizontal match AND that match is not empty spaces (empty space = 0)
+            if(boardSpaces[0][x] != 0 && matching(boardSpaces[0][x], boardSpaces[1][x], boardSpaces[2][x]))
+            {
+                return boardSpaces[0][x]; // then return the winning token
+            }
+        }
+
+        for(int y = 0; y < 3; y++) // check all vertical groups
+        {
+            // if there is a vertical match AND that match is not empty spaces
+            if(boardSpaces[y][0] != 0 && matching(boardSpaces[y][0], boardSpaces[y][1], boardSpaces[y][2]))
+            {
+                return boardSpaces[y][0]; // then return the winning token
+            }
+        }
+
+        if(boardSpaces[0][0] != 0 && matching(boardSpaces[0][0], boardSpaces[1][1], boardSpaces[2][2])) // check both diagonal groups
+        {
+            return boardSpaces[0][0];
+        }
+        else if(boardSpaces[2][0] != 0 && matching(boardSpaces[2][0], boardSpaces[1][1], boardSpaces[0][2]))
+        {
+            return boardSpaces[2][0];
+        }
+        else // if no winner is found, then determine if there is still a playable/empty space
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    if (boardSpaces[y][x] == 0) // if an empty space is found return empty token
+                    {
+                        return boardSpaces[y][x]; // returning the empty token to show that the game is not over
+                    }
+                }
+            }
+        }
+
+        return 'T'; // if all other cases fail (no winner, and no empty spaces), then this game must be a Tie
+    }
     //public char [][] getBoard(){ return boardSpaces;}
 
     public void updateWinner() {
