@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 public class TwoPlayerController {
 
 
+
     public Button firstMover, x, o;
     public TextField xName, oName;
 

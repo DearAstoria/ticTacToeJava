@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fce96803-db69-43d3-a1b0-beefd28a74f5" name="Default Changelist" comment="" />
+    <list default="true" id="fce96803-db69-43d3-a1b0-beefd28a74f5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sample/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sample/GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/Human.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sample/Human.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/OpponentAI.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sample/OpponentAI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sample/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/SingleSettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sample/SingleSettingsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/StartupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sample/StartupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/sample/TwoPlayerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/sample/TwoPlayerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/sample/StartupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/sample/StartupMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/Human.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Human.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/OpponentAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/OpponentAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/SingleSettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/SingleSettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/StartupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/StartupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sample/TwoPlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sample/TwoPlayerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sample/StartupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sample/StartupMenu.fxml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,11 +54,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/sample/GameController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="60" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="116">
+              <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -42,23 +69,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sample/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
+            <state relative-caret-position="1465">
+              <caret line="109" selection-start-line="109" selection-end-line="109" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3310#3311#0" expanded="true" />
+                <element signature="e#3372#3373#0" expanded="true" />
+                <element signature="e#3637#3638#0" expanded="true" />
+                <element signature="e#5541#5542#0" expanded="true" />
+                <element signature="e#5589#5590#0" expanded="true" />
+                <element signature="e#3885#3886#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sample/OpponentAI.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sample/Human.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="66" selection-start-line="66" selection-end-line="66" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="45">
+              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -66,8 +96,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sample/SingleSettingsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="65" column="8" lean-forward="true" selection-start-line="65" selection-start-column="8" selection-end-line="69" selection-end-column="9" />
+            <state relative-caret-position="289">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sample/TwoPlayerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
+            <state relative-caret-position="110">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,20 +135,22 @@
         <option value="$PROJECT_DIR$/src/main/resources/sample/Yoo.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/sample/YooController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/sample/SinglePlayerSettings.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Player.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/Human.java" />
         <option value="$PROJECT_DIR$/src/main/resources/sample/TwoPlayerSettings.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/sample/GameScreen.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/OpponentAI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/GameController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/GameState.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sample/SingleSettingsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/sample/TwoPlayerController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/SingleSettingsController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/sample/StartupMenu.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Human.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/Player.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/OpponentAI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/StartupController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/GameState.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sample/GameController.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="35" />
+    <option name="x" value="12" />
     <option name="y" value="23" />
     <option name="width" value="1437" />
     <option name="height" value="852" />
@@ -185,7 +217,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550710255690" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550724805597" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -243,9 +275,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="35" y="23" width="1437" height="852" extended-state="0" />
+    <frame x="12" y="23" width="1437" height="852" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26236558" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26164874" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -282,60 +314,16 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/yo.fxml" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/sample/hi.fxml" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/sample/hey.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/sample/StartupMenu.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22">
-          <caret line="3" column="26" lean-forward="true" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/StartupMenu.fxml" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/sample/Yoo.fxml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/YooController.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/StartupController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-88">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/sample/PlayerMode.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/sample/SinglePlayerSettings.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Human.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/sample/GameScreen.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="-968">
-          <caret line="19" column="73" selection-start-line="19" selection-start-column="73" selection-end-line="19" selection-end-column="73" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/sample/TwoPlayerSettings.fxml">
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
@@ -343,30 +331,10 @@
         <state relative-caret-position="-606" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/GameController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/TwoPlayerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/OpponentAI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
+        <state relative-caret-position="110">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -375,18 +343,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sample/SingleSettingsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="65" column="8" lean-forward="true" selection-start-line="65" selection-start-column="8" selection-end-line="69" selection-end-column="9" />
+        <state relative-caret-position="289">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sample/TwoPlayerController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="78" lean-forward="true" selection-start-line="78" selection-end-line="78" />
+        <state relative-caret-position="165">
+          <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sample/GameScreen.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="19" column="73" selection-start-line="19" selection-start-column="73" selection-end-line="19" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="52" selection-start-line="3" selection-start-column="52" selection-end-line="3" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/OpponentAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-534">
+          <caret line="6" column="62" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/StartupController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sample/StartupMenu.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/Human.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1465">
+          <caret line="109" selection-start-line="109" selection-end-line="109" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3310#3311#0" expanded="true" />
+            <element signature="e#3372#3373#0" expanded="true" />
+            <element signature="e#3637#3638#0" expanded="true" />
+            <element signature="e#5541#5542#0" expanded="true" />
+            <element signature="e#5589#5590#0" expanded="true" />
+            <element signature="e#3885#3886#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sample/GameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -23,7 +23,7 @@
                      </font></Text>
                </children>
             </StackPane>
-                <Button fx:id="resume" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#onHovered" onMouseExited="#mouseExit" prefWidth="140.0" style="-fx-background-radius: 90; -fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 90; -fx-border-width: 2; -fx-background-insets: 3;" text="resume">
+                <Button fx:id="resume" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#resumeClicked" onMouseEntered="#onHovered" onMouseExited="#mouseExit" prefWidth="140.0" style="-fx-background-radius: 90; -fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 90; -fx-border-width: 2; -fx-background-insets: 3;" text="resume">
                     <font>
                         <Font name="Verdana Bold" size="13.0" />
                     </font>

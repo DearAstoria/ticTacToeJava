@@ -61,7 +61,7 @@ public class SingleSettingsController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(xmlFile));
 
         Scene GameScreenScene = new Scene((Pane)loader.load());
-        System.out.println(name.getText());
+
         GameState game = new GameState(name.getText(), playerChoice.getText().charAt(0), cpu.getText(), firstMover.getText().charAt(0));
         GameController gameUI;
         if(xmlFile.equals("GameScreen.fxml")) {

@@ -43,9 +43,7 @@ public class GameController
     //@FXML public void initialize()
       public void init(GameState gamestate){
 
-        System.out.println("@FXML initialize()..");
 
-        //game = gamestate;
         game.location[0][0]  = cell00;
         game.location[0][1]  = cell01;
         game.location[0][2]  = cell02;
@@ -56,11 +54,22 @@ public class GameController
         game.location[2][1]  = cell21;
         game.location[2][2]  = cell22;
 
+
         xBox.setText(game.p[0].name);
         oBox.setText(game.p[1].name);
 
-        //screen.setMouseTransparent(true);
-        //firstMove();   // in case computer gets the first move
+        Text t;
+        if(!gamestate.isNewGame)
+            for(int i = 0; i<3; ++i)
+                for(int j=0; j<3; ++j){
+                    if(gamestate.boardSpaces[i][j] != 0)
+                    {
+                        gamestate.atLocation(i,j).getChildren().add(new Text(Character.toString(gamestate.boardSpaces[i][j])));
+                        ((Text)gamestate.atLocation(i,j).getChildren().get(0)).setStyle("-fx-font: 64 System;");
+                        gamestate.atLocation(i,j).setId("Permanent");
+                    }
+                }
+
 
     }
 
@@ -132,6 +141,7 @@ public class GameController
     public void outputWinner(/*String winningMessage*/)
     {
         game.setGameOver();
+        game.savedGame.delete();
         // overwrite initial properties on the button which made it hidden
 
 

@@ -26,30 +26,34 @@ import javafx.scene.text.FontWeight;
 // the game
 public class GameState implements Serializable {
 
+    boolean isNewGame = true;
+
+    static final File savedGame = new File("savedGame.bin");
+
 
     //private char playerTurn = 'x'; // who's turn is it, either X (true) or O (false)
     public char[][] boardSpaces = new char[][]{{0, 0, 0}, {0, 0, 0},{0, 0, 0}};
     private boolean gameOver = false;
 
-    GameController controller;
+    transient GameController controller;
 
     // indeces for current mover and winner   can only be 0 or 1 in a two player game
     public  int currentMover = 0;
     public int winnerIndex = -1;
 
     // parallel arrays   -  index with currentMover or winnerIndex above
-    char [] pIcon  = {'x','o'};
+    static public char [] pIcon  = new char[]{'x','o'};
     public Player [] p = new Player[2];
     // lets OpponentAI access desired board space  - used in the AI's move methods
-    public StackPane [][] location = new StackPane[3][3];
+    transient public StackPane [][] location = new StackPane[3][3];
 
-    public GameState() {
-    }
+    public GameState() { }
 
 
 
     public GameState(String humanName, char playerChoice, String easyMode, char firstmover)  // Single Player Mode
     {
+
         System.out.println("GameController(" + humanName + ", " + playerChoice + ", " + easyMode + ", " + firstmover + ")..");
         currentMover = firstmover == 'X' ? 0 : 1;
         if(playerChoice == 'X'){
@@ -73,6 +77,7 @@ public class GameState implements Serializable {
     }
 
     public GameState(String xPlayer, String oPlayer, char firstmover) {
+
         currentMover = firstmover == 'X' ? 0 : 1;
         p[0] = new Human(xPlayer);
         p[1] = new Human(oPlayer);
@@ -81,6 +86,9 @@ public class GameState implements Serializable {
     }
 
     void setUI(GameController c){
+        if(location == null)
+            location = new StackPane[3][3];
+
         controller = c;
         controller.game = this;
         controller.init(this);
@@ -100,46 +108,6 @@ public class GameState implements Serializable {
         return gameOver;
     }
 
-    public char checkForWin() {
-        for (int x = 0; x < 3; x++) // check all horizontal groups
-        {
-            // if there is a horizontal match AND that match is not empty spaces (empty space = 0)
-            if (boardSpaces[0][x] != '\0' && matching(boardSpaces[0][x], boardSpaces[1][x], boardSpaces[2][x])) {
-                setGameOver();
-                return boardSpaces[0][x]; // then return the winning token
-            }
-        }
-
-        for (int y = 0; y < 3; y++) // check all vertical groups
-        {
-            // if there is a vertical match AND that match is not empty spaces
-            if (boardSpaces[y][0] != '\0' && matching(boardSpaces[y][0], boardSpaces[y][1], boardSpaces[y][2])) {
-                setGameOver();
-                return boardSpaces[y][0]; // then return the winning token
-            }
-        }
-
-        if (boardSpaces[0][0] != '\0' && matching(boardSpaces[0][0], boardSpaces[1][1], boardSpaces[2][2])) // check both diagonal groups
-        {
-            setGameOver();
-            return boardSpaces[0][0];
-        } else if (boardSpaces[2][0] != '\0' && matching(boardSpaces[2][0], boardSpaces[1][1], boardSpaces[0][2])) {
-            setGameOver();
-            return boardSpaces[2][0];
-        } else // if no winner is found, then determine if there is still a playable/empty space
-        {
-            for (int y = 0; y < 3; y++) {
-                for (int x = 0; x < 3; x++) {
-                    if (boardSpaces[y][x] == '\0') // if an empty space is found return empty token
-                    {
-                        return boardSpaces[y][x]; // returning the empty token to show that the game is not over
-                    }
-                }
-            }
-        }
-
-        return '0'; // if all other cases fail (no winner, and no empty spaces), then this game must be a draw
-    }
 
     public void set(char player,   // the player's symbol
                     int x, int y) // position where to place player's symbol
@@ -215,6 +183,10 @@ public class GameState implements Serializable {
         public void  changeTurn(){     // called each time a player has made a move
             updateWinner();
             currentMover = (++currentMover % 2);
+            if(!gameOver){
+                try{    save(this);     }
+                catch(Exception e){  e.printStackTrace(); }
+            }
             if(p[currentMover] instanceof OpponentAI)
                 ((OpponentAI)p[currentMover]).nextMove(this);
         }
@@ -225,7 +197,21 @@ public class GameState implements Serializable {
             return  c == 'x' ? 0 : 1;
 
         }
+    public static GameState restore() throws Exception{
+        FileInputStream fileInput = new FileInputStream(savedGame);
+        ObjectInputStream objInput = new ObjectInputStream((fileInput));
+        return (GameState)objInput.readObject();
 
+
+    }
+
+    public static void save(GameState game) throws Exception{
+        //if(savedGame.)
+        game.isNewGame = false;
+        FileOutputStream fileOutput = new FileOutputStream(savedGame, false);
+        ObjectOutputStream objOutput = new ObjectOutputStream((fileOutput));
+        objOutput.writeObject(game);
+    }
 
 
 }

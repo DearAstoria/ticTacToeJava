@@ -1,5 +1,6 @@
 package sample;
+import java.io.*;
 
-public class Player {
+public abstract class Player implements Serializable{
     String name;
 }

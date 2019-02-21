@@ -2,9 +2,9 @@ package sample;
 
 import java.util.Random;
 import javafx.scene.text.Text;
+import java.io.*;
 
-public class OpponentAI extends Player
-{
+public class OpponentAI extends Player implements Serializable{
 
     String difficulty; // "easy" or "hard"
 

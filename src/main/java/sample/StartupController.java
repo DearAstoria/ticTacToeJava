@@ -24,8 +24,10 @@ public class StartupController {
     //public Button newGame;
     public StartupController(){ }
     @FXML public void initialize(){
-        resume.setOpacity(.2);
-        resume.setMouseTransparent(true);
+        if (!GameState.savedGame.isFile()) {
+            resume.setMouseTransparent(true);
+            resume.setOpacity(.2); }
+
         //resume.removeEventHandler(MouseEvent.MOUSE_ENTERED,this::onHovered);
 
     }
@@ -37,7 +39,6 @@ public class StartupController {
 
     }
     public void mouseExit(MouseEvent e){
-        //if(((Button)e.getSource()).getOpacity() == 1.0)
         ((Button)e.getSource()).setStyle("-fx-border-width: 2; -fx-border-radius: 90; -fx-background-radius: 90; -fx-text-fill: white; -fx-border-color: white; -fx-background-color: black;");
     }
     public void newGameClicked(MouseEvent click) throws java.io.IOException
@@ -53,5 +54,21 @@ public class StartupController {
         window.setScene(GameScreenScene);
 
         window.show();
+    }
+    public void resumeClicked(MouseEvent click) throws Exception{
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameScreen.fxml"));
+        Scene GameScreenScene = new Scene((Pane)loader.load());
+
+        GameState game = GameState.restore();
+       // GameController gameUI;
+            //gameUI = loader.<GameController>getController();
+            game.setUI(loader.<GameController>getController());
+
+
+
+        Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
+
+        window.setScene(GameScreenScene);
     }
 }
