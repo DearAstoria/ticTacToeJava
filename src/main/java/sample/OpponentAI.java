@@ -130,7 +130,7 @@ public class OpponentAI extends Player implements Serializable{
         Text t = new Text(Character.toString(gs.pIcon[gs.currentMover]));
         t.setStyle("-fx-font: 64 System;");
         gs.atLocation(x,y).getChildren().add(t);
-        gs.atLocation(x,y).setId("Permanent");
+        gs.atLocation(x,y).getChildren().get(0).setId("Permanent");
     }
 
 
