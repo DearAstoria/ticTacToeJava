@@ -11,7 +11,7 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("StartupMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("TwoPlayerSettings.fxml"));
         primaryStage.setTitle("TicTacToe");
 
         primaryStage.setScene(new Scene(root, 600, 600));

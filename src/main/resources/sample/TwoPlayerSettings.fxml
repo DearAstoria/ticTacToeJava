@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" spacing="80.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TwoPlayerController">
    <children>
@@ -14,15 +13,7 @@
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="180.0" spacing="10.0" style="-fx-border-color: gray;">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
-                     <font>
-                        <Font size="47.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="-10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <TextField alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="Player X" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;" fx:id="xName">
+                  <TextField alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="YOUR NAME HERE" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;" fx:id="xName">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -32,52 +23,7 @@
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="180.0" spacing="10.0" style="-fx-border-color: gray;">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="O">
-                     <font>
-                        <Font size="47.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="-10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <TextField fx:id="oName" alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="Player O" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </TextField>
-               </children>
-            </VBox>
          </children>
-      </HBox>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" style="-fx-border-color: black;">
-         <children>
-            <Text fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="Who Moves First?   ">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </Text>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#xo" prefHeight="26.0" prefWidth="24.0" style="-fx-background-color: #2b2a2a; -fx-border-color: white; -fx-background-radius: 0; -fx-background-insets: 0px;" text="X" textFill="WHITE" fx:id="x">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <padding>
-                  <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
-               </padding>
-            </Button>
-            <Button fx:id="o" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#xo" prefHeight="26.0" prefWidth="24.0" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-insets: 0px; -fx-background-radius: 0;" text="O" textFill="#a4a4a4">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <padding>
-                  <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
-               </padding>
-            </Button>
-         </children>
-         <VBox.margin>
-            <Insets top="-60.0" />
-         </VBox.margin>
       </HBox>
       <HBox spacing="152.0">
          <children>

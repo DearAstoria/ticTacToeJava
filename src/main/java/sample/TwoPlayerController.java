@@ -60,15 +60,9 @@ public class TwoPlayerController {
 
     public void nextWindow(MouseEvent click, String xmlFile) throws java.io.IOException
     {
-        // initialize loader
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(xmlFile));
-
-        Scene GameScreenScene = new Scene((Pane)loader.load());
-
-        GameState game = new GameState(xName.getText(),oName.getText(),firstMover.getText().charAt(0));
-
-        if(xmlFile.equals("GameScreen.fxml"))
-            game.setUI(loader.<GameController>getController());
+        // load the next scene
+        Parent GameScreenParent = FXMLLoader.load(getClass().getResource(xmlFile));
+        Scene GameScreenScene = new Scene(GameScreenParent);
 
         // get the stage... getSource = get object that was clicked on (the button) from the event, getScene = get the scene the button is a part of, getWindow = get the stage the scene is a part of
         Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
