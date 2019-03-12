@@ -61,6 +61,20 @@ public class TicTacToeServer extends Application  {
                                 player2.getInetAddress().getHostAddress() + '\n');
                     });
 
+
+                    Platform.runLater(() -> {
+                        try {
+                        taLog.appendText(new BufferedReader(new InputStreamReader(player1.getInputStream())).readLine());}
+                        catch (IOException e){e.printStackTrace();}
+                    //String a = new BufferedReader(new InputStreamReader(player1.getInputStream())).readLine();
+                    //System.out.println(a);
+                            });
+
+                     /** edit */
+                    //new OutputStreamWriter(player2.getOutputStream(), "UTF-8").flush();
+                    //new PrintWriter(player2.getOutputStream(), true).write(a); //.write(new BufferedReader(new InputStreamReader(player1.getInputStream())).readLine());
+
+
                     // Notify that the player is Player 2
                     new DataOutputStream(
                             player2.getOutputStream()).writeInt(PLAYER2);
@@ -69,6 +83,9 @@ public class TicTacToeServer extends Application  {
                     Platform.runLater(() ->
                             taLog.appendText(new Date() +
                                     ": Start a thread for session " + sessionNo++ + '\n'));
+
+                    /** edit */
+                    new OutputStreamWriter(player1.getOutputStream(), "UTF-8").flush();
 
                     // Launch a new thread for this session of two players
                     new Thread(new HandleASession(player1, player2)).start();
@@ -86,7 +103,9 @@ public class TicTacToeServer extends Application  {
         private Socket player2;
 
         // Create and initialize cells
-        private char[][] cell =  new char[3][3];
+        //private char[][] cell =  new char[3][3];
+
+        GameState game = new GameState();
 
         private DataInputStream fromPlayer1;
         private DataOutputStream toPlayer1;
@@ -101,10 +120,11 @@ public class TicTacToeServer extends Application  {
             this.player1 = player1;
             this.player2 = player2;
 
-            // Initialize cells
+         /*   // Initialize cells
             for (int i = 0; i < 3; i++)
                 for (int j = 0; j < 3; j++)
                     cell[i][j] = ' ';
+        */
         }
 
         /** Implement the run() method for the thread */
@@ -132,16 +152,19 @@ public class TicTacToeServer extends Application  {
                     int column = fromPlayer1.readInt();
                     System.out.println("reveived X move");
 
-                    cell[row][column] = 'X';
+                    //cell[row][column] = 'X';
+                    game.set('X',row,column);
+
+                    char isWon = game.checkForWin();
 
                     // Check if Player 1 wins
-                    if (isWon('X')) {
+                    if (/*isWon('X')*/isWon == 'X') {
                         toPlayer1.writeInt(PLAYER1_WON);
                         toPlayer2.writeInt(PLAYER1_WON);
                         sendMove(toPlayer2, row, column);
                         break; // Break the loop
                     }
-                    else if (isFull()) { // Check if all cells are filled
+                    else if (isWon == 'T') { // Check if all cells are filled
                         toPlayer1.writeInt(DRAW);
                         toPlayer2.writeInt(DRAW);
                         sendMove(toPlayer2, row, column);
@@ -159,10 +182,11 @@ public class TicTacToeServer extends Application  {
                     row = fromPlayer2.readInt();
                     column = fromPlayer2.readInt();
                     System.out.println("reveived X move");
-                    cell[row][column] = 'O';
+                    //cell[row][column] = 'O';
+                    game.set('O',row,column);
 
                     // Check if Player 2 wins
-                    if (isWon('O')) {
+                    if (isWon == 'O') {
                         toPlayer1.writeInt(PLAYER2_WON);
                         toPlayer2.writeInt(PLAYER2_WON);
                         sendMove(toPlayer1, row, column);
@@ -187,53 +211,6 @@ public class TicTacToeServer extends Application  {
                 throws IOException {
             out.writeInt(row); // Send row index
             out.writeInt(column); // Send column index
-        }
-
-        /** Determine if the cells are all occupied */
-        private boolean isFull() {
-            for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
-                    if (cell[i][j] == ' ')
-                        return false; // At least one cell is not filled
-
-            // All cells are filled
-            return true;
-        }
-
-        /** Determine if the player with the specified token wins */
-        private boolean isWon(char token) {
-            // Check all rows
-            for (int i = 0; i < 3; i++)
-                if ((cell[i][0] == token)
-                        && (cell[i][1] == token)
-                        && (cell[i][2] == token)) {
-                    return true;
-                }
-
-            /** Check all columns */
-            for (int j = 0; j < 3; j++)
-                if ((cell[0][j] == token)
-                        && (cell[1][j] == token)
-                        && (cell[2][j] == token)) {
-                    return true;
-                }
-
-            /** Check major diagonal */
-            if ((cell[0][0] == token)
-                    && (cell[1][1] == token)
-                    && (cell[2][2] == token)) {
-                return true;
-            }
-
-            /** Check subdiagonal */
-            if ((cell[0][2] == token)
-                    && (cell[1][1] == token)
-                    && (cell[2][0] == token)) {
-                return true;
-            }
-
-            /** All checked, but no winner */
-            return false;
         }
     }
 

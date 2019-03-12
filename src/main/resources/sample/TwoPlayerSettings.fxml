@@ -13,7 +13,7 @@
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="180.0" spacing="10.0" style="-fx-border-color: gray;">
                <children>
-                  <TextField alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="YOUR NAME HERE" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;" fx:id="xName">
+                  <TextField fx:id="name" alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="YOUR NAME HERE" style="-fx-background-color: #2b2a2a; -fx-text-inner-color: white;">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

@@ -24,30 +24,19 @@ public class TwoPlayerController {
 
 
     public Button firstMover, x, o;
-    public TextField xName, oName;
+    public TextField name;
 
     @FXML public void initialize(){
         firstMover = x;
     }
     public void beginGame(MouseEvent click) throws java.io.IOException {
-        nextWindow(click, "GameScreen.fxml");
+        nextWindow(click, "GameScreenForClient.fxml");
     }
     public void back(MouseEvent click) throws java.io.IOException {
         nextWindow(click, "PlayerMode.fxml");
     }
 
-    public void xo(MouseEvent click){
-        Button bt = (Button)click.getSource();
-        Button other;
-        if(bt != firstMover) {
-            bt.setTextFill(Color.valueOf("White"));
-            bt.setStyle("-fx-background-color: #2b2a2a; -fx-border-color: white;");
-            other = (bt != x) ? x : o;
-            other.setTextFill(Color.web("#909090"));
-            other.setStyle("-fx-background-color: black; -fx-border-color: gray;");
-            firstMover =  bt;
-        }
-    }
+
 
     public void beginHovered(MouseEvent e){
         ((Button)e.getSource()).setStyle("-fx-border-width: 2; -fx-background-insets: 3;   -fx-border-radius: 90; -fx-background-radius: 90; -fx-text-fill: black; -fx-border-color: black; -fx-background-color: white;");
@@ -60,12 +49,21 @@ public class TwoPlayerController {
 
     public void nextWindow(MouseEvent click, String xmlFile) throws java.io.IOException
     {
-        // load the next scene
-        Parent GameScreenParent = FXMLLoader.load(getClass().getResource(xmlFile));
-        Scene GameScreenScene = new Scene(GameScreenParent);
+        // initialize loader
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(xmlFile));
+        Scene GameScreenScene = new Scene((Pane)loader.load());
+
+        //Parent GameScreenParent = FXMLLoader.load(getClass().getResource(xmlFile));
+        //Scene GameScreenScene = new Scene(GameScreenParent);
 
         // get the stage... getSource = get object that was clicked on (the button) from the event, getScene = get the scene the button is a part of, getWindow = get the stage the scene is a part of
         Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
+
+        //TicTacToeClient game = new TicTacToeClient();
+        //GameControllerForClient gameUI;
+        if(xmlFile.equals("GameScreen.fxml"))
+            loader.<GameControllerForClient>getController().setClient(new TicTacToeClient());
+
 
         // set stage to display the next scene
         window.setScene(GameScreenScene);
