@@ -65,7 +65,7 @@
                                       <Insets />
                                   </VBox.margin>
                                   <children>
-                                      <Text fx:id="myName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="player1">
+                                      <Text fx:id="myName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: .5;" text="player1">
                                           <font>
                                               <Font size="20.0" />
                                           </font>
@@ -81,7 +81,7 @@
                                       <Insets />
                                   </VBox.margin>
                                   <children>
-                                      <Text fx:id="opponentName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="player2">
+                                      <Text fx:id="opponentName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: .5;" text="player2">
                                           <font>
                                               <Font size="20.0" />
                                           </font>
@@ -107,6 +107,12 @@
               </Button>
           </bottom>
       </BorderPane>
+      <VBox fx:id="waitForPlayer2" alignment="CENTER" spacing="30.0" style="-fx-background-color: black;" visible="false">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for player 2 to join ... " />
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="You will start as 'X' win the game begins" />
+         </children>
+      </VBox>
       <VBox fx:id="nameEntryWindow" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" spacing="80.0" style="-fx-background-color: black;">
          <children>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="500.0" spacing="40.0">

@@ -3,6 +3,10 @@ package sample;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -12,6 +16,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -27,34 +32,16 @@ public class GameControllerForClient {
     @FXML  public Text myName, opponentName;
     @FXML  public TextField nameField;
     @FXML  public VBox nameEntryWindow;
+    @FXML  public  VBox waitForPlayer2;
     public Text [] playerDisplay;
     private StackPane [][] location = new StackPane[3][3];
     private TicTacToeClient client;
 
-
-
     static int PLAYER1 = 1, PLAYER1_WON = 1, PLAYER2 = 2, PLAYER2_WON = 2, DRAW = 0, CONTINUE = 5;
-
-
-    // Indicate whether the player has the turn
-    //@FXML private boolean myTurn = false;
-
-    // Indicate the token for the player
-    //@FXML private char myToken;
-
-    // Indicate the token for the other player
-    //@FXML  private char otherToken;
 
     private String name;
 
-    // Create and initialize cells
-    //private Cell[][] cell = new Cell[3][3];
 
-    // Create and initialize a title label
-    private Label lblTitle = new Label();
-
-    // Create and initialize a status label
-    private Label lblStatus = new Label();
 
     // Indicate selected row and column by the current move
     private int rowSelected;
@@ -73,12 +60,7 @@ public class GameControllerForClient {
     // Host name or ip
     private String host = "localhost";
 
-    public GameControllerForClient() {
-        /*otherToken = ' ';
-        myToken = ' ';
-        name = str;
-        initialize();*/
-    }
+    public GameControllerForClient() { }
 
     @FXML public void initialize(){
         location[0][0]  = cell00;
@@ -141,7 +123,6 @@ public class GameControllerForClient {
         if(!client.getMyTurn())
             return;
 
-        //System.out.println(game.toString()); // DEBUG
         Pane space = (Pane)event.getSource(); // get the board space that detected this event
         Text token = (Text)space.getChildren().get(0); // get the symbol in this space (because mouseOver event is guaranteed to occur first, we can be sure the space is not empty when calling it's children)
 
@@ -155,7 +136,7 @@ public class GameControllerForClient {
 
             client.setRowSelected(GridPane.getRowIndex(space) != null ? GridPane.getRowIndex(space) : 0);
             client.setcolumnSelected(GridPane.getColumnIndex(space) != null ? GridPane.getColumnIndex(space) : 0);
-            lblStatus.setText("Waiting for the other player to move");
+            myName.setOpacity(.5);
             client.setWaiting(false);
         }
     }
@@ -173,7 +154,7 @@ public class GameControllerForClient {
 
     public void restart(ActionEvent click) throws java.io.IOException
     {
-       /* // load the next scene
+        // load the next scene
         Parent GameScreenParent = FXMLLoader.load(getClass().getResource("StartupMenu.fxml"));
         Scene GameScreenScene = new Scene(GameScreenParent);
 
@@ -182,15 +163,15 @@ public class GameControllerForClient {
 
         // set stage to display the next scene
         window.setScene(GameScreenScene);
-        window.show();*/
+        window.show();
     }
     public void exit(MouseEvent click) throws java.io.IOException
     {
-        /*Parent GameScreenParent = FXMLLoader.load(getClass().getResource("StartupMenu.fxml"));
+        Parent GameScreenParent = FXMLLoader.load(getClass().getResource("StartupMenu.fxml"));
         Scene GameScreenScene = new Scene(GameScreenParent);
         Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
         window.setScene(GameScreenScene);
-        window.show();*/
+        window.show();
     }
 
     public void join(MouseEvent click){

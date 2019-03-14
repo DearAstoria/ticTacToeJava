@@ -70,11 +70,6 @@ public class TicTacToeServer extends Application  {
                     //System.out.println(a);
                             });
 
-                     /** edit */
-                    //new OutputStreamWriter(player2.getOutputStream(), "UTF-8").flush();
-                    //new PrintWriter(player2.getOutputStream(), true).write(a); //.write(new BufferedReader(new InputStreamReader(player1.getInputStream())).readLine());
-
-
                     // Notify that the player is Player 2
                     new DataOutputStream(
                             player2.getOutputStream()).writeInt(PLAYER2);
@@ -84,7 +79,7 @@ public class TicTacToeServer extends Application  {
                             taLog.appendText(new Date() +
                                     ": Start a thread for session " + sessionNo++ + '\n'));
 
-                    /** edit */
+
                     new OutputStreamWriter(player1.getOutputStream(), "UTF-8").flush();
 
                     // Launch a new thread for this session of two players
@@ -158,7 +153,7 @@ public class TicTacToeServer extends Application  {
                     char isWon = game.checkForWin();
 
                     // Check if Player 1 wins
-                    if (/*isWon('X')*/isWon == 'X') {
+                    if (isWon == 'X') {
                         toPlayer1.writeInt(PLAYER1_WON);
                         toPlayer2.writeInt(PLAYER1_WON);
                         sendMove(toPlayer2, row, column);
@@ -181,8 +176,6 @@ public class TicTacToeServer extends Application  {
                     // Receive a move from Player 2
                     row = fromPlayer2.readInt();
                     column = fromPlayer2.readInt();
-                    System.out.println("reveived X move");
-                    //cell[row][column] = 'O';
                     game.set('O',row,column);
 
                     // Check if Player 2 wins

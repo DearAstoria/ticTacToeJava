@@ -119,6 +119,11 @@ public class TicTacToeClient {
 
                 // Am I player 1 or 2?
                 if (player == PLAYER1) {
+                    Platform.runLater(() -> {
+                    UI.waitForPlayer2.setVisible(true);
+                    UI.myName.setOpacity(1);
+                    });
+
                     myToken = 'X';
                     otherToken = 'O';
 
@@ -128,6 +133,7 @@ public class TicTacToeClient {
                     String str = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine() + " (" + otherToken + ")";
                     Platform.runLater(() -> {
                         UI.opponentName.setText(str);
+                        UI.waitForPlayer2.setVisible(false);
                     });
 
                     Platform.runLater(() -> {
@@ -145,7 +151,6 @@ public class TicTacToeClient {
                 }
 
                 else if (player == PLAYER2) {
-
                     myToken = 'O';
                     otherToken = 'X';
 
@@ -153,6 +158,7 @@ public class TicTacToeClient {
                     String str = new BufferedReader(new InputStreamReader(socket.getInputStream())).readLine() + " (" + otherToken + ")";
                     Platform.runLater(() -> {
                         UI.opponentName.setText(str);
+                        UI.opponentName.setOpacity(1);
                     });
                     // write myName
                     toServer.writeBytes(UI.nameField.getText() + '\n');
@@ -164,7 +170,8 @@ public class TicTacToeClient {
                 }
 
                 Platform.runLater(() -> {
-                    UI.myName.setText(UI.nameField.getText() + " (" + myToken + ")"); });
+                    UI.myName.setText(UI.nameField.getText() + " (" + myToken + ")");
+                });
                 System.out.println("myTurn initialized to: " + myTurn);
                 System.out.println("my token: " + myToken + " otherToken: " + otherToken + " my move: " + rowSelected + "," + columnSelected);
 
@@ -194,8 +201,6 @@ public class TicTacToeClient {
         while (waiting) {
             Thread.sleep(100);
         }
-        System.out.println("my token: " + myToken + " otherToken: " + otherToken + " my move: " + rowSelected + "," + columnSelected);
-
         waiting = true;
     }
 
@@ -218,34 +223,34 @@ public class TicTacToeClient {
             // Player 1 won, stop playing
             continueToPlay = false;
             if (myToken == 'X') {
-                Platform.runLater(() -> UI.outputWinner(UI.myName.getText() + " wins", "GREEN"));//lblStatus.setText("I won! (X)"));
+                Platform.runLater(() -> UI.outputWinner(UI.myName.getText() + " wins", "GREEN"));
             } else if (myToken == 'O') {
                 Platform.runLater(() ->
-                        UI.outputWinner(UI.opponentName.getText() + " wins", "RED"));//RESTART.setText("Player 1 (X) has won!"));
+                        UI.outputWinner(UI.opponentName.getText() + " wins", "RED"));
                 receiveMove();
             }
         } else if (status == PLAYER2_WON) {
             // Player 2 won, stop playing
             continueToPlay = false;
             if (myToken == 'O') {
-                Platform.runLater(() -> UI.outputWinner(UI.myName.getText() + " wins", "GREEN"));//lblStatus.setText("I won! (O)"));
+                Platform.runLater(() -> UI.outputWinner(UI.myName.getText() + " wins", "GREEN"));
             } else if (myToken == 'X') {
                 Platform.runLater(() ->
-                        UI.outputWinner(UI.opponentName.getText() + " wins", "RED"));//lblStatus.setText("Player 2 (O) has won!"));
+                        UI.outputWinner(UI.opponentName.getText() + " wins", "RED"));
                 receiveMove();
             }
         } else if (status == DRAW) {
             // No winner, game is over
             continueToPlay = false;
             Platform.runLater(() ->
-                    UI.outputWinner("DRAW", "YELLOW"));//lblStatus.setText("Game is over, no winner!"));
+                    UI.outputWinner("DRAW", "YELLOW"));
 
             if (myToken == 'O') {
                 receiveMove();
             }
         } else {
             receiveMove();
-            Platform.runLater(() -> lblStatus.setText("My turn"));
+            Platform.runLater(() -> UI.myName.setOpacity(1.));
             myTurn = true; // It is my turn
         }
     }
@@ -254,8 +259,6 @@ public class TicTacToeClient {
         // Get the other player's move
         int row = fromServer.readInt();
         int column = fromServer.readInt();
-
-        //Platform.runLater(() -> cell[row][column].setToken(otherToken));
 
         Text t = new Text(Character.toString(otherToken));
         t.setStyle("-fx-font: 64 System;");
