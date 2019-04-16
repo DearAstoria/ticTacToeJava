@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TicTacToe.iml" filepath="$PROJECT_DIR$/.idea/modules/TicTacToe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TicTacToe.main.iml" filepath="$PROJECT_DIR$/.idea/modules/TicTacToe.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TicTacToe.test.iml" filepath="$PROJECT_DIR$/.idea/modules/TicTacToe.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/ticTacToeJava.iml" filepath="$PROJECT_DIR$/ticTacToeJava.iml" />
     </modules>
   </component>
