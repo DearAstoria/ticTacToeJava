@@ -9,14 +9,14 @@ import javafx.stage.Stage;
 
 public class GameModeMenuController {
     public void singleMode(MouseEvent click) throws java.io.IOException {
-        nextWindow(click, "/client/gui_controllers/gui_controllers/GameSettingsMenu.fxml");
+        nextWindow(click, "../../gui_resources/GameSettingsMenu.fxml");
     }
     public void twoPlayerMode(MouseEvent click) throws java.io.IOException {
-        nextWindow(click, "GameScreenForClient.fxml");
+        nextWindow(click, "../../gui_resources/GameScreenForClient.fxml");
     }
 
     public void back(MouseEvent click) throws java.io.IOException {
-        nextWindow(click, "/client/gui_controllers/gui_controllers/StartupMenu.fxml");
+        nextWindow(click, "../../gui_resources/StartupMenu.fxml");
     }
 
     public void nextWindow(MouseEvent click, String xmlFile) throws java.io.IOException

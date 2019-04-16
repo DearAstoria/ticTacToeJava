@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.gui_controllers.GameSettingsMenuController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="220.0" styleClass="root">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-13px" text="CPU">
+                     <HBox.margin> <Insets left="-34.0" right="5.0" /> </HBox.margin>
+                  </Text>
+
+                  <fx:define> <ToggleGroup fx:id="DIFFICULTY" /> </fx:define>
+                  <ToggleButton fx:id="EASY" mnemonicParsing="false" onMouseReleased="#difficultySelected" styleClass="button" text="Easy">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="DIFFICULTY" />
+                     </toggleGroup></ToggleButton>
+                  <ToggleButton fx:id="HARD" mnemonicParsing="false" onMouseReleased="#difficultySelected" styleClass="button" text="Hard" toggleGroup="$DIFFICULTY" />
+
+               </children>
+               <VBox.margin>
+                  <Insets left="40.0" right="40.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="220.0" styleClass="root">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
+               </VBox.margin>
+               <children>
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="400.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-13px" text="Player">
+                           <HBox.margin> <Insets right="5.0" /> </HBox.margin>
+                        </Text>
+                        <TextField fx:id="NAME" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefWidth="146.0" promptText="Name">
+                           <HBox.margin> <Insets /> </HBox.margin>
+                           <opaqueInsets> <Insets /> </opaqueInsets>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="-90.0" top="-10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="80.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-13px" text="plays">
+                           <HBox.margin>
+                              <Insets left="8.0" right="5.0" />
+                           </HBox.margin>
+                        </Text>
+
+                        <fx:define> <ToggleGroup fx:id="CHOICEOFLETTER" /> </fx:define>
+                        <ToggleButton fx:id="PLAYX" mnemonicParsing="false" onMouseClicked="#playerSymbolSelected" styleClass="button" text="X">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="CHOICEOFLETTER" />
+                           </toggleGroup></ToggleButton>
+                        <ToggleButton fx:id="PLAYO" mnemonicParsing="false" onMouseClicked="#playerSymbolSelected" styleClass="button" text="O" toggleGroup="$CHOICEOFLETTER" />
+
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-13px" text="Who Moves First?   ">
+                     <HBox.margin> <Insets right="5.0" /> </HBox.margin>
+                  </Text>
+
+                  <fx:define> <ToggleGroup fx:id="FIRSTMOVE" /> </fx:define>
+                  <ToggleButton fx:id="XFIRST" mnemonicParsing="false" onMouseClicked="#firstMoverSelected" styleClass="button" text="X">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="FIRSTMOVE" />
+                     </toggleGroup></ToggleButton>
+                  <ToggleButton fx:id="OFIRST" mnemonicParsing="false" onMouseClicked="#firstMoverSelected" styleClass="button" text="O" toggleGroup="$FIRSTMOVE" />
+
+               </children>
+               <VBox.margin> <Insets /> </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" spacing="134.0">
+               <children>
+                  <Button fx:id="BACK" mnemonicParsing="false" onMouseClicked="#back" styleClass="back-button" text="&lt;-- back">
+                     <HBox.margin> <Insets left="-220.0" /> </HBox.margin>
+                  </Button>
+                  <Button fx:id="begin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#beginClicked" prefHeight="40.0" prefWidth="100.0" styleClass="round-button" text="begin">
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

@@ -16,7 +16,9 @@ public class PostgresqlExample {
 
 
 
-    static void createDatabase()        {
+    public static void createDatabase()
+
+    {
         Connection conn = null;
         Statement stmt = null;
         try{
