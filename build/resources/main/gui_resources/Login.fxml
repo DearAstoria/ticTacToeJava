@@ -20,8 +20,8 @@
             </Text>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-14px" text="Online Name:" />
-                  <TextField promptText="Name for this session" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-14px" text="Email:" />
+                  <TextField />
                </children>
                <padding>
                   <Insets top="30.0" />
