@@ -1,6 +1,8 @@
 package pubnubWrappers;
 
 
+import client.raw_data.GameSettings;
+import com.google.gson.Gson;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.PNCallback;
@@ -13,6 +15,7 @@ import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 import java.util.Arrays;
 
 import static pubnubWrappers.PubNubWrappers.new_PubNub;
+import static pubnubWrappers.PubNubWrappers.publish;
 
 public class Main {
     public static void main(String args[]){
@@ -28,7 +31,10 @@ public class Main {
 
         @Override
         public void message(PubNub pubnub, PNMessageResult message) {
-
+            System.out.println("from " + message.getPublisher() + " on " + message.getChannel());
+            client.raw_data.GameSettings gamesettings = new Gson().fromJson(message.getMessage(), client.raw_data.GameSettings.class);
+            System.out.println(gamesettings);
+            publish(pubnub,gamesettings, message.getPublisher());
         }
 
         @Override
@@ -37,15 +43,9 @@ public class Main {
         }
     });
 
-    // subscribe to "AustinsChannel"
-    austin.subscribe().channels(Arrays.asList("AustinsChannel")).execute();
-
-
-
-    // create a PubNub with UUID of Justis, from which to publish to "AustinsChannel"
-    PubNub justis = PubNubWrappers.publish("Justis",
-            new client.raw_data.GameSettings("player1",true,true,true), "AustinsChannel");
-
+        // create a PubNub with UUID of Justis, from which to publish to "AustinsChannel"
+        PubNub justis = new_PubNub("Justis");
+        // add handler for justis as a subscriber
         justis.addListener(new SubscribeCallback() {
             @Override
             public void status(PubNub pubnub, PNStatus status) {
@@ -54,6 +54,9 @@ public class Main {
 
             @Override
             public void message(PubNub pubnub, PNMessageResult message) {
+                System.out.println("from " + message.getPublisher() + " on " + message.getChannel());
+                System.out.println(message.getMessage());
+
 
             }
 
@@ -64,6 +67,16 @@ public class Main {
         });
 
 
+        // subscribe to "AustinsChannel"
+        austin.subscribe().channels(Arrays.asList("AustinsChannel")).execute();
+
+        // justis is subscribing to a channel named "Justis" which is also the UUID for justis
+        justis.subscribe().channels(Arrays.asList(justis.getConfiguration().getUuid())).execute();
+
+
+
+        publish(justis, new client.raw_data.GameSettings("player1",true,true,true),
+                "AustinsChannel");
 
 
 

@@ -61,11 +61,11 @@ public class GameSettings {
 
     @Override
     public String toString() {
-        return "GameSettings{" +
-                "player='" + player + '\'' +
-                ", playingX=" + playingX +
-                ", easy=" + easy +
-                ", xFirst=" + xFirst +
+        return "GameSettings{\n" +
+                ", player='" + player + "\n" +
+                ", playingX=" + playingX + "\n"+
+                ", easy=" + easy + "\n"+
+                ", xFirst=" + xFirst + "\n"+
                 '}';
     }
 }

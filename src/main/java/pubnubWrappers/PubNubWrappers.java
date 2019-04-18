@@ -39,8 +39,8 @@ public class PubNubWrappers {
         return p;
     }
 
-    static PubNub publish(Object object, String chan) { // creates a PubNub, publishes from it, returns the new PubNub
-        return publish(new_PubNub(), object, chan);
+    static PubNub publish(Object message, String chan) { // creates a PubNub, publishes from it, returns the new PubNub
+        return publish(new_PubNub(), message, chan);
     }
 
     static PubNub publish(PubNub pubnubObject, Object object, String chan){
