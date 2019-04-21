@@ -16,9 +16,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import pubnubWrappers.Subcallback;
 import server.Server;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static pubnubWrappers.PubNubWrappers.*;
@@ -62,7 +62,9 @@ public class LoginController extends pubnubWrappers.Subscriber {
                 FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
                 Parent root = (Parent)loader.load();
                 GameLobbyController controller = loader.getController();
-                controller.init(usernameField.getText());//,Arrays.asList(Server.LOBBY_CHANNEL));
+                ArrayList<String> lobby = new ArrayList<>();
+                lobby.addAll(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL));
+                controller.init(usernameField.getText(),lobby);
                 checkHereNow(Server.LOBBY_CHANNEL,controller.getHereNowCallBack());
                 loadFXML(usernameField, root);
 

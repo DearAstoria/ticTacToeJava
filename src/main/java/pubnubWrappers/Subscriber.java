@@ -7,9 +7,7 @@ import com.pubnub.api.models.consumer.presence.PNHereNowResult;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static pubnubWrappers.PubNubWrappers.new_PubNub;
 
@@ -20,10 +18,10 @@ import static pubnubWrappers.PubNubWrappers.new_PubNub;
         protected PNHereNowResult hereNow;
         protected HereNowCallback hereNowCallback = new HereNowCallback();
 
-        public void init(String uuid, List<String> channels){
+        public void init(String uuid, ArrayList<String> channels){
             connection = new_PubNub(uuid);
             connection.addListener(this);
-//            channels.add(uuid);
+            channels.add(uuid);
             subscribe(channels);
         }
         public void init(String uuid){
@@ -93,15 +91,16 @@ import static pubnubWrappers.PubNubWrappers.new_PubNub;
 
         class HereNowCallback extends PNCallback<PNHereNowResult> {
 
-
         @Override
         public void onResponse(PNHereNowResult result, PNStatus status){
-            handleHereNow(result, status);
-        }
-
-
+            handleHereNow(result, status); }
 
         }
+
+
+
+
+
     }
 
 //}

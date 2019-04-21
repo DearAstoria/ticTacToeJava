@@ -2,74 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39c35665-ba41-49d1-b0fe-459693628170" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__ch_qos_logback_logback_classic_1_0_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__ch_qos_logback_logback_core_1_0_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_pubnub_pubnub_gson_4_22_0_beta.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_logging_interceptor_3_12_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_12_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_1_15_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_converter_gson_2_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_retrofit_2_5_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_base_11_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_base_mac_11_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_controls_11_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_controls_mac_11_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_fxml_mac_11_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_graphics_11_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_graphics_mac_11_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_api_1_7_25.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_xerial_sqlite_jdbc_3_7_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__postgresql_postgresql_9_0_801_jdbc4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/Engine/TicTacToe.Engine.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/Engine/TicTacToe.Engine.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/Engine/TicTacToe.Engine.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/GUI/TicTacToe.GUI.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/TicTacToe.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/TicTacToe.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/TicTacToe.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Subcallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sceneLoader/SceneLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/UseCases/JoinLobby.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/UseCases/LeaveLobby.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/client/gui_controllers/GameLobbyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/client/gui_controllers/GameLobbyController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/client/gui_controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/client/gui_controllers/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/databaseOperations/PostgresqlExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/gui_resources/GameLobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/gui_resources/GameLobby.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/gui_resources/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/gui_resources/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/Subcallback.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/Subscriber.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/Subscriber.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/client/gui_controllers/GameLobbyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/client/gui_controllers/GameLobbyController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/client/gui_controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/client/gui_controllers/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/databaseOperations/PostgresqlExample.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/gui_resources/GameLobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/gui_resources/GameLobby.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/gui_resources/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/gui_resources/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/Subcallback.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/Subscriber.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/Subscriber.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/databaseOperations/PostgresqlExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/databaseOperations/PostgresqlExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/gui_resources/GameLobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/gui_resources/GameLobby.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/gui_resources/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/gui_resources/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -106,7 +60,20 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+              <caret line="23" column="24" selection-end-line="115" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#example1#0;class#Main#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/UseCases/JoinLobby.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#example1#0;class#Main#0" />
@@ -118,8 +85,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1308">
-              <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+            <state relative-caret-position="400">
+              <caret line="110" column="47" lean-forward="true" selection-start-line="110" selection-start-column="47" selection-end-line="110" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/UseCases/LeaveLobby.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="24" column="89" selection-start-line="24" selection-start-column="89" selection-end-line="24" selection-end-column="89" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,8 +109,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-61">
-              <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
+            <state relative-caret-position="563">
+              <caret line="65" column="91" selection-start-line="65" selection-start-column="91" selection-end-line="65" selection-end-column="91" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1618#1619#0" expanded="true" />
@@ -144,26 +123,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="2" selection-start-line="25" selection-start-column="2" selection-end-line="25" selection-end-column="2" />
+            <state relative-caret-position="196">
+              <caret line="91" column="66" lean-forward="true" selection-start-line="91" selection-start-column="66" selection-end-line="91" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2656#2657#0" expanded="true" />
-                <element signature="e#2709#2710#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/server/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-74">
-              <caret line="65" column="46" lean-forward="true" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#requestGame#0;class#Server#0" />
-                <element signature="method#leaveLobby#0;class#Server#0" />
               </folding>
             </state>
           </provider>
@@ -172,22 +135,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2430#2431#0" expanded="true" />
-                <element signature="e#2496#2497#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/client/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="284">
+              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -240,10 +189,12 @@
         <option value="$PROJECT_DIR$/src/main/java/sceneLoader/SceneLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/server/Server.java" />
         <option value="$PROJECT_DIR$/src/main/resources/gui_resources/GameLobby.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java" />
         <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/UseCases/LeaveLobby.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/UseCases/JoinLobby.java" />
         <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java" />
       </list>
     </option>
@@ -314,6 +265,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pubnubWrappers" type="462c0819:PsiDirectoryNode" />
+              <item name="UseCases" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ticTacToeJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ticTacToeJava" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sceneLoader" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -348,7 +308,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555824561614" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555870697523" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -382,6 +342,32 @@
     </option>
   </component>
   <component name="RunManager" selected="Gradle.ticTacToeJava [run]">
+    <configuration name="JoinLobby" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pubnubWrappers.UseCases.JoinLobby" />
+      <module name="TicTacToe.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pubnubWrappers.UseCases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LeaveLobby" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pubnubWrappers.UseCases.LeaveLobby" />
+      <module name="TicTacToe.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pubnubWrappers.UseCases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pubnubWrappers.Main" />
       <module name="TicTacToe.main" />
@@ -431,10 +417,14 @@
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Server" />
       <item itemvalue="Gradle.ticTacToeJava [run]" />
+      <item itemvalue="Application.JoinLobby" />
+      <item itemvalue="Application.LeaveLobby" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.JoinLobby" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.LeaveLobby" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -566,16 +556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Subcallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="98" lean-forward="true" selection-start-line="16" selection-end-line="98" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameModeMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -691,36 +671,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Subcallback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="2" selection-start-line="25" selection-start-column="2" selection-end-line="25" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2656#2657#0" expanded="true" />
-            <element signature="e#2709#2710#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1308">
-          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+        <state relative-caret-position="196">
+          <caret line="91" column="66" lean-forward="true" selection-start-line="91" selection-start-column="66" selection-end-line="91" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/server/Server.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-74">
-          <caret line="65" column="46" lean-forward="true" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+        <state relative-caret-position="238">
+          <caret line="23" column="24" selection-end-line="115" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#requestGame#0;class#Server#0" />
-            <element signature="method#leaveLobby#0;class#Server#0" />
+            <element signature="method#example1#0;class#Main#0" />
           </folding>
         </state>
       </provider>
@@ -735,10 +712,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+        <state relative-caret-position="506">
+          <caret line="65" column="46" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#requestGame#0;class#Server#0" />
+            <element signature="method#leaveLobby#0;class#Server#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="110" column="47" lean-forward="true" selection-start-line="110" selection-start-column="47" selection-end-line="110" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/UseCases/LeaveLobby.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="24" column="89" selection-start-line="24" selection-start-column="89" selection-end-line="24" selection-end-column="89" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/UseCases/JoinLobby.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#example1#0;class#Main#0" />
@@ -748,8 +757,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
+        <state relative-caret-position="563">
+          <caret line="65" column="91" selection-start-line="65" selection-start-column="91" selection-end-line="65" selection-end-column="91" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1618#1619#0" expanded="true" />
@@ -760,12 +769,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        <state relative-caret-position="284">
+          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2430#2431#0" expanded="true" />
-            <element signature="e#2496#2497#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -95,7 +95,7 @@ public class PubNubWrappers {
                 });*/
     }
 
-    static PubNub sendReceive(String uuid, Object message, Subscriber parentObj, String channel){
+    public static PubNub sendReceive(String uuid, Object message, Subscriber parentObj, String channel){
         PubNub pubnub = new_PubNub(uuid);
         //pubnub.addListener(new Subcallback(parentObj));
         pubnub.subscribe().channels(Arrays.asList(channel)).execute();
@@ -103,8 +103,11 @@ public class PubNubWrappers {
         return null;
     }
 
-    static PubNub sub(String uuid, List chan){
+    public static PubNub sub(String uuid, List chan){
         PubNub p = new_PubNub(uuid);
+        return sub(p,chan);
+    }
+    public static PubNub sub(PubNub p, List chan){
         p.subscribe().channels(chan).execute();
         return p;
     }

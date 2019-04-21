@@ -25,7 +25,7 @@ import pubnubWrappers.*;
 import server.Server;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static pubnubWrappers.PubNubWrappers.checkHereNow;
 
@@ -41,7 +41,7 @@ public class GameLobbyController extends Subscriber
 
     @FXML public void initialize(){ }
 
-
+    Map playerMap = new HashMap();
 
     @Override
     public void handleHereNow(PNHereNowResult result, PNStatus status){
@@ -49,9 +49,9 @@ public class GameLobbyController extends Subscriber
         Platform.runLater(()->{
             for(PNHereNowChannelData channelData : hereNow.getChannels().values()){
                 channelData.getOccupants();
-                for (PNHereNowOccupantData occupant : channelData.getOccupants()) {
-                    playerList.getChildren().add(new Button(occupant.getUuid()));
-                }
+                for (PNHereNowOccupantData occupant : channelData.getOccupants())
+                    addPlayer(occupant.getUuid());
+
             }
 
     });
@@ -67,15 +67,24 @@ public class GameLobbyController extends Subscriber
                 else if(chan.equals(Server.LEAVE_LOBBY_CHANNEL))
                     removePlayer(message.getPublisher());
 
-                    //push to lobby, then get lobby subscribers, then subscribe to lobby
+                    //publish to lobby, then get lobby subscribers, then subscribe to lobby
     }
 
     private void removePlayer(String uuid_username){
 
+
+        Platform.runLater(()->{
+            playerList.getChildren().remove(playerMap.get(uuid_username));
+            playerMap.remove(uuid_username);
+        });
+
         // search for user and delete associated button
     }
     private void addPlayer(String username){
-        playerList.getChildren().add(new Button(username));
+        Platform.runLater(()->{
+            playerMap.put(username,new Button(username));
+            playerList.getChildren().add((Node)playerMap.get(username));});
+
     }
 
     public void joinGame(MouseEvent click) throws java.io.IOException {
