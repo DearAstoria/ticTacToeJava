@@ -17,7 +17,7 @@ public class Main extends Application {
 
 
         //Database example
-        databaseOperations.PostgresqlExample.createDatabase("TicTacToe");
+        //server.databaseOperations.PostgresqlExample.createDatabase("TicTacToe");
 
 
     }

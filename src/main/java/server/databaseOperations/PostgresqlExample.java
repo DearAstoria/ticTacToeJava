@@ -1,20 +1,22 @@
-package databaseOperations;
+package server.databaseOperations;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 
 public class PostgresqlExample {
 
-
-    static final String DB_URL = "jdbc:postgresql://localhost/";
+    // driver and database url
+    static final String DB_URL = "jdbc:postgresql://localhost/TicTacToe";
     static final String driver = "org.postgresql.Driver";
 
+    // database tables
+    static final String USERS = "USERS";
+    static final String GAMES = "games";
+    static final String MOVES = "MOVES";
+
     //  Database credentials
-    static final String USER = "user";
-    static final String PASS = "password";
+    static final String USER = "postgres";
+    static final String PASS = "1234";
 
 
 
@@ -63,7 +65,7 @@ public class PostgresqlExample {
 
 
 
-        static void createTable() {
+    public static void createTable() {
             Connection conn = null;
             Statement stmt = null;
             try{
@@ -75,18 +77,17 @@ public class PostgresqlExample {
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 System.out.println("Connected database successfully...");
 
-                //STEP 4: Execute a query
-                System.out.println("Creating table in given database...");
+
+
                 stmt = conn.createStatement();
-
-                String sql = "CREATE TABLE USERS " +
-                        "(id INTEGER not NULL, " +
-                        " first VARCHAR(255), " +
-                        " last VARCHAR(255), " +
-                        " age INTEGER, " +
-                        " PRIMARY KEY ( id ))";
-
-                stmt.executeUpdate(sql);
+                //stmt.execute("CREATE DATABASE TicTacToe");
+                stmt.executeUpdate("CREATE TABLE USERS " +
+                        " email VARCHAR(255), " +
+                        " username VARCHAR(255), " +
+                        " wins INTEGER, " +
+                        " losses INTEGER, " +
+                        " draws INTEGER, " +
+                        " PRIMARY KEY ( username ))");
                 System.out.println("Created table in given database...");
             }catch(SQLException se){
                 //Handle errors for JDBC
@@ -112,6 +113,42 @@ public class PostgresqlExample {
         }
 
 
+    public static ResultSet executeQuery(String sql){
+
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet result = null;
+        try {
+
+            Class.forName(driver);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            stmt = conn.createStatement();
+            result = stmt.executeQuery(sql);
+        }
+        catch(
+                SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }
+
+        return result;
+    }
 
 
 

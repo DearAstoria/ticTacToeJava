@@ -20,8 +20,8 @@
             </Text>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-14px" text="Online Name:" />
-                  <TextField promptText="Name for this session" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-14px" text="Email:" />
+                  <TextField fx:id="emailField" />
                </children>
                <padding>
                   <Insets top="30.0" />
@@ -30,7 +30,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-14px" text="Username:" />
-                  <TextField />
+                  <TextField fx:id="usernameField" />
                </children>
                <padding>
                   <Insets top="30.0" />
@@ -39,7 +39,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-14px" text="Password:" />
-                  <PasswordField />
+                  <PasswordField fx:id="passwordField" />
                </children>
                <padding>
                   <Insets top="30.0" />
@@ -47,11 +47,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#loginClicked" styleClass="round-button" text="Login">
+                  <Button fx:id="login" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#loginClicked" styleClass="round-button" text="Login">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin></Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" styleClass="round-button" text="Sign Up">
+                  <Button fx:id="signup" alignment="CENTER" mnemonicParsing="false" styleClass="round-button" text="Sign Up">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin></Button>

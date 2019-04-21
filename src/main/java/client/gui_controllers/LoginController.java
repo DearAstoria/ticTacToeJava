@@ -1,26 +1,79 @@
 package client.gui_controllers;
 
+import client.User;
+import com.pubnub.api.PubNub;
+import com.pubnub.api.callbacks.SubscribeCallback;
+import com.pubnub.api.models.consumer.PNStatus;
+import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
+import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import pubnubWrappers.Subcallback;
+import server.Server;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.Arrays;
 
-public class LoginController {
+import static pubnubWrappers.PubNubWrappers.*;
+import static sceneLoader.SceneLoader.loadFXML;
+import static server.Server.LOGIN_CHANNEL;
+
+public class LoginController extends pubnubWrappers.Subscriber {
     String email; // a name used for this online session
     String username;   // the username ID of the player
     String password;   // the password to the username ID
+    //PubNub connection = new_PubNub();
 
-    public LoginController() {}
+    public LoginController() {
+        super();
+       // PubNub connection = new_PubNub();
+        // add handler
+        //connection.addListener(new Subcallback());
+        //connection.subscribe().channels(Arrays.asList(connection.getConfiguration().getUuid())).execute();
 
-    public void loginClicked(MouseEvent click) throws java.io.IOException, java.sql.SQLException, java.lang.ClassNotFoundException {
-        Connection dbConn;
+
+    }
+
+    @FXML public Button login;
+    @FXML public Button signup;
+    @FXML public TextField emailField;
+    @FXML public TextField usernameField;
+    @FXML public TextField passwordField;
+
+
+
+    @FXML public void initialize(){
+        init("loginScreen");
+    }
+
+    @Override
+    public void handleSubCallBack(PubNub pubnub, PNMessageResult message) {
+
+
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
+                Parent root = (Parent)loader.load();
+                GameLobbyController controller = loader.getController();
+                controller.init(usernameField.getText());//,Arrays.asList(Server.LOBBY_CHANNEL));
+                checkHereNow(Server.LOBBY_CHANNEL,controller.getHereNowCallBack());
+                loadFXML(usernameField, root);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
+    public void loginClicked(MouseEvent click) throws java.io.IOException, java.sql.SQLException, ClassNotFoundException {
+        /*Connection dbConn;
 
         // database parameter =‎‎ jdbc:sqlite: + filepath to database
         String url = "jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"; // NOTE: this is the file path to a database on my computer for testing purposes, it does not go to the final database we will use - Austin
@@ -40,31 +93,39 @@ public class LoginController {
                     }
                 }
             }
-        }
 
-        if(loginSucsessful) {
+        }*/
+
+        //if(loginSucsessful)
+       /* {
             System.out.println("login sucsessful");
             loginResults.close();
+*/
 
-            // load the next scene
-            Parent GameScreenParent = FXMLLoader.load(getClass().getResource("../../gui_resources/GameLobby.fxml"));
-            Scene GameScreenScene = new Scene(GameScreenParent);
+        //System.out.println(connection.getConfiguration().getUuid() + '\n' + connection.getSubscribedChannels());
 
-            // get the stage... getSource: get object that was clicked on (the button) from the event, getScene: get the scene the button is a part of, getWindow: get the stage the scene is a part of
-            Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
 
-            // set stage to display the next scene
-            window.setScene(GameScreenScene);
 
-            window.show();
 
-        } else {
-            System.out.println("login failed");
-        }
 
-        loginResults.close();
+        publish(connection, new User("email", "username", "password"), LOGIN_CHANNEL);
+
+
+
+
+
+        /*}
+        else { System.out.println("login failed"); }
+
+        loginResults.close();*/
 
     }
+
+
+
+
+
+
 
     public void signUpClicked(MouseEvent click) {
 
@@ -74,4 +135,6 @@ public class LoginController {
     private void getConnection() {
 
     }
+
+
 }

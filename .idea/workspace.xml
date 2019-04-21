@@ -2,9 +2,74 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39c35665-ba41-49d1-b0fe-459693628170" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__ch_qos_logback_logback_classic_1_0_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__ch_qos_logback_logback_core_1_0_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_pubnub_pubnub_gson_4_22_0_beta.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_logging_interceptor_3_12_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_12_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_1_15_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_converter_gson_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_retrofit2_retrofit_2_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_base_11_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_base_mac_11_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_controls_11_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_controls_mac_11_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_fxml_mac_11_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_graphics_11_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_openjfx_javafx_graphics_mac_11_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_api_1_7_25.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_xerial_sqlite_jdbc_3_7_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__postgresql_postgresql_9_0_801_jdbc4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/Engine/TicTacToe.Engine.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/Engine/TicTacToe.Engine.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/Engine/TicTacToe.Engine.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/GUI/TicTacToe.GUI.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/TicTacToe.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/TicTacToe.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/TicTacToe.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Subcallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sceneLoader/SceneLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/client/gui_controllers/GameLobbyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/client/gui_controllers/GameLobbyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/client/gui_controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/client/gui_controllers/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/databaseOperations/PostgresqlExample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/pubnubWrappers/PubNubWrappers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/gui_resources/GameLobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/gui_resources/GameLobby.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/gui_resources/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/gui_resources/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/client/gui_controllers/GameLobbyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/client/gui_controllers/GameLobbyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/client/gui_controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/client/gui_controllers/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/databaseOperations/PostgresqlExample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/pubnubWrappers/PubNubWrappers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/gui_resources/GameLobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/gui_resources/GameLobby.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/gui_resources/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/gui_resources/Login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/databaseOperations/PostgresqlExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/databaseOperations/PostgresqlExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/databaseOperations/PostgresqlExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/databaseOperations/PostgresqlExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/gui_resources/GameLobby.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/gui_resources/GameLobby.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/gui_resources/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/gui_resources/Login.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -37,54 +102,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/databaseOperations/PostgresqlExample.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="238">
+              <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#createTable#0;class#PostgresqlExample#0" />
+                <element signature="method#example1#0;class#Main#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="153" column="94" selection-start-line="153" selection-start-column="94" selection-end-line="153" selection-end-column="94" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="30" column="14" lean-forward="true" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/client/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/client/raw_data/GameEngine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -92,35 +118,79 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="41" column="40" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
+            <state relative-caret-position="1308">
+              <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+            <state relative-caret-position="-61">
+              <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1618#1619#0" expanded="true" />
+                <element signature="e#1640#1641#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/client/raw_data/GameSettings.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="63" column="31" lean-forward="true" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
+            <state relative-caret-position="375">
+              <caret line="25" column="2" selection-start-line="25" selection-start-column="2" selection-end-line="25" selection-end-column="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2656#2657#0" expanded="true" />
+                <element signature="e#2709#2710#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/client/raw_data/GameState.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/server/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-52">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="-74">
+              <caret line="65" column="46" lean-forward="true" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#requestGame#0;class#Server#0" />
+                <element signature="method#leaveLobby#0;class#Server#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2430#2431#0" expanded="true" />
+                <element signature="e#2496#2497#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/client/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="103">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,6 +203,13 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>hey</find>
+      <find>alrea</find>
+      <find>System</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -147,17 +224,27 @@
         <option value="$PROJECT_DIR$/src/main/java/cs4b/proj1/SingleModeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cs4b/proj1/Main.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/StartupMenuController.java" />
         <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameSettingsMenuController.java" />
         <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameModeMenuController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java" />
         <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/client/raw_data/GameSettings.java" />
-        <option value="$PROJECT_DIR$/src/main/java/client/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/databaseOperations/PostgresqlExample.java" />
+        <option value="$PROJECT_DIR$/src/main/java/SceneLoader/WindowCreater.java" />
+        <option value="$PROJECT_DIR$/src/main/java/SceneLoader/SceneLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/client/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/Subcallback.java" />
+        <option value="$PROJECT_DIR$/src/main/java/client/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/gui_resources/Login.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobby.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/sceneLoader/SceneLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/server/Server.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/gui_resources/GameLobby.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java" />
+        <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java" />
       </list>
     </option>
   </component>
@@ -171,8 +258,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -213,15 +298,7 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="raw_data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ticTacToeJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ticTacToeJava" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="databaseOperations" type="462c0819:PsiDirectoryNode" />
+              <item name="gui_controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ticTacToeJava" type="b2602c69:ProjectViewProjectNode" />
@@ -231,20 +308,60 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="pubnubWrappers" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ticTacToeJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ticTacToeJava" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sceneLoader" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ticTacToeJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ticTacToeJava" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ticTacToeJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ticTacToeJava" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ticTacToeJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ticTacToeJava" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="gui_resources" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555603644358" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555824561614" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/client/gui_controllers" />
+      <recent name="$PROJECT_DIR$/src/main/java/pubnubWrappers" />
+      <recent name="$PROJECT_DIR$/src/main/java/SceneLoader" />
+      <recent name="$PROJECT_DIR$/src/main/java/server/databaseOperations" />
+      <recent name="$PROJECT_DIR$/src/main/java/server" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/gui_resources" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
@@ -264,13 +381,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Gradle.ticTacToeJava [run]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pubnubWrappers.Main" />
-      <module name="ticTacToeJava.TicTacToe.main" />
+      <module name="TicTacToe.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="pubnubWrappers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.Server" />
+      <module name="TicTacToe.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -297,8 +427,14 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Gradle.ticTacToeJava [run]" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Server" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -320,7 +456,7 @@
     <frame x="0" y="23" width="1440" height="852" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2811159" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27110156" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -328,8 +464,8 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32894737" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32894737" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32894737" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -338,7 +474,7 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.32894737" />
-      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32894737" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -363,53 +499,10 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/cs4b/proj1/SingleModeController.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/cs4b/proj1/Board.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/cs4b/proj1/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="44" column="94" selection-start-line="44" selection-start-column="94" selection-end-line="44" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/gui_resources/Login.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/gui_resources/GameLobby.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="18" column="74" selection-start-line="18" selection-start-column="74" selection-end-line="18" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/StartupMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="13" column="94" selection-start-line="13" selection-start-column="94" selection-end-line="13" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameSettingsMenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="62" column="94" selection-start-line="62" selection-start-column="94" selection-end-line="62" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameModeMenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="153" column="94" selection-start-line="153" selection-start-column="94" selection-end-line="153" selection-end-column="94" />
         </state>
       </provider>
     </entry>
@@ -420,65 +513,259 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/client/raw_data/GameSettings.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/databaseOperations/CreateTable.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/module-info.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="63" column="31" lean-forward="true" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
+        <state relative-caret-position="75">
+          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/client/raw_data/GameState.java">
+    <entry file="file://$PROJECT_DIR$/ticTacToeJava.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-52">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="90">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java">
+    <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="41" column="40" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
+        <state relative-caret-position="225">
+          <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/server/databaseOperations/PostgresqlExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+        <state relative-caret-position="315">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/databaseOperations/CreateTable.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/SceneLoader.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sceneLoader/SceneLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="30">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/client/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="255">
+          <caret line="17" column="67" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
+          <folding>
+            <element signature="e#467#468#0" expanded="true" />
+            <element signature="e#492#493#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Subcallback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="98" lean-forward="true" selection-start-line="16" selection-end-line="98" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameModeMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="30" column="14" lean-forward="true" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+        <state relative-caret-position="253">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/databaseOperations/PostgresqlExample.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/gui_resources/DarkTheme.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="-925" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/gui_resources/GameModeMenu.fxml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/gui_resources/Login.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-642" />
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/gui_resources/GameSettingsMenu.fxml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameSettingsMenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#createTable#0;class#PostgresqlExample#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
+          <folding>
+            <element signature="method#mouseOver#0;class#GameController#0" />
+            <element signature="method#mouseOut#0;class#GameController#0" />
+            <element signature="method#spaceClicked#0;class#GameController#0" />
+            <element signature="method#quit#0;class#GameController#0" />
+            <element signature="method#computerTurn#0;class#GameController#0" />
+            <element signature="method#initialize#0;class#GameController#0" />
+            <element signature="method#initData#0;class#GameController#0" />
+            <element signature="method#exit#0;class#GameController#0" />
+            <element signature="method#update#0;class#GameController#0" />
+            <element signature="method#takeSpace#0;class#GameController#0" />
+            <element signature="method#outputWinner#0;class#GameController#0" />
+            <element signature="method#getSpace#0;class#GameController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/raw_data/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <element signature="method#nextTurn#0;class#GameState#0" />
+            <element signature="method#toString#0;class#GameState#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/raw_data/GameSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="63" column="31" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Runnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobby.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/resources/main/gui_resources/GameLobby.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-271">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/gui_resources/GameLobby.fxml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/sceneLoader/SceneLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Subscriber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="2" selection-start-line="25" selection-start-column="2" selection-end-line="25" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2656#2657#0" expanded="true" />
+            <element signature="e#2709#2710#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/PubNubWrappers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1308">
+          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-74">
+          <caret line="65" column="46" lean-forward="true" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#requestGame#0;class#Server#0" />
+            <element signature="method#leaveLobby#0;class#Server#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pubnubWrappers/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#example1#0;class#Main#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-61">
+          <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1618#1619#0" expanded="true" />
+            <element signature="e#1640#1641#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/gui_controllers/GameLobbyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2430#2431#0" expanded="true" />
+            <element signature="e#2496#2497#0" expanded="true" />
           </folding>
         </state>
       </provider>
