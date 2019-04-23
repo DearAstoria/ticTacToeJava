@@ -6,6 +6,9 @@ import java.util.Vector;
 public class GameEngine
 {
     // verify if a a space can be taken at (xcoord, ycoord), and take the space for the current player's turn if it is available.  return weather or not a space has been taken or not
+
+    public  static boolean takeSpace(GameState state, Move move){ return takeSpace(state, move.getRow(), move.getCol());}
+
     public static boolean takeSpace(GameState state, int xcoord, int ycoord) {
         if(state.getBoardSpaces().get(xcoord, ycoord) == ' ') {
             state.getBoardSpaces().set(state.getCurrentTurn(), xcoord, ycoord); // if this board space is empty then take the space

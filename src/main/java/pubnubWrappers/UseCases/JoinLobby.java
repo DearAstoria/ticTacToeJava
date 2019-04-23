@@ -21,13 +21,16 @@ public class JoinLobby {
         new Thread(()->{
 
             PubNub users[] = {new_PubNub("yoBro"),new_PubNub("hoodlum"), new_PubNub("charmeleon")};
-            for(PubNub i : users)
-                PubNubWrappers.sub(i, Arrays.asList(Server.LOBBY_CHANNEL));
+            for(PubNub i : users){
+                publish(i,"join",Server.LOBBY_CHANNEL);
+                PubNubWrappers.sub(i, Arrays.asList(Server.LOBBY_CHANNEL));}
             try{
             Thread.sleep(30000);}
             catch (Exception e){e.printStackTrace();}
-            for(PubNub i : users)
-                publish(i,"leave", Server.LEAVE_LOBBY_CHANNEL);
+            for(PubNub i : users) {
+                publish(i, "leave", Server.LEAVE_LOBBY_CHANNEL);
+                i.unsubscribe().channels(Arrays.asList(Server.LOBBY_CHANNEL));
+            }
 
 
         }).run();

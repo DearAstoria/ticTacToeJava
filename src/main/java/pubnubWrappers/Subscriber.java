@@ -25,7 +25,12 @@ import static pubnubWrappers.PubNubWrappers.new_PubNub;
             subscribe(channels);
         }
         public void init(String uuid){
-            connection = new_PubNub(uuid);
+            init(uuid, new ArrayList<String>());
+            /*connection = new_PubNub(uuid);
+            connection.addListener(this);
+            subscribe();*/
+        }
+        public void init(){
             connection.addListener(this);
             subscribe();
         }
@@ -47,8 +52,16 @@ import static pubnubWrappers.PubNubWrappers.new_PubNub;
             addSubsribtion(channels);
         }
 
+        protected void getSubscribers(List<String> chan) {
+            connection.hereNow()
+                    .channels(chan) // who is present on those channels?
+                    .includeState(true) // include state with request (false by default)
+                    .includeUUIDs(true) // if false, only shows occupancy count
+                    .async(hereNowCallback);
+        }
+        protected void getSubscribers(String chan){getSubscribers(Arrays.asList(chan));}
 
-        public HereNowCallback getHereNowCallBack(){ return hereNowCallback;}
+        //public HereNowCallback getHereNowCallBack(){ return hereNowCallback;}
 
         public void addSubsribtion(List<String> channels){
 
@@ -62,23 +75,27 @@ import static pubnubWrappers.PubNubWrappers.new_PubNub;
         }
 
         public void subscribe(List<String> channels){ connection.subscribe().channels(channels).execute();  }
-        public void subscribe() { subscribe(Arrays.asList(connection.getConfiguration().getUuid())); }
+        public void subscribe() { subscribe(Arrays.asList(getUUID())); }
 
 
         abstract public void handleSubCallBack(PubNub pubnub, PNMessageResult message);
-        public void handleHereNow(PNHereNowResult result, PNStatus status){ hereNow = result;}
+        public void handleHereNow(PNHereNowResult result, PNStatus status){}
+
+        public PubNub getConnection(){return connection;}
+
+        public String getUUID(){return connection.getConfiguration().getUuid();}
 
         @Override
         public void status (PubNub pubnub, PNStatus status){
-                System.out.println(pubnub.getConfiguration().getUuid()
-                + '\n' + pubnub.getSubscribedChannels() + '\n' + status.getCategory());
+                System.out.println("UUID: " + pubnub.getConfiguration().getUuid()
+                + '\n' + "subscribed to: " + pubnub.getSubscribedChannels() + '\n' + "connection status: " + status.getCategory());
 
 
         }
 
         @Override
         public void message (PubNub pubnub, PNMessageResult message){
-            System.out.println("message from: " + message.getPublisher());
+            System.out.println("message from: " + message.getPublisher() + " on chan: " + message.getChannel() + " message: " + message.getMessage());
             handleSubCallBack(pubnub,message);
 
 

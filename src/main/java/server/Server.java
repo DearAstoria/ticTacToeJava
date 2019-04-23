@@ -3,12 +3,10 @@ package server;
 import client.User;
 import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
-import com.pubnub.api.callbacks.SubscribeCallback;
-import com.pubnub.api.models.consumer.PNStatus;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
-import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 import pubnubWrappers.Subscriber;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static pubnubWrappers.PubNubWrappers.publish;
@@ -21,6 +19,8 @@ public class Server extends Subscriber {
     public static final String LOBBY_CHANNEL = "lobby";
     public static final String JOIN_LOBBY_CHANNEL = "join_lobby";
     public static final String LEAVE_LOBBY_CHANNEL = "leave_lobby";
+    public static final String GAME_REQUEST_CHANNEL = "game_request";
+    public static final String NEW_GAME_GRANTED = "game_granted";
 
 
 
@@ -30,7 +30,7 @@ public class Server extends Subscriber {
 
     public Server()
     {
-        super(Arrays.asList(NEW_ACCOUNT_CHANNEL,LOGIN_CHANNEL,LOBBY_CHANNEL,JOIN_LOBBY_CHANNEL,LEAVE_LOBBY_CHANNEL));
+        super(Arrays.asList(NEW_ACCOUNT_CHANNEL,LOGIN_CHANNEL,JOIN_LOBBY_CHANNEL, GAME_REQUEST_CHANNEL));
     }
 
 
@@ -41,7 +41,7 @@ public class Server extends Subscriber {
             addAccount(message);
         else if(channel.equals(LOGIN_CHANNEL))
             login(message);
-        else if(channel.equals(LOBBY_CHANNEL))
+        else if(channel.equals(GAME_REQUEST_CHANNEL))
             requestGame(message);
         else if(channel.equals(LEAVE_LOBBY_CHANNEL))
             leaveLobby(message);
@@ -87,14 +87,17 @@ public class Server extends Subscriber {
 
     void requestGame(PNMessageResult msg)
     {
-
+        new Thread(()->{
+            GameHandler handler = new GameHandler(msg.getPublisher(), msg.toString()); // (x,o)
+            publish(handler.getConnection(), handler.getX(), Server.NEW_GAME_GRANTED);
+        }).run();
 
 
     }
 
     void leaveLobby(PNMessageResult msg)
     {
-
+        System.out.println(msg.getPublisher() + msg.getMessage().toString());
 
     }
 

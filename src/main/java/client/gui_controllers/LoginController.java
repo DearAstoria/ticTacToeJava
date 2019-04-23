@@ -4,6 +4,7 @@ import client.User;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.SubscribeCallback;
 import com.pubnub.api.models.consumer.PNStatus;
+import com.pubnub.api.models.consumer.presence.PNHereNowResult;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 import javafx.application.Platform;
@@ -50,22 +51,24 @@ public class LoginController extends pubnubWrappers.Subscriber {
 
 
     @FXML public void initialize(){
-        init("loginScreen");
+        init();
     }
 
     @Override
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message) {
 
-
+                connection.unsubscribeAll();
         Platform.runLater(() -> {
             try {
                 FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
                 Parent root = (Parent)loader.load();
                 GameLobbyController controller = loader.getController();
-                ArrayList<String> lobby = new ArrayList<>();
+                //controller.requestedOpponent.setText(usernameField.getText());
+                controller.init(usernameField.getText(),new ArrayList<String>(Arrays.asList(Server.LOBBY_CHANNEL,Server.LEAVE_LOBBY_CHANNEL, Server.NEW_GAME_GRANTED)));
+                /*ArrayList<String> lobby = new ArrayList<>();
                 lobby.addAll(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL));
                 controller.init(usernameField.getText(),lobby);
-                checkHereNow(Server.LOBBY_CHANNEL,controller.getHereNowCallBack());
+                checkHereNow(Server.LOBBY_CHANNEL,controller.getHereNowCallBack());*/
                 loadFXML(usernameField, root);
 
             } catch (Exception e) {
@@ -74,6 +77,9 @@ public class LoginController extends pubnubWrappers.Subscriber {
         });
 
     }
+
+
+
     public void loginClicked(MouseEvent click) throws java.io.IOException, java.sql.SQLException, ClassNotFoundException {
         /*Connection dbConn;
 
@@ -87,7 +93,7 @@ public class LoginController extends pubnubWrappers.Subscriber {
         Statement query = dbConn.createStatement(); // initialize a statement object to generate and execute sql queries on the database
         ResultSet loginResults = query.executeQuery("SELECT email, username, password FROM USERS"); // get a list of all users from USERS table
 
-        while(loginResults.next() && !loginSucsessful) { // search through results of query for matching login entered by user
+        while(loginResults.next() && !loginSucsessful) { // search through results of query for matching login entered by requestedOpponent
             if(loginResults.getString("email").equals(email)) {
                 if(loginResults.getString("username").equals(username)) {
                     if(loginResults.getString("password").equals(password)) {
@@ -133,10 +139,6 @@ public class LoginController extends pubnubWrappers.Subscriber {
 
     }
 
-    // get connection to the server
-    private void getConnection() {
-
-    }
 
 
 }

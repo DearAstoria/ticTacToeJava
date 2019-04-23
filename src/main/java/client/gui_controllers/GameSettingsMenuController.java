@@ -15,7 +15,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 
 public class GameSettingsMenuController implements Initializable {
-    GameSettings form; // the form that the user fills out to choose game settings
+    GameSettings form; // the form that the requestedOpponent fills out to choose game settings
 
     @FXML public TextField NAME;
     @FXML public ToggleGroup DIFFICULTY;
@@ -27,7 +27,7 @@ public class GameSettingsMenuController implements Initializable {
 
     @Override
     public void initialize(URL loacation, ResourceBundle resources) {
-        form = new GameSettings(); // default constructor creates a form initialized for an easy opponent where the player is X and goes first
+        form = new GameSettings(); // default constructor creates a form initialized for an easy requestedOpponent where the player is X and goes first
         EASY.setSelected(true); // difficulty is set to easy by default in the GUI
         PLAYX.setSelected(true); // play as X by default in the GUI
         XFIRST.setSelected(true); // X moves first by default in the GUI
@@ -45,7 +45,7 @@ public class GameSettingsMenuController implements Initializable {
     // called when the X or O buttons for player's choice of letter are clicked
     public void playerSymbolSelected(MouseEvent click) {
         ToggleButton clicked = (ToggleButton)CHOICEOFLETTER.getSelectedToggle(); // get the selected button in the toggle group
-        boolean playsX = clicked.getText().equals("X") ? true : false;           // does the user want to play as X?
+        boolean playsX = clicked.getText().equals("X") ? true : false;           // does the requestedOpponent want to play as X?
         form.setPlayingX(playsX);                                                // set the player symbol in the form
         update();                                                                // update the GUI to reflect changes to the form
     }
@@ -126,7 +126,7 @@ public class GameSettingsMenuController implements Initializable {
         }
     }
 
-    // create a new game state based off the game settings the user selected in the form
+    // create a new game state based off the game settings the requestedOpponent selected in the form
     private GameState generateGame(GameSettings settings)
     {
         form.setPlayer(NAME.getText());

@@ -1,6 +1,9 @@
 package client.gui_controllers;
 
 import client.raw_data.*;
+import com.google.gson.Gson;
+import com.pubnub.api.PubNub;
+import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,19 +17,35 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import pubnubWrappers.Subscriber;
 
-public class GameController{
+public class GameController extends Subscriber {
     @FXML public StackPane cell00, cell01, cell02, cell10, cell11, cell12, cell20, cell21, cell22;
     @FXML public Button RESTART;
-    @FXML public Text xBox, oBox;
+    @FXML public Text myName, opponentName;
 
     StackPane[][] spaces;  // UI board space objects
     GameState game;        // Data of what is in each board space, who's turn it is
     GameSettings settings; // Name of the player, difficulty of the computer
-    boolean humanOpponent; // is the opponent another human player or the computer
+    boolean humanOpponent; // is the requestedOpponent another human player or the computer
+
+    /************************/
+    char status;
+    String gameID;
+    /************************/
+
+
+    public void setGameID(String s){
+        gameID = s;
+    }
+
+    public void setNames(String myname, String opponent){
+        myName.setText(myname);
+        opponentName.setText(opponent);
+    }
 
     public void mouseOver(MouseEvent event) {
-        // if the game is not over and it is the current player's turn, then provide mouse over feedback for the user when selecting a space
+        // if the game is not over and it is the current player's turn, then provide mouse over feedback for the requestedOpponent when selecting a space
         if(!game.isGameOver() && game.getCurrentTurn() == settings.getPlayerLetter()) {
             Pane space = (Pane)event.getSource(); // get the space that is hovered over
             if(space.getChildren().isEmpty()) { // if the space is empty
@@ -37,7 +56,7 @@ public class GameController{
 
     // Clear the highlighted symbol if the mouse moves out of a space
     public void mouseOut(MouseEvent event) {
-        // if the game is not over and it is the current player's turn, then clear the space that the user had moused over
+        // if the game is not over and it is the current player's turn, then clear the space that the requestedOpponent had moused over
         if(!game.isGameOver() && game.getCurrentTurn() == settings.getPlayerLetter()) {
             Pane space = (Pane)event.getSource(); // get the space that is hovered over
             if(!space.getChildren().isEmpty()) { // if the space is not empty
@@ -59,19 +78,19 @@ public class GameController{
 
                 if(GameEngine.winFound(game) || GameEngine.checkGameState(game) == 'T') { // if taking this space results in a win or a tie
                     game.toggleGameOver(); // toggle game over
-                    if(humanOpponent) {} // and if also playing against a human opponent, send this move to the server somehow here
-                } else if(humanOpponent) { // else if playing against a human opponent
-                    // send coord[] to server (send move to opponent) here
-                    // wait until the server updates client with opponent's move (wait for opponent's turn to end) here
-                    game.nextTurn(); // when the server returns that the opponent has mad his/her turn, switch turns again
-                    if(GameEngine.winFound(game)) { game.toggleGameOver(); } // if after opponent's turn, a win is found, toggle game over
+                    if(humanOpponent) {} // and if also playing against a human requestedOpponent, send this move to the server somehow here
+                } else if(humanOpponent) { // else if playing against a human requestedOpponent
+                    // send coord[] to server (send move to requestedOpponent) here
+                    // wait until the server updates client with requestedOpponent's move (wait for requestedOpponent's turn to end) here
+                    game.nextTurn(); // when the server returns that the requestedOpponent has mad his/her turn, switch turns again
+                    if(GameEngine.winFound(game)) { game.toggleGameOver(); } // if after requestedOpponent's turn, a win is found, toggle game over
                 } else { // else calculate the computer's turn
                     computerTurn();
                     game.nextTurn();
                     if(GameEngine.winFound(game)) { game.toggleGameOver(); }
                 }
 
-                update(); // update the spaces in the UI to reflect any changes to the board data by opponent
+                update(); // update the spaces in the UI to reflect any changes to the board data by requestedOpponent
                 System.out.println(game.toString());
 
                 if(game.isGameOver()) { // if the game is over
@@ -110,15 +129,15 @@ public class GameController{
                                     {cell10, cell11, cell12},
                                     {cell20, cell21, cell22} };
         update(); // update spaces to match with GameState
-        xBox.setText(settings.getPlayer()); // set the player's name in the top-left box
-        if(humanOpponent) { // if playing against a human opponent
-            // get the opponent's name from the server
-            // set the opponent's name in the top-right box
+        myName.setText(settings.getPlayer()); // set the player's name in the top-left box
+        if(humanOpponent) { // if playing against a human requestedOpponent
+            // get the requestedOpponent's name from the server
+            // set the requestedOpponent's name in the top-right box
         } else if(settings.isEasy()) { // if playing against the easy mode AI
-            oBox.setText("Easy CPU");
+            opponentName.setText("Easy CPU");
         }
         else { // else playing against the hard mode AI
-            oBox.setText("Hard CPU");
+            opponentName.setText("Hard CPU");
         }
 
     }
@@ -129,15 +148,25 @@ public class GameController{
         this.settings = settings;
         this.humanOpponent = humanOpponent;
 
-        if(game.getCurrentTurn() != settings.getPlayerLetter()) { // if the player does not move first then wait for the opponent's move first
-            if(humanOpponent) { // if playing a human opponent
-                // wait until opponent's turn has ended from the server
+        if(game.getCurrentTurn() != settings.getPlayerLetter()) { // if the player does not move first then wait for the requestedOpponent's move first
+            if(humanOpponent) { // if playing a human requestedOpponent
+                // wait until requestedOpponent's turn has ended from the server
                 game.nextTurn();
             } else { // else calculate the computer's move
                 computerTurn();
                 game.nextTurn();
             }
         }
+    }
+    public void initData(GameState state, GameSettings settings)
+    {
+        initData(state, settings, true);
+    }
+
+
+    @Override public void handleSubCallBack(PubNub pubnub, PNMessageResult message){
+        MovePacket move_status = new Gson().fromJson(message.getMessage(), MovePacket.class);
+
 
     }
 
@@ -145,7 +174,7 @@ public class GameController{
         this(new GameState(), new GameSettings());
     }
 
-    // constructor for initializing a game against a computer opponent
+    // constructor for initializing a game against a computer requestedOpponent
     public GameController(GameState state, GameSettings settings) {
         initData(state, settings, false);
     }

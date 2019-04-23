@@ -4,7 +4,7 @@ public class GameSettings {
     String player;    // name of the player
     boolean playingX; // does the player play as X (true) or O (false)
     boolean easy;     // easy mode (true) or hard mode (false)
-    boolean xFirst;   // does the X player move first (true) or O player (false)
+    boolean xFirst = true;   // does the X player move first (true) or O player (false)
 
     // custom game settings
     public GameSettings(String player, boolean playingX, boolean easy, boolean xFirst) {
@@ -12,6 +12,12 @@ public class GameSettings {
         this.playingX = playingX;
         this.easy = easy;
         this.xFirst = xFirst;
+    }
+
+    // playing against human
+    public GameSettings(String player, boolean playingX, boolean xFirst)
+    {
+        this(player, playingX, xFirst, true);
     }
 
     public GameSettings(String player) {
