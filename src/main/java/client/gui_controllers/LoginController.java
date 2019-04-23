@@ -63,12 +63,8 @@ public class LoginController extends pubnubWrappers.Subscriber {
                 FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
                 Parent root = (Parent)loader.load();
                 GameLobbyController controller = loader.getController();
-                //controller.requestedOpponent.setText(usernameField.getText());
                 controller.init(usernameField.getText(),new ArrayList<String>(Arrays.asList(Server.LOBBY_CHANNEL,Server.LEAVE_LOBBY_CHANNEL, Server.NEW_GAME_GRANTED)));
-                /*ArrayList<String> lobby = new ArrayList<>();
-                lobby.addAll(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL));
-                controller.init(usernameField.getText(),lobby);
-                checkHereNow(Server.LOBBY_CHANNEL,controller.getHereNowCallBack());*/
+                publish(controller.getConnection(), "join lobby", Server.LOBBY_CHANNEL);
                 loadFXML(usernameField, root);
 
             } catch (Exception e) {
@@ -102,7 +98,7 @@ public class LoginController extends pubnubWrappers.Subscriber {
                 }
             }
 
-        }*/
+        }
 
         //if(loginSucsessful)
        /* {

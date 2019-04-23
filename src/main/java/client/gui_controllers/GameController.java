@@ -4,6 +4,7 @@ import client.raw_data.*;
 import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -72,11 +73,12 @@ public class GameController extends Subscriber {
             Pane space = (Pane)event.getSource(); // then get the space that is clicked on
             if(space.getChildren().get(0).getId() != "Permanent") { // ...and if the space is not taken then
                 int coord[] = getSpace(space.getId()); // get the numerical coordinates of the space
-                GameEngine.takeSpace(game, coord[0],coord[1]); // take that space within the GameState
-                takeSpace(space, game.getCurrentTurn(), false); // take that space within the UI
-                game.nextTurn(); // pass the turn off to the next player
+                /** replaced */ //GameEngine.takeSpace(game, coord[0],coord[1]); // take that space within the GameState
 
-                if(GameEngine.winFound(game) || GameEngine.checkGameState(game) == 'T') { // if taking this space results in a win or a tie
+                takeSpace(space, game.getCurrentTurn(), false); // take that space within the UI
+                /** replaced */ //game.nextTurn(); // pass the turn off to the next player
+
+               /** replace */  /*if(GameEngine.winFound(game) || GameEngine.checkGameState(game) == 'T') { // if taking this space results in a win or a tie
                     game.toggleGameOver(); // toggle game over
                     if(humanOpponent) {} // and if also playing against a human requestedOpponent, send this move to the server somehow here
                 } else if(humanOpponent) { // else if playing against a human requestedOpponent
@@ -89,6 +91,7 @@ public class GameController extends Subscriber {
                     game.nextTurn();
                     if(GameEngine.winFound(game)) { game.toggleGameOver(); }
                 }
+                */
 
                 update(); // update the spaces in the UI to reflect any changes to the board data by requestedOpponent
                 System.out.println(game.toString());
@@ -166,6 +169,11 @@ public class GameController extends Subscriber {
 
     @Override public void handleSubCallBack(PubNub pubnub, PNMessageResult message){
         MovePacket move_status = new Gson().fromJson(message.getMessage(), MovePacket.class);
+        Platform.runLater(()->{
+            (spaces[move_status.move.getRow()][move_status.move.getCol()]).getChildren().add(new Text(String.valueOf(settings.getPlayerLetter())));
+
+
+        });
 
 
     }
@@ -189,6 +197,7 @@ public class GameController extends Subscriber {
 
     // update the game board in the UI to reflect what the game state is
     private void update() {
+        /*
         // for each space on the board update it with what is in the game state
         for(int y = 0; y < 3; y++) {
             for(int x = 0; x < 3; x++) {
@@ -198,7 +207,7 @@ public class GameController extends Subscriber {
                     }
                 }
             }
-        }
+        }*/
     }
 
     // places a letter on a space in the UI

@@ -76,6 +76,10 @@ public class Server extends Subscriber {
     void login(PNMessageResult message){  // verify login information
         {
             User user = new Gson().fromJson(message.getMessage(),User.class);
+            user.getUsername();
+            user.getEmail();
+
+
             System.out.println(user);
             publish(user,message.getPublisher());
         }

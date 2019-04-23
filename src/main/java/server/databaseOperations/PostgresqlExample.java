@@ -9,14 +9,16 @@ public class PostgresqlExample {
     static final String DB_URL = "jdbc:postgresql://localhost/TicTacToe";
     static final String driver = "org.postgresql.Driver";
 
+
+
     // database tables
     static final String USERS = "USERS";
     static final String GAMES = "games";
     static final String MOVES = "MOVES";
 
     //  Database credentials
-    static final String USER = "postgres";
-    static final String PASS = "1234";
+    static final String USER = "";
+    static final String PASS = "";
 
 
 
@@ -124,6 +126,80 @@ public class PostgresqlExample {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
             stmt = conn.createStatement();
             result = stmt.executeQuery(sql);
+        }
+        catch(
+                SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }
+
+        return result;
+    }
+
+    public static boolean execute(String sql){
+
+        Connection conn = null;
+        Statement stmt = null;
+        boolean result = false;
+        try {
+
+            Class.forName(driver);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            stmt = conn.createStatement();
+            result = stmt.execute(sql);
+        }
+        catch(
+                SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }
+
+        return result;
+    }
+
+    public static int executeUpdate(String sql){
+
+        Connection conn = null;
+        Statement stmt = null;
+        int result = 0;
+        try {
+
+            Class.forName(driver);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            stmt = conn.createStatement();
+            result = stmt.executeUpdate(sql);
         }
         catch(
                 SQLException se){
