@@ -10,7 +10,6 @@ public class GameEngine
     public  static boolean takeSpace(GameState state, Move move){ return takeSpace(state, move.getRow(), move.getCol());}
 
     public static boolean takeSpace(GameState state, int xcoord, int ycoord) {
-        assert state.getBoardSpaces().get(xcoord, ycoord) == ' ';
 
         if(state.getBoardSpaces().get(xcoord, ycoord) == ' ') {
             state.getBoardSpaces().set(state.getCurrentTurn(), xcoord, ycoord); // if this board space is empty then take the space
@@ -38,9 +37,10 @@ public class GameEngine
     }
 
     // calculate and take the best space for the current player's turn
-    public static void takeBestSpace(GameState state) {
+    public static Move takeBestSpace(GameState state) {
         ScoredMove bestMove = minmax(state);
         takeSpace(state, bestMove.x, bestMove.y);
+        return new Move(bestMove.x, bestMove.y);
     }
 
     private static ScoredMove minmax(GameState state)

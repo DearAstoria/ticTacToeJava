@@ -26,7 +26,7 @@ import static pubnubWrappers.PubNubWrappers.publish;
 public class GameController extends Subscriber {
     @FXML public StackPane cell00, cell01, cell02, cell10, cell11, cell12, cell20, cell21, cell22;
     @FXML public Button RESTART;
-    @FXML public Text myName, opponentName;
+    @FXML public Text myName, opponentName, myToken, opponentToken;
 
     StackPane[][] spaces;  // UI board space objects
     GameState game;        // Data of what is in each board space, who's turn it is
@@ -176,8 +176,11 @@ public class GameController extends Subscriber {
     {
         initData(new GameState(), settings, true);
         myTurn = settings.getPlayerLetter() == GameState.X;
-        //System.out.println(settings + "\n" + "myTurn: " + myTurn);
-       // System.out.println("gameOver" + gameOver);
+        myToken.setText(String.valueOf(settings.getPlayerLetter()));
+        if(myTurn)
+            opponentToken.setText(String.valueOf(GameState.O));
+        else
+            opponentToken.setText(String.valueOf(GameState.X));
 
 
     }
@@ -187,24 +190,19 @@ public class GameController extends Subscriber {
         MovePacket move_status = new Gson().fromJson(message.getMessage(), MovePacket.class);
         Move move = move_status.move; //get move
         status = move_status.status;   // get token of person who just moved
+        Pane pane = spaces[move.getRow()][move.getCol()];
+        gameOver = Character.isUpperCase(status);
+        myTurn = settings.getPlayerLetter() != toUpperCase(status);  // it is my turn if status says last person who moved is not me
 
-
-        /*if(message.getPublisher().equals(opponentName.getText()))
-            Platform.runLater(() -> { outputWinner(); });*/
-
-        //else if(message.getPublisher().equals(getUUID())){ /** do nothing */}
-
-        //else {                                          // from server
-            gameOver = Character.isUpperCase(status);
-            myTurn = settings.getPlayerLetter() != toUpperCase(status);  // it is my turn if status says last person who moved is not me
 
             // update UI with opponent's move
-            if(status != settings.getPlayerLetter())
-            Platform.runLater(() -> { takeSpace(spaces[move.getRow()][move.getCol()], toUpperCase(status), false); });
+            if(status != settings.getPlayerLetter() && status != MovePacket.DRAW)
+            Platform.runLater(() -> { takeSpace(pane, toUpperCase(status), false); });
+            else if(status == MovePacket.DRAW && pane.getChildren().isEmpty())
+                    Platform.runLater(()->{ takeSpace(pane,opponentToken.getText().charAt(0),false); });
 
             if (gameOver) {
-                Platform.runLater(() -> { outputWinner(); });             // output winner
-                //publish(connection, move_status, opponentName.getText());
+                Platform.runLater(() -> { outputWinner(); });             // restart button with winner
             }
         //}
 

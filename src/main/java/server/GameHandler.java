@@ -3,6 +3,7 @@ package server;
 import client.raw_data.GameState;
 import client.raw_data.Move;
 import client.raw_data.MovePacket;
+import client.raw_data.ScoredMove;
 import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
@@ -14,12 +15,15 @@ import static pubnubWrappers.PubNubWrappers.publish;
 
 public class GameHandler extends Subscriber {
 
-    GameState game = new GameState();  // new GameState, where currentPlayer is X
+    GameState game;// = new GameState();  // new GameState, where currentPlayer is X
+    ScoredMove scoredMove;
     private String xPlayer;
     private String oPlayer;
+    int i=0;
 
     public GameHandler(String x, String o) {
         init();
+        game = new GameState();
         this.xPlayer = x;
         this.oPlayer = o;
     }
@@ -52,18 +56,24 @@ public class GameHandler extends Subscriber {
                 publish(connection, move_n_status, xPlayer);
             game.nextTurn();
 
-        System.out.print("\n" + move_n_status + "\n");
+        /*System.out.print("\n" + move_n_status + "\n");
         System.out.println(game.getBoardSpaces());
+        System.out.println(i);*/
     }
     public MovePacket computeMove(Move move){
 
-
-        assert takeSpace(game, move);
-
+        takeSpace(game, move);
         System.out.println("check game state:   " + checkGameState(game));
-
         return  new MovePacket(move, checkGameStatus_or_lastMover(game));
 
+    }
+
+
+
+    public MovePacket cpuMove(){
+        takeBestSpace(game);
+        System.out.println(game.getBoardSpaces());
+return null;
     }
 
     @Override public String toString(){
