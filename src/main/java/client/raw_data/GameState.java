@@ -2,16 +2,19 @@ package client.raw_data;
 
 public class GameState
 {
+    public static final char X = 'X';
+    public static final char O = 'O';
+
     Board boardSpaces; // board spaces
     char currentTurn;  // who's turn it currently is (X or O)
     boolean gameOver;  // has the game reached an end?
 
     public void nextTurn()
     {
-        if (currentTurn == 'X') {
-            currentTurn = 'O';
+        if (currentTurn == X) {
+            currentTurn = O;
         } else {
-            currentTurn = 'X';
+            currentTurn = X;
         }
     }
 
@@ -44,7 +47,7 @@ public class GameState
 
     public GameState()
     {
-        this(new Board(), 'X', false);
+        this(new Board(), X, false);
     }
 
     @Override

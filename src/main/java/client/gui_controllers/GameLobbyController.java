@@ -84,7 +84,7 @@ public class GameLobbyController extends Subscriber
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message){
                 String chan = message.getChannel();
                 String msg = message.getMessage().toString().replace("\"","");
-                if(chan.equals(Server.LOBBY_CHANNEL) && !(msg.equals(getUUID())) )
+                if(chan.equals(Server.LOBBY_CHANNEL) && !(message.getPublisher().equals(getUUID())) )
                     addPlayer(message.getPublisher());
                 else if(chan.equals(Server.LEAVE_LOBBY_CHANNEL) && !(msg.equals(getUUID())) )
                     removePlayer(message.getPublisher());
@@ -92,15 +92,19 @@ public class GameLobbyController extends Subscriber
                     if(msg.equals(getUUID())) {
                         publish(connection, message.getPublisher(), requestedOpponent);
                         gameController.setGameID(message.getPublisher());
-                        gameController.initData(new GameState(), new GameSettings(getUUID(), true ,true));
+                        gameController.initData(new GameSettings(getUUID(), true ,true));
+                        connection.unsubscribeAll();
+                        gameController.init(getUUID());
                         gameController.setNames(getUUID(), requestedOpponent);
                         launchGame();
                     }
 
                 }
                 else if(chan.equals(getUUID())){   // someone requested to play me
-                    gameController.setGameID(message.getMessage().toString());
-                    gameController.initData(new GameState(), new GameSettings(getUUID(), false ,true));
+                    gameController.setGameID(message.getMessage().toString().replace("\"",""));
+                    gameController.initData(new GameSettings(getUUID(), false ,true));
+                    connection.unsubscribeAll();
+                    gameController.init(getUUID());
                     gameController.setNames(getUUID(), message.getPublisher());
                     launchGame();
                 }

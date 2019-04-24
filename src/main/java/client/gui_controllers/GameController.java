@@ -20,6 +20,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import pubnubWrappers.Subscriber;
 
+import static java.lang.Character.toUpperCase;
+import static pubnubWrappers.PubNubWrappers.publish;
+
 public class GameController extends Subscriber {
     @FXML public StackPane cell00, cell01, cell02, cell10, cell11, cell12, cell20, cell21, cell22;
     @FXML public Button RESTART;
@@ -33,6 +36,8 @@ public class GameController extends Subscriber {
     /************************/
     char status;
     String gameID;
+    boolean myTurn;
+    boolean gameOver = false;
     /************************/
 
 
@@ -47,10 +52,10 @@ public class GameController extends Subscriber {
 
     public void mouseOver(MouseEvent event) {
         // if the game is not over and it is the current player's turn, then provide mouse over feedback for the requestedOpponent when selecting a space
-        if(!game.isGameOver() && game.getCurrentTurn() == settings.getPlayerLetter()) {
+        if(/**!game.isGameOver()*/ !gameOver && myTurn/**game.getCurrentTurn() == settings.getPlayerLetter()*/) {
             Pane space = (Pane)event.getSource(); // get the space that is hovered over
             if(space.getChildren().isEmpty()) { // if the space is empty
-                takeSpace(space, game.getCurrentTurn(),true); // then generate a temporary letter in that space to provide feedback
+                takeSpace(space, settings.getPlayerLetter()/**game.getCurrentTurn()*/,true); // then generate a temporary letter in that space to provide feedback
             }
         }
     }
@@ -58,7 +63,7 @@ public class GameController extends Subscriber {
     // Clear the highlighted symbol if the mouse moves out of a space
     public void mouseOut(MouseEvent event) {
         // if the game is not over and it is the current player's turn, then clear the space that the requestedOpponent had moused over
-        if(!game.isGameOver() && game.getCurrentTurn() == settings.getPlayerLetter()) {
+        if(/**!game.isGameOver()*/ !gameOver && myTurn/**game.getCurrentTurn() == settings.getPlayerLetter()*/) {
             Pane space = (Pane)event.getSource(); // get the space that is hovered over
             if(!space.getChildren().isEmpty()) { // if the space is not empty
                 if(space.getChildren().get(0).getId() == "Temporary") { // and if the space is occupied by a temporary letter (permanent would indicate that the space was taken)
@@ -69,13 +74,17 @@ public class GameController extends Subscriber {
     }
 
     public void spaceClicked(MouseEvent event) {
-        if(!game.isGameOver()) { // if the game is not over...
+        if(/**!game.isGameOver()*/ !gameOver && myTurn) { // if the game is not over...
             Pane space = (Pane)event.getSource(); // then get the space that is clicked on
             if(space.getChildren().get(0).getId() != "Permanent") { // ...and if the space is not taken then
                 int coord[] = getSpace(space.getId()); // get the numerical coordinates of the space
                 /** replaced */ //GameEngine.takeSpace(game, coord[0],coord[1]); // take that space within the GameState
 
-                takeSpace(space, game.getCurrentTurn(), false); // take that space within the UI
+                takeSpace(space, settings.getPlayerLetter()/**game.getCurrentTurn()*/, false); // take that space within the UI
+                myTurn = false;
+                publish(connection, new Move(coord[0], coord[1]), gameID);
+
+
                 /** replaced */ //game.nextTurn(); // pass the turn off to the next player
 
                /** replace */  /*if(GameEngine.winFound(game) || GameEngine.checkGameState(game) == 'T') { // if taking this space results in a win or a tie
@@ -126,6 +135,8 @@ public class GameController extends Subscriber {
         }
     }
 
+
+
     @FXML // initialize FXML objects in the controller
     public void initialize() {
         spaces = new StackPane[][]{ {cell00, cell01, cell02},
@@ -161,19 +172,41 @@ public class GameController extends Subscriber {
             }
         }
     }
-    public void initData(GameState state, GameSettings settings)
+    public void initData(GameSettings settings)
     {
-        initData(state, settings, true);
+        initData(new GameState(), settings, true);
+        myTurn = settings.getPlayerLetter() == GameState.X;
+        //System.out.println(settings + "\n" + "myTurn: " + myTurn);
+       // System.out.println("gameOver" + gameOver);
+
+
     }
 
 
     @Override public void handleSubCallBack(PubNub pubnub, PNMessageResult message){
         MovePacket move_status = new Gson().fromJson(message.getMessage(), MovePacket.class);
-        Platform.runLater(()->{
-            (spaces[move_status.move.getRow()][move_status.move.getCol()]).getChildren().add(new Text(String.valueOf(settings.getPlayerLetter())));
+        Move move = move_status.move; //get move
+        status = move_status.status;   // get token of person who just moved
 
 
-        });
+        /*if(message.getPublisher().equals(opponentName.getText()))
+            Platform.runLater(() -> { outputWinner(); });*/
+
+        //else if(message.getPublisher().equals(getUUID())){ /** do nothing */}
+
+        //else {                                          // from server
+            gameOver = Character.isUpperCase(status);
+            myTurn = settings.getPlayerLetter() != toUpperCase(status);  // it is my turn if status says last person who moved is not me
+
+            // update UI with opponent's move
+            if(status != settings.getPlayerLetter())
+            Platform.runLater(() -> { takeSpace(spaces[move.getRow()][move.getCol()], toUpperCase(status), false); });
+
+            if (gameOver) {
+                Platform.runLater(() -> { outputWinner(); });             // output winner
+                //publish(connection, move_status, opponentName.getText());
+            }
+        //}
 
 
     }
@@ -231,9 +264,21 @@ public class GameController extends Subscriber {
         // overwrite initial properties on the button which made it hidden on the screen
         RESTART.setOpacity(1);              // make the hidden button visible
         RESTART.setMouseTransparent(false); // make false so that the hidden button can detect mouse events again
+        switch(status) {
+         case 'X':
+         RESTART.setText("X wins");
+         break;
+         case 'O':
+         RESTART.setText("O wins");
+         break;
+         case 'T':
+         RESTART.setText("Draw");
+         break;
+         default:
+         break;
+         }
 
-
-        switch(GameEngine.checkGameState(game)) {
+        /**switch(GameEngine.checkGameState(game)) {
             case 'X':
                 RESTART.setText("X wins");
                 break;
@@ -246,7 +291,7 @@ public class GameController extends Subscriber {
             case ' ':
             default:
                 break;
-        }
+        }*/
     }
 
     // given the fxID of a space return the x-y coordinates of it in the GameState

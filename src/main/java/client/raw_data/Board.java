@@ -4,7 +4,7 @@ public class Board
 {
     char [][] space;
 
-    Board()
+    public Board()
     {
         space = new char[3][3];
         clear();

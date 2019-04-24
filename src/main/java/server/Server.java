@@ -6,7 +6,6 @@ import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import pubnubWrappers.Subscriber;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static pubnubWrappers.PubNubWrappers.publish;
@@ -92,8 +91,9 @@ public class Server extends Subscriber {
     void requestGame(PNMessageResult msg)
     {
         new Thread(()->{
-            GameHandler handler = new GameHandler(msg.getPublisher(), msg.toString()); // (x,o)
-            publish(handler.getConnection(), handler.getX(), Server.NEW_GAME_GRANTED);
+            GameHandler handler = new GameHandler(msg.getPublisher(), msg.getMessage().toString().replace("\"","")); // (x,o)
+            publish(handler.getConnection(), handler.getxPlayer(), Server.NEW_GAME_GRANTED);
+            System.out.println(handler.toString());
         }).run();
 
 

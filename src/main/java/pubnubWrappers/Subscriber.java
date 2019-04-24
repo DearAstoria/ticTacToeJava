@@ -88,14 +88,14 @@ import static pubnubWrappers.PubNubWrappers.new_PubNub;
         @Override
         public void status (PubNub pubnub, PNStatus status){
                 System.out.println("UUID: " + pubnub.getConfiguration().getUuid()
-                + '\n' + "subscribed to: " + pubnub.getSubscribedChannels() + '\n' + "connection status: " + status.getCategory());
+                + '\n' + "sub to: " + pubnub.getSubscribedChannels());// + '\n' + "connection status: " + status.getCategory());
 
 
         }
 
         @Override
         public void message (PubNub pubnub, PNMessageResult message){
-            System.out.println("message from: " + message.getPublisher() + " on chan: " + message.getChannel() + " message: " + message.getMessage());
+            System.out.println("message from:   " + message.getPublisher() + " on      [" + message.getChannel() + "]        " + message.getMessage());
             handleSubCallBack(pubnub,message);
 
 
