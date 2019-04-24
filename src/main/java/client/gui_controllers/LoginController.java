@@ -26,14 +26,24 @@ import static pubnubWrappers.PubNubWrappers.*;
 import static sceneLoader.SceneLoader.loadFXML;
 import static server.Server.LOGIN_CHANNEL;
 
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.DriverManager;
+
 public class LoginController extends pubnubWrappers.Subscriber {
-    String email; // a name used for this online session
-    String username;   // the username ID of the player
-    String password;   // the password to the username ID
     //PubNub connection = new_PubNub();
 
-    public LoginController() {
+    public LoginController() throws java.sql.SQLException, ClassNotFoundException {
         super();
+
+        /*
+        // database parameter =‎‎ jdbc:sqlite: + filepath to database
+        String url = "jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"; // NOTE: this is the file path to a database on my computer for testing purposes, it does not go to the final database we will use - Austin
+        Class.forName("org.sqlite.JDBC");
+        dbConn = DriverManager.getConnection(url); // create a connection to the database
+        */
+
        // PubNub connection = new_PubNub();
         // add handler
         //connection.addListener(new Subcallback());
@@ -48,8 +58,6 @@ public class LoginController extends pubnubWrappers.Subscriber {
     @FXML public TextField usernameField;
     @FXML public TextField passwordField;
 
-
-
     @FXML public void initialize(){
         init();
     }
@@ -57,7 +65,7 @@ public class LoginController extends pubnubWrappers.Subscriber {
     @Override
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message) {
 
-                connection.unsubscribeAll();
+        connection.unsubscribeAll();
         Platform.runLater(() -> {
             try {
                 FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
@@ -78,65 +86,71 @@ public class LoginController extends pubnubWrappers.Subscriber {
 
     }
 
-
-
-    public void loginClicked(MouseEvent click) throws java.io.IOException, java.sql.SQLException, ClassNotFoundException {
-        /*Connection dbConn;
-
-        // database parameter =‎‎ jdbc:sqlite: + filepath to database
-        String url = "jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"; // NOTE: this is the file path to a database on my computer for testing purposes, it does not go to the final database we will use - Austin
-        // create a connection to the database
+    // insert a new user into the database using data entered into the text fields
+    private void insertUser() throws java.sql.SQLException, ClassNotFoundException {
+        // reference the driver being used to connect to the database
         Class.forName("org.sqlite.JDBC");
-        dbConn = DriverManager.getConnection(url);
 
-        boolean loginSucsessful = false;
-        Statement query = dbConn.createStatement(); // initialize a statement object to generate and execute sql queries on the database
-        ResultSet loginResults = query.executeQuery("SELECT email, username, password FROM USERS"); // get a list of all users from USERS table
+        // connect to database
+        Connection databaseConn = DriverManager.getConnection("jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db");
 
-        while(loginResults.next() && !loginSucsessful) { // search through results of query for matching login entered by requestedOpponent
-            if(loginResults.getString("email").equals(email)) {
-                if(loginResults.getString("username").equals(username)) {
-                    if(loginResults.getString("password").equals(password)) {
-                        loginSucsessful = true;
-                    }
-                }
-            }
+        // create a statement
+        Statement query = databaseConn.createStatement();
 
-        }*/
+        // execute SQL insert
+        query.executeUpdate("INSERT INTO USERS VALUES ('" + emailField.getText() + "', '" + usernameField.getText() + "', '" + passwordField.getText() + "')");
 
-        //if(loginSucsessful)
-       /* {
-            System.out.println("login sucsessful");
-            loginResults.close();
-*/
-
-        //System.out.println(connection.getConfiguration().getUuid() + '\n' + connection.getSubscribedChannels());
-
-
-
-
-
-        publish(connection, new User("email", "username", "password"), LOGIN_CHANNEL);
-
-
-
-
-
-        /*}
-        else { System.out.println("login failed"); }
-
-        loginResults.close();*/
-
+        query.close();
+        databaseConn.close();
     }
 
+    private boolean queryUser() throws java.sql.SQLException, ClassNotFoundException {
+        // reference the driver being used to connect to the database
+        Class.forName("org.sqlite.JDBC");
 
+        // connect to database
+        Connection databaseConn = DriverManager.getConnection("jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db");
 
+        // create a statement
+        Statement query = databaseConn.createStatement();
 
+        // execute SQL query
+        ResultSet rs = query.executeQuery("SELECT email, username, password FROM USERS WHERE email = '" + emailField.getText() + "' AND username = '" + usernameField.getText() + "' AND password = '" + passwordField.getText() + "'");
 
+        // if the query results in a ResultSet, then the user entered was found in the database
+        if(rs.next()) {
+            rs.close();
+            query.close();
+            databaseConn.close();
+            return true;
+        } else {
+            rs.close();
+            query.close();
+            databaseConn.close();
+            return false;
+        }
+    }
 
+    public void loginClicked(MouseEvent click) throws java.io.IOException, java.sql.SQLException, ClassNotFoundException {
+        boolean userFound = queryUser();
+        if(userFound) {
+            System.out.println("Login Successful");
+            //System.out.println(connection.getConfiguration().getUuid() + '\n' + connection.getSubscribedChannels());
+            publish(connection, new User("email", "username", "password"), LOGIN_CHANNEL);
+        } else {
+            System.out.println("Login Failed");
+        }
+    }
 
-    public void signUpClicked(MouseEvent click) {
-
+    public void signUpClicked(MouseEvent click) throws java.io.IOException, java.sql.SQLException, ClassNotFoundException {
+        boolean userExists = queryUser();
+        if(!userExists) { // if the user being signed up does not yet exist
+            insertUser(); // add new user to database
+            System.out.println("New user created");
+            loginClicked(click); // log into the game server
+        } else {
+            System.out.println("That user already exists");
+        }
     }
 
 

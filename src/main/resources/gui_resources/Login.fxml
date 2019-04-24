@@ -51,7 +51,7 @@
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="signup" alignment="CENTER" mnemonicParsing="false" styleClass="round-button" text="Sign Up">
+                  <Button fx:id="signup" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#signUpClicked" styleClass="round-button" text="Sign Up">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin></Button>
