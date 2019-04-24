@@ -19,9 +19,14 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import pubnubWrappers.Subscriber;
+import server.Server;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.lang.Character.toUpperCase;
 import static pubnubWrappers.PubNubWrappers.publish;
+import static sceneLoader.SceneLoader.loadFXML;
 
 public class GameController extends Subscriber {
     @FXML public StackPane cell00, cell01, cell02, cell10, cell11, cell12, cell20, cell21, cell22;
@@ -85,45 +90,13 @@ public class GameController extends Subscriber {
                 publish(connection, new Move(coord[0], coord[1]), gameID);
 
 
-                /** replaced */ //game.nextTurn(); // pass the turn off to the next player
-
-               /** replace */  /*if(GameEngine.winFound(game) || GameEngine.checkGameState(game) == 'T') { // if taking this space results in a win or a tie
-                    game.toggleGameOver(); // toggle game over
-                    if(humanOpponent) {} // and if also playing against a human requestedOpponent, send this move to the server somehow here
-                } else if(humanOpponent) { // else if playing against a human requestedOpponent
-                    // send coord[] to server (send move to requestedOpponent) here
-                    // wait until the server updates client with requestedOpponent's move (wait for requestedOpponent's turn to end) here
-                    game.nextTurn(); // when the server returns that the requestedOpponent has mad his/her turn, switch turns again
-                    if(GameEngine.winFound(game)) { game.toggleGameOver(); } // if after requestedOpponent's turn, a win is found, toggle game over
-                } else { // else calculate the computer's turn
-                    computerTurn();
-                    game.nextTurn();
-                    if(GameEngine.winFound(game)) { game.toggleGameOver(); }
-                }
-                */
-
-                update(); // update the spaces in the UI to reflect any changes to the board data by requestedOpponent
-                System.out.println(game.toString());
-
-                if(game.isGameOver()) { // if the game is over
-                    outputWinner(); // display winner
-                }
             }
         }
     }
 
     public void quit(MouseEvent event) throws java.io.IOException {
-        // load the next scene
-        Parent GameScreenParent = FXMLLoader.load(getClass().getResource("../../gui_resources/GameLobby.fxml"));
-        Scene GameScreenScene = new Scene(GameScreenParent);
-
-        // get the stage... getSource: get object that was clicked on (the button) from the event, getScene: get the scene the button is a part of, getWindow: get the stage the scene is a part of
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        // set stage to display the next scene
-        window.setScene(GameScreenScene);
-
-        window.show();
+        connection.unsubscribeAll();
+        GameLobbyController.load(myName, getUUID());
     }
 
     public void computerTurn() {
@@ -218,28 +191,8 @@ public class GameController extends Subscriber {
         initData(state, settings, false);
     }
 
-    public void exit(MouseEvent click) throws java.io.IOException {
-        Parent GameScreenParent = FXMLLoader.load(getClass().getResource("../../gui_resources/StartupMenu.fxml"));
-        Scene GameScreenScene = new Scene(GameScreenParent);
-        Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
-        window.setScene(GameScreenScene);
-        window.show();
-    }
-
     // update the game board in the UI to reflect what the game state is
-    private void update() {
-        /*
-        // for each space on the board update it with what is in the game state
-        for(int y = 0; y < 3; y++) {
-            for(int x = 0; x < 3; x++) {
-                if(spaces[x][y].getChildren().isEmpty()) { // if the current space on display is empty
-                    if(game.getBoardSpaces().get(x, y) != ' ') { // but it does not match with the game state
-                        takeSpace(spaces[x][y], game.getBoardSpaces().get(x, y), false); // then update it to display the correct state
-                    }
-                }
-            }
-        }*/
-    }
+    private void update() {}
 
     // places a letter on a space in the UI
     private void takeSpace(Pane space, char letter, boolean temporary) {
@@ -275,21 +228,6 @@ public class GameController extends Subscriber {
          default:
          break;
          }
-
-        /**switch(GameEngine.checkGameState(game)) {
-            case 'X':
-                RESTART.setText("X wins");
-                break;
-            case 'O':
-                RESTART.setText("O wins");
-                break;
-            case 'T':
-                RESTART.setText("Draw");
-                break;
-            case ' ':
-            default:
-                break;
-        }*/
     }
 
     // given the fxID of a space return the x-y coordinates of it in the GameState

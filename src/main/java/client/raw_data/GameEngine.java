@@ -23,7 +23,7 @@ public class GameEngine
     }
 
     // take a random space for the current player's turn
-    public static void takeRandomSpace(GameState state) {
+    public static Move takeRandomSpace(GameState state) {
         Random rand = new Random();
         int x, y;
 
@@ -32,8 +32,9 @@ public class GameEngine
             y = rand.nextInt(3);
         }
         while(state.getBoardSpaces().get(x, y) != ' '); // continue checking random spaces until an empty space is found
-
         takeSpace(state, x, y);
+
+        return new Move(x, y);
     }
 
     // calculate and take the best space for the current player's turn

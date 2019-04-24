@@ -1,9 +1,6 @@
 package server;
 
-import client.raw_data.GameState;
-import client.raw_data.Move;
-import client.raw_data.MovePacket;
-import client.raw_data.ScoredMove;
+import client.raw_data.*;
 import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
@@ -15,17 +12,24 @@ import static pubnubWrappers.PubNubWrappers.publish;
 
 public class GameHandler extends Subscriber {
 
-    GameState game;// = new GameState();  // new GameState, where currentPlayer is X
+    GameState game = new GameState();  // new GameState, where currentPlayer is X
     ScoredMove scoredMove;
     private String xPlayer;
     private String oPlayer;
+    private boolean twoPlayerMode = true;
+    private boolean easy;
     int i=0;
 
-    public GameHandler(String x, String o) {
+    public GameHandler(String x, String o) {  // two players
         init();
-        game = new GameState();
         this.xPlayer = x;
         this.oPlayer = o;
+    }
+    public GameHandler(String singlePlayer, boolean easy){  // one player
+        init();
+        xPlayer = singlePlayer;
+        this.easy = easy;
+        twoPlayerMode = false;
     }
 
     public String getxPlayer() {
@@ -40,41 +44,51 @@ public class GameHandler extends Subscriber {
     @Override
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message) {
 
-            String sender = message.getPublisher();
-            MovePacket move_n_status = computeMove(new Gson().fromJson(message.getMessage(), Move.class));
-
-
-
-            if(isUpperCase(move_n_status.status)) {         // send GameOver status to both players
-                publish(connection, move_n_status, oPlayer);
-                publish(connection, move_n_status, xPlayer);
-            }
-
-            else if(sender.equals(xPlayer))
-                publish(connection, move_n_status, oPlayer);
+            Move move = new Gson().fromJson(message.getMessage(), Move.class);//computeMove(new Gson().fromJson(message.getMessage(), Move.class));
+            if(twoPlayerMode)
+                computeMove(move, message.getPublisher());
             else
-                publish(connection, move_n_status, xPlayer);
+                cpuMode(move);
+        System.out.println("check game state:   " + checkGameState(game));
+        System.out.println(game.getBoardSpaces());
             game.nextTurn();
 
-        /*System.out.print("\n" + move_n_status + "\n");
-        System.out.println(game.getBoardSpaces());
-        System.out.println(i);*/
     }
-    public MovePacket computeMove(Move move){
+
+
+    public void cpuMode(Move playerMove){
+
+        takeSpace(game, playerMove);
+        Move cpuMove;
+        if(isUpperCase(checkGameStatus_or_lastMover(game))) {
+            publish(connection, new MovePacket(playerMove, checkGameStatus_or_lastMover(game)), xPlayer);
+            return; }
+
+        game.nextTurn();
+        if(easy)
+            cpuMove = takeRandomSpace(game);
+        else
+            cpuMove = takeBestSpace(game);
+
+        publish(connection, new MovePacket(cpuMove, checkGameStatus_or_lastMover(game)) , xPlayer);
+    }
+
+    public void computeMove(Move move, String sender){
 
         takeSpace(game, move);
-        System.out.println("check game state:   " + checkGameState(game));
-        return  new MovePacket(move, checkGameStatus_or_lastMover(game));
+        MovePacket p = new MovePacket(move, checkGameStatus_or_lastMover(game));
+        if(isUpperCase(p.status)) {         // send GameOver status
+            publish(connection, p, xPlayer);
+            publish(connection, p, oPlayer);
+        }
+        else if(sender.equals(xPlayer) && twoPlayerMode)             // always false in CPU mode
+            publish(connection, p, oPlayer);
+        else
+            publish(connection, p, xPlayer);
 
     }
 
 
-
-    public MovePacket cpuMove(){
-        takeBestSpace(game);
-        System.out.println(game.getBoardSpaces());
-return null;
-    }
 
     @Override public String toString(){
         return new String("gameID " + getUUID() + " " + xPlayer + " " + oPlayer);

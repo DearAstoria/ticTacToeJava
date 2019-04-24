@@ -20,8 +20,9 @@ public class Server extends Subscriber {
     public static final String LEAVE_LOBBY_CHANNEL = "leave_lobby";
     public static final String GAME_REQUEST_CHANNEL = "game_request";
     public static final String NEW_GAME_GRANTED = "game_granted";
-    public static final String REQUEST_EASY = "easy_cpu";
-    public static final String REQUEST_HARD = "hard_cpu";
+    public static final String REQUEST_CPU = "request_cpu";
+    public static final String CPU_GRANTED = "cpu_granted";
+    public static final String EASY = "easy";
 
 
 
@@ -31,7 +32,7 @@ public class Server extends Subscriber {
 
     public Server()
     {
-        super(Arrays.asList(NEW_ACCOUNT_CHANNEL,LOGIN_CHANNEL,JOIN_LOBBY_CHANNEL, GAME_REQUEST_CHANNEL,REQUEST_EASY,REQUEST_HARD));
+        super(Arrays.asList(NEW_ACCOUNT_CHANNEL,LOGIN_CHANNEL,JOIN_LOBBY_CHANNEL, GAME_REQUEST_CHANNEL, REQUEST_CPU));
     }
 
 
@@ -46,6 +47,8 @@ public class Server extends Subscriber {
             requestGame(message);
         else if(channel.equals(LEAVE_LOBBY_CHANNEL))
             leaveLobby(message);
+        else if(channel.equals(REQUEST_CPU))
+            requestCPU(message);
     }
 
     void addAccount(PNMessageResult message){
@@ -96,13 +99,16 @@ public class Server extends Subscriber {
             publish(handler.getConnection(), handler.getxPlayer(), Server.NEW_GAME_GRANTED);
     }
 
-    void requestEasy(PNMessageResult msg){
+    void requestCPU(PNMessageResult msg){
+        GameHandler handler;
+        if(msg.getMessage().toString().replace("\"","").equals(EASY))
+            handler = new GameHandler(msg.getPublisher(),true);
+        else
+            handler = new GameHandler(msg.getPublisher(),false);
+        publish(handler.getConnection(), handler.getxPlayer(), CPU_GRANTED);
 
     }
 
-    void requestHard(PNMessageResult msg)  {
-
-    }
 
     void leaveLobby(PNMessageResult msg)
     {

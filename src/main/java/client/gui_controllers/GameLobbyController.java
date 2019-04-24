@@ -36,6 +36,22 @@ public class GameLobbyController extends Subscriber
     GameController gameController;
     String requestedOpponent;
     Parent root;
+    Map playerMap = new HashMap();
+
+    public static void load(Node node, String uuid) {
+        try {
+            FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
+            Parent root = (Parent) loader.load();
+            GameLobbyController controller = loader.getController();
+            controller.init(uuid, new ArrayList<String>(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL, Server.NEW_GAME_GRANTED, Server.CPU_GRANTED)));
+            publish(controller.getConnection(), "join lobby", Server.LOBBY_CHANNEL);
+            loadFXML(node, root);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML public VBox playerList;
     //@FXML public Label requestedOpponent;
@@ -62,7 +78,6 @@ public class GameLobbyController extends Subscriber
 
     }
 
-    Map playerMap = new HashMap();
 
     @Override
     public void handleHereNow(PNHereNowResult result, PNStatus status){
@@ -83,34 +98,41 @@ public class GameLobbyController extends Subscriber
     @Override
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message){
                 String chan = message.getChannel();
+                String sender = message.getPublisher();
                 String msg = message.getMessage().toString().replace("\"","");
-                if(chan.equals(Server.LOBBY_CHANNEL) && !(message.getPublisher().equals(getUUID())) )
-                    addPlayer(message.getPublisher());
-                else if(chan.equals(Server.LEAVE_LOBBY_CHANNEL) && !(msg.equals(getUUID())) )
-                    removePlayer(message.getPublisher());
-                else if(chan.equals(Server.NEW_GAME_GRANTED)){   // I requested to play someone
-                    if(msg.equals(getUUID())) {
-                        publish(connection, message.getPublisher(), requestedOpponent);
-                        gameController.setGameID(message.getPublisher());
-                        gameController.initData(new GameSettings(getUUID(), true ,true));
-                        connection.unsubscribeAll();
-                        gameController.init(getUUID());
-                        gameController.setNames(getUUID(), requestedOpponent);
-                        launchGame();
-                    }
 
+
+                if(chan.equals(Server.LOBBY_CHANNEL) && !(sender.equals(getUUID())) && playerMap.get(sender) == null )
+                    addPlayer(sender);
+                else if(chan.equals(Server.LEAVE_LOBBY_CHANNEL) && !(msg.equals(getUUID())) )
+                    removePlayer(sender);
+                else if(chan.equals(Server.NEW_GAME_GRANTED) && msg.equals(getUUID())) { // I requested to play someone
+                        publish(connection, sender, requestedOpponent);
+                        callInitializers(requestedOpponent, sender, true);
                 }
                 else if(chan.equals(getUUID())){   // someone requested to play me
-                    gameController.setGameID(message.getMessage().toString().replace("\"",""));
-                    gameController.initData(new GameSettings(getUUID(), false ,true));
-                    connection.unsubscribeAll();
-                    gameController.init(getUUID());
-                    gameController.setNames(getUUID(), message.getPublisher());
-                    launchGame();
+                    callInitializers(sender, msg, false);
                 }
+                if(chan.equals(Server.CPU_GRANTED) && msg.equals(getUUID())) {
+                    callInitializers("CPU", sender, true);
+                }
+
 
                     //publish to lobby, then get lobby subscribers, then subscribe to lobby
     }
+
+
+    public void callInitializers(String opponent, String gameID, boolean playingX){
+        gameController.setGameID(gameID);
+        gameController.initData(new GameSettings(getUUID(), playingX, true));
+        connection.unsubscribeAll();
+        gameController.init(getUUID());
+        gameController.setNames(getUUID(), opponent);
+        launchGame();
+
+
+    }
+
 
     private void launchGame() {
         Platform.runLater(()->{
@@ -147,13 +169,13 @@ public class GameLobbyController extends Subscriber
 
     public void joinGame(MouseEvent click) throws java.io.IOException {
         //GameController controller = new GameController();
-
+        //gameController.initData(new GameSettings(getUUID(), true ,true));
         switch(((Button)click.getSource()).getText()) {
             case "CPU (Easy)":
-                gameController.initData(new GameState(), new GameSettings("player 1", true, true, true), false);
+                publish(connection, Server.EASY, Server.REQUEST_CPU);
                 break;
             case "CPU (Hard)":
-                gameController.initData(new GameState(), new GameSettings("player 1", true, false, true), false);
+                publish(connection, "hard", Server.REQUEST_CPU);
                 break;
             default:
                 break;
@@ -170,7 +192,7 @@ public class GameLobbyController extends Subscriber
         // set current stage to display the next scene
         window.setScene(GameScreenScene);
 
-        window.show();}*/ launchGame();
+        window.show();}*/ //launchGame();
         //catch(Exception e){System.out.println(e.getCause()); e.printStackTrace();}
     }
 
