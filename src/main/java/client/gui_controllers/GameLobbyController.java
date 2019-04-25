@@ -64,6 +64,7 @@ public class GameLobbyController extends Subscriber
         playerScroll.setContent(playerList);
         leaderBoard.setContent(leaderBoardList);
 
+
         getSubscribers(Server.LOBBY_CHANNEL);
         FXMLLoader loader = new FXMLLoader(GameController.class.getResource("../../gui_resources/GameScreen.fxml"));
         try{ root = (Parent)loader.load();
@@ -109,6 +110,9 @@ public class GameLobbyController extends Subscriber
 
     @Override
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message){
+                if(!((Stage)leaderBoardList.getScene().getWindow()).getTitle().equals(getUUID()))
+                    Platform.runLater(()->{((Stage)leaderBoardList.getScene().getWindow()).setTitle(getUUID()); });
+
                 String chan = message.getChannel();
                 String sender = message.getPublisher();
                 String msg = message.getMessage().toString().replace("\"","");
