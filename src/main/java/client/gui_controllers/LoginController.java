@@ -44,27 +44,10 @@ public class LoginController extends pubnubWrappers.Subscriber {
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message) {
         String msg = message.getMessage().toString().replace("\"","");
 
-
          if(msg.equals("success")) {
             connection.unsubscribeAll();
-            Platform.runLater(() -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
-                    Parent root = (Parent) loader.load();
-                    GameLobbyController controller = loader.getController();
-                    //controller.requestedOpponent.setText(usernameField.getText());
-                    controller.init(usernameField.getText(), new ArrayList<String>(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL, Server.NEW_GAME_GRANTED, Server.CPU_GRANTED)));
-                    publish(controller.getConnection(), "", Server.LOBBY_CHANNEL);
-                    /*ArrayList<String> lobby = new ArrayList<>();
-                lobby.addAll(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL));
-                controller.init(usernameField.getText(),lobby);
-                checkHereNow(Server.LOBBY_CHANNEL,controller.getHereNowCallBack());*/
-                    loadFXML(usernameField, root);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
+            Platform.runLater(()->{
+                GameLobbyController.load(usernameField, usernameField.getText());  });
         }
         else
             System.out.println(msg + " used/incorrect");

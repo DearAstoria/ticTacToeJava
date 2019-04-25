@@ -63,8 +63,7 @@ public class GameController extends Subscriber {
     }
 
     public void mouseOver(MouseEvent event) {
-        // if the game is not over and it is the current player's turn, then provide mouse over feedback for the requestedOpponent when selecting a space
-        if(/**!game.isGameOver()*/ !gameOver && myTurn/**game.getCurrentTurn() == settings.getPlayerLetter()*/) {
+        if(!gameOver && myTurn) {
             Pane space = (Pane)event.getSource(); // get the space that is hovered over
             if(space.getChildren().isEmpty()) { // if the space is empty
                 takeSpace(space, settings.getPlayerLetter()/**game.getCurrentTurn()*/,true); // then generate a temporary letter in that space to provide feedback
@@ -74,8 +73,7 @@ public class GameController extends Subscriber {
 
     // Clear the highlighted symbol if the mouse moves out of a space
     public void mouseOut(MouseEvent event) {
-        // if the game is not over and it is the current player's turn, then clear the space that the requestedOpponent had moused over
-        if(/**!game.isGameOver()*/ !gameOver && myTurn/**game.getCurrentTurn() == settings.getPlayerLetter()*/) {
+        if(!gameOver && myTurn) {
             Pane space = (Pane)event.getSource(); // get the space that is hovered over
             if(!space.getChildren().isEmpty()) { // if the space is not empty
                 if(space.getChildren().get(0).getId() == "Temporary") { // and if the space is occupied by a temporary letter (permanent would indicate that the space was taken)
@@ -219,14 +217,10 @@ public class GameController extends Subscriber {
 
     // display the restart button showing the winner, and when clicked restarts the game
     public void outputWinner() {
-        //try {
-
 
             // overwrite initial properties on the button which made it hidden on the screen
             RESTART.setOpacity(1);              // make the hidden button visible
             RESTART.setMouseTransparent(false); // make false so that the hidden button can detect mouse events again
-            System.out.println("status    "  + status + "\n" + "my token " + myToken.getText());
-            System.out.println("boolean   " + (status == settings.getPlayerLetter()));
 
 
             if (status == 'T') {

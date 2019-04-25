@@ -1,7 +1,7 @@
 package client.gui_controllers;
 
-import client.raw_data.GameState;
 import client.raw_data.GameSettings;
+import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.PNStatus;
 import com.pubnub.api.models.consumer.presence.PNHereNowChannelData;
@@ -22,12 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pubnubWrappers.*;
 import server.Server;
-import server.databaseOperations.PostgresqlExample;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.*;
 
 import static pubnubWrappers.PubNubWrappers.publish;
@@ -43,13 +38,14 @@ public class GameLobbyController extends Subscriber
     String requestedOpponent;
     Parent root;
     Map playerMap = new HashMap();
+    boolean needLeaderBoard = true;
 
     public static void load(Node node, String uuid) {
         try {
             FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
             Parent root = (Parent) loader.load();
             GameLobbyController controller = loader.getController();
-            controller.init(uuid, new ArrayList<String>(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL, Server.NEW_GAME_GRANTED, Server.CPU_GRANTED)));
+            controller.init(uuid, new ArrayList<String>(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL, Server.NEW_GAME_GRANTED, Server.CPU_GRANTED, Server.GET_LEADER_BOARD)));
             publish(controller.getConnection(), "join lobby", Server.LOBBY_CHANNEL);
             loadFXML(node, root);
 
@@ -75,45 +71,12 @@ public class GameLobbyController extends Subscriber
         }
         catch (Exception e){e.printStackTrace();}
 
-
-
-/*
-            String ar[] = new String[1000];
-            int i = 0;
-            StringBuilder b = new StringBuilder();
-
-            Class.forName(PostgresqlExample.driver);
-
-            // connect to database
-            Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER, PostgresqlExample.PASS);
-
-            // create a statement
-            Statement query = databaseConn.createStatement();
-
-            // execute SQL insert
-            ResultSet rs = query.executeQuery("SELECT username, wins FROM USERS" +
-                    " ORDER BY WINS DESC");
-            while (rs.next()) {
-                //ar[i] =
-                b = new StringBuilder();
-                b.append(rs.getString("username")).append("       ").append(String.valueOf(rs.getInt("wins")));
-                ar[i++] = new String(b);
-                System.out.println(b);
-            }
-            //publish(connection, Arrays.copyOf(ar, i), Server.NEW_ACCOUNT_CHANNEL);
-            for (String str : Arrays.copyOf(ar, i))
-                leaderBoardList.getChildren().add(new Button(str));
-
-            query.close();
-            databaseConn.close();
-*/
-
-
-
+        publish(connection, "", Server.REQUEST_LEADER_BOARD);
 
 
 
     }
+
 
     class playerSelected implements EventHandler<MouseEvent>{
 
@@ -135,7 +98,7 @@ public class GameLobbyController extends Subscriber
             for(PNHereNowChannelData channelData : hereNow.getChannels().values()){
                 channelData.getOccupants();
                 for (PNHereNowOccupantData occupant : channelData.getOccupants()) {
-                    if(!occupant.getUuid().isEmpty())
+                    if(!occupant.getUuid().equals(getUUID()))
                         addPlayer(occupant.getUuid());
                 }
 
@@ -165,7 +128,12 @@ public class GameLobbyController extends Subscriber
                 if(chan.equals(Server.CPU_GRANTED) && msg.equals(getUUID())) {
                     callInitializers("CPU", sender, true);
                 }
-                //if(chan.equals(Server.UPDATE_LEADER_BOARD) msg.equals(getUUID()))
+                if(chan.equals(Server.GET_LEADER_BOARD) && needLeaderBoard) {
+                        getLeaderBoard(new Gson().fromJson(message.getMessage(), String[].class));
+                        needLeaderBoard = !needLeaderBoard;
+                    }
+
+
 
 
 
@@ -174,6 +142,8 @@ public class GameLobbyController extends Subscriber
 
 
     public void callInitializers(String opponent, String gameID, boolean playingX){
+        connection.unsubscribeAll();
+        publish(connection, "", Server.LEAVE_LOBBY_CHANNEL);
         gameController.setGameID(gameID);
         gameController.initData(new GameSettings(getUUID(), playingX, true));
         connection.unsubscribeAll();
@@ -181,6 +151,14 @@ public class GameLobbyController extends Subscriber
         gameController.setNames(getUUID(), opponent);
         launchGame();
 
+
+    }
+
+    private void getLeaderBoard(String ar[]){
+
+       Platform.runLater(()->{
+           for(String elem : ar)
+           leaderBoardList.getChildren().add(new Button(elem));});
 
     }
 
@@ -203,9 +181,8 @@ public class GameLobbyController extends Subscriber
             playerList.getChildren().remove(playerMap.get(uuid_username));
             playerMap.remove(uuid_username);
         });
-        connection.unsubscribe().channels(Arrays.asList(Server.LOBBY_CHANNEL));
+        //connection.unsubscribe().channels(Arrays.asList(Server.LOBBY_CHANNEL));
 
-        // search for requestedOpponent and delete associated button
     }
     private void addPlayer(String username){
 
@@ -234,6 +211,7 @@ public class GameLobbyController extends Subscriber
     }
 
     public void logout(MouseEvent click) throws java.io.IOException {
+        publish(connection,"",Server.LEAVE_LOBBY_CHANNEL);
         connection.unsubscribeAll();
         // load the next scene
         Parent GameScreenParent = FXMLLoader.load(getClass().getResource("../../gui_resources/Login.fxml"));
