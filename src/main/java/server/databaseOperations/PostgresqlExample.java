@@ -6,20 +6,65 @@ import java.sql.*;
 public class PostgresqlExample {
 
     // driver and database url
-    static final String DB_URL = "jdbc:postgresql://localhost/TicTacToe";
-    static final String driver = "org.postgresql.Driver";
-
+    public static final String DB_URL = "jdbc:postgresql://localhost/";//jdbc:postgresql://localhost/";
+    public static final String driver = "org.postgresql.Driver";
+    public static final String tictactoe = "jdbc:postgresql://localhost/tictactoe";
 
 
     // database tables
-    static final String USERS = "USERS";
-    static final String GAMES = "games";
-    static final String MOVES = "MOVES";
+    public static final String USERS = "USERS";
+    public static final String GAMES = "games";
+    public static final String MOVES = "MOVES";
 
     //  Database credentials
-    static final String USER = "";
-    static final String PASS = "";
+    public static final String USER = "postgres";
+    public static final String PASS = "1234";
 
+
+
+    public static boolean queryUser(String email, String username) throws java.sql.SQLException, ClassNotFoundException {
+        // reference the driver being used to connect to the database
+        Class.forName(PostgresqlExample.driver);
+
+        // connect to database
+        Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER, PostgresqlExample.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
+
+        // create a statement
+        Statement query = databaseConn.createStatement();
+
+        // execute SQL query
+        ResultSet rs = query.executeQuery("SELECT email, username, password FROM USERS WHERE email = '" + email+ "' AND username = '" + username);// + "' AND password = '" + passwordField.getText() + "'");
+
+        // if the query results in a ResultSet, then the user entered was found in the database
+        if(rs.next()) {
+            rs.close();
+            query.close();
+            databaseConn.close();
+            return true;
+        } else {
+            rs.close();
+            query.close();
+            databaseConn.close();
+            return false;
+        }
+    }
+
+    public static void insertUser(String email, String username, String password) throws java.sql.SQLException, ClassNotFoundException {
+        // reference the driver being used to connect to the database
+        Class.forName(PostgresqlExample.driver);
+
+        // connect to database
+        Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe,PostgresqlExample.USER, PostgresqlExample.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
+
+        // create a statement
+        Statement query = databaseConn.createStatement();
+
+        // execute SQL insert
+        query.executeUpdate("INSERT INTO USERS VALUES ('" + email+ "', '" + username + "', '" + password + "')");
+
+        query.close();
+        databaseConn.close();
+    }
 
 
     public static void createDatabase(String database)
@@ -67,7 +112,10 @@ public class PostgresqlExample {
 
 
 
-    public static void createTable() {
+    public static void createTable(String db, String sql) {
+            StringBuilder url = new StringBuilder();
+            url.append(DB_URL).append(db);
+            System.out.println(url);
             Connection conn = null;
             Statement stmt = null;
             try{
@@ -76,20 +124,20 @@ public class PostgresqlExample {
 
                 //STEP 3: Open a connection
                 System.out.println("Connecting to a selected database...");
-                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                conn = DriverManager.getConnection(url.toString(), USER, PASS);
                 System.out.println("Connected database successfully...");
 
 
 
                 stmt = conn.createStatement();
                 //stmt.execute("CREATE DATABASE TicTacToe");
-                stmt.executeUpdate("CREATE TABLE USERS " +
+                stmt.executeUpdate(sql/*"CREATE TABLE USERS " +
                         " email VARCHAR(255), " +
                         " username VARCHAR(255), " +
                         " wins INTEGER, " +
                         " losses INTEGER, " +
                         " draws INTEGER, " +
-                        " PRIMARY KEY ( username ))");
+                        " PRIMARY KEY ( username ))"*/);
                 System.out.println("Created table in given database...");
             }catch(SQLException se){
                 //Handle errors for JDBC
@@ -115,19 +163,19 @@ public class PostgresqlExample {
         }
 
 
-    public static ResultSet executeQuery(String sql){
+    public static ResultSet executeQuery(String sql) throws Exception{
 
         Connection conn = null;
         Statement stmt = null;
         ResultSet result = null;
-        try {
+       // try {
 
             Class.forName(driver);
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            conn = DriverManager.getConnection(tictactoe,USER,PASS);
             stmt = conn.createStatement();
             result = stmt.executeQuery(sql);
-        }
-        catch(
+        //}
+        /*catch(
                 SQLException se){
             //Handle errors for JDBC
             se.printStackTrace();
@@ -147,7 +195,7 @@ public class PostgresqlExample {
             }catch(SQLException se){
                 se.printStackTrace();
             }//end finally try
-        }
+        }*/
 
         return result;
     }

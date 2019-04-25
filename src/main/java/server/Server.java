@@ -1,10 +1,12 @@
 package server;
 
 import client.User;
+import client.gui_controllers.GameLobbyController;
 import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import pubnubWrappers.Subscriber;
+import server.databaseOperations.PostgresqlExample;
 
 import java.util.Arrays;
 
@@ -39,6 +41,7 @@ public class Server extends Subscriber {
     @Override
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message){
         String channel = message.getChannel();
+        try {
         if(channel.equals(NEW_ACCOUNT_CHANNEL))
             addAccount(message);
         else if(channel.equals(LOGIN_CHANNEL))
@@ -48,16 +51,24 @@ public class Server extends Subscriber {
         else if(channel.equals(LEAVE_LOBBY_CHANNEL))
             leaveLobby(message);
         else if(channel.equals(REQUEST_CPU))
-            requestCPU(message);
+            requestCPU(message); }
+        catch (Exception e) {e.printStackTrace();}
     }
 
-    void addAccount(PNMessageResult message){
+    void addAccount(PNMessageResult message) throws Exception{
 
         User user = new Gson().fromJson(message.getMessage(), User.class);
-
+/*
         boolean emailExists, nameExists;
+        boolean userExists = PostgresqlExample.queryUser( user.getEmail(), user.getUsername());
+        if(!userExists) { // if the user being signed up does not yet exist
+            PostgresqlExample.insertUser(user.getEmail(), user.getUsername(), user.getPassword()); // add new user to database
+            publish(connection,"success",message.getPublisher());//System.out.println("New user created");
+            //loginClicked(click); // log into the game server
+        } else {*/
+            publish(connection,"user already exists",message.getPublisher());;
 
-        emailExists = userExists(user.getEmail());
+        /*emailExists = userExists(user.getEmail());
         nameExists = userExists(user.getUsername());
         if( emailExists || nameExists )
             {
@@ -66,8 +77,9 @@ public class Server extends Subscriber {
                 if(nameExists)
                     System.out.println("username already used");
             }
-        else
-            executeQuery("signup successful");
+        else { try{ executeQuery("signup successful"); }
+            catch (Exception e){e.printStackTrace();}*/
+       // }
 
 
 

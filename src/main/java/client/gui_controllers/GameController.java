@@ -20,7 +20,13 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import pubnubWrappers.Subscriber;
 import server.Server;
+import server.databaseOperations.PostgresqlExample;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -113,8 +119,8 @@ public class GameController extends Subscriber {
     @FXML // initialize FXML objects in the controller
     public void initialize() {
         spaces = new StackPane[][]{ {cell00, cell01, cell02},
-                                    {cell10, cell11, cell12},
-                                    {cell20, cell21, cell22} };
+                {cell10, cell11, cell12},
+                {cell20, cell21, cell22} };
         update(); // update spaces to match with GameState
         myName.setText(settings.getPlayer()); // set the player's name in the top-left box
         if(humanOpponent) { // if playing against a human requestedOpponent
@@ -168,15 +174,15 @@ public class GameController extends Subscriber {
         myTurn = settings.getPlayerLetter() != toUpperCase(status);  // it is my turn if status says last person who moved is not me
 
 
-            // update UI with opponent's move
-            if(status != settings.getPlayerLetter() && status != MovePacket.DRAW)
+        // update UI with opponent's move
+        if(status != settings.getPlayerLetter() && status != MovePacket.DRAW)
             Platform.runLater(() -> { takeSpace(pane, toUpperCase(status), false); });
-            else if(status == MovePacket.DRAW && pane.getChildren().isEmpty())
-                    Platform.runLater(()->{ takeSpace(pane,opponentToken.getText().charAt(0),false); });
+        else if(status == MovePacket.DRAW && pane.getChildren().isEmpty())
+            Platform.runLater(()->{ takeSpace(pane,opponentToken.getText().charAt(0),false); });
 
-            if (gameOver) {
-                Platform.runLater(() -> { outputWinner(); });             // restart button with winner
-            }
+        if (gameOver) {
+            Platform.runLater(() -> { outputWinner(); });             // restart button with winner
+        }
         //}
 
 
@@ -212,22 +218,46 @@ public class GameController extends Subscriber {
 
     // display the restart button showing the winner, and when clicked restarts the game
     public void outputWinner() {
-        // overwrite initial properties on the button which made it hidden on the screen
-        RESTART.setOpacity(1);              // make the hidden button visible
-        RESTART.setMouseTransparent(false); // make false so that the hidden button can detect mouse events again
-        switch(status) {
-         case 'X':
-         RESTART.setText("X wins");
-         break;
-         case 'O':
-         RESTART.setText("O wins");
-         break;
-         case 'T':
-         RESTART.setText("Draw");
-         break;
-         default:
-         break;
-         }
+        try {
+            Class.forName(PostgresqlExample.driver/*"org.sqlite.JDBC"*/);
+            // connect to database
+            Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER,PostgresqlExample.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
+            // create a statement
+            Statement query = databaseConn.createStatement();
+
+            // overwrite initial properties on the button which made it hidden on the screen
+            RESTART.setOpacity(1);              // make the hidden button visible
+            RESTART.setMouseTransparent(false); // make false so that the hidden button can detect mouse events again
+            System.out.println("status    "  + status);
+            switch (status) {
+                case 'X':
+                    RESTART.setText("X wins");
+                    if (myToken.equals("X")) {
+                        query.executeUpdate("UPDATE USERS SET wins = wins + 1 WHERE username = " + "'" + myName.getText() + "'");
+                    } else {
+                        query.executeUpdate("UPDATE USERS SET losses = losses + 1 WHERE username = " + "'" +myName.getText() + "'");
+                    }
+                    break;
+                case 'O':
+                    RESTART.setText("O wins");
+                    if (myToken.equals("O")) {
+                        query.executeUpdate("UPDATE USERS SET wins = wins + 1 WHERE username = '"  + myName.getText()+ "'");
+                    } else {
+                        query.executeUpdate("UPDATE USERS SET losses = losses + 1 WHERE username = " + "'" + myName.getText()+ "'");
+                    }
+                    break;
+                case 'T':
+                    RESTART.setText("Draw");
+                    query.executeUpdate("UPDATE USERS SET draws = draws + 1 WHERE username = " + "'" + myName.getText()+ "'");
+                    break;
+                default:
+                    break;
+            }
+        } catch(ClassNotFoundException e) {
+            System.out.println(e.toString());
+        } catch(SQLException e) {
+            System.out.println(e.toString());
+        }
     }
 
     // given the fxID of a space return the x-y coordinates of it in the GameState

@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import server.Server;
+import server.databaseOperations.PostgresqlExample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,35 +65,42 @@ public class LoginController extends pubnubWrappers.Subscriber {
 
     @Override
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message) {
+        String msg = message.getMessage().toString().replace("\'","");
 
-        connection.unsubscribeAll();
-        Platform.runLater(() -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
-                Parent root = (Parent)loader.load();
-                GameLobbyController controller = loader.getController();
-                //controller.requestedOpponent.setText(usernameField.getText());
-                controller.init(usernameField.getText(),new ArrayList<String>(Arrays.asList(Server.LOBBY_CHANNEL,Server.LEAVE_LOBBY_CHANNEL, Server.NEW_GAME_GRANTED)));
-                /*ArrayList<String> lobby = new ArrayList<>();
+
+       // if(msg.equals("success")) {
+            connection.unsubscribeAll();
+            Platform.runLater(() -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(GameLobbyController.class.getResource("../../gui_resources/GameLobby.fxml"));
+                    Parent root = (Parent) loader.load();
+                    GameLobbyController controller = loader.getController();
+                    //controller.requestedOpponent.setText(usernameField.getText());
+                    controller.init(usernameField.getText(), new ArrayList<String>(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL, Server.NEW_GAME_GRANTED, Server.CPU_GRANTED)));
+                    publish(controller.getConnection(), "", Server.LOBBY_CHANNEL);
+                    /*ArrayList<String> lobby = new ArrayList<>();
                 lobby.addAll(Arrays.asList(Server.LOBBY_CHANNEL, Server.LEAVE_LOBBY_CHANNEL));
                 controller.init(usernameField.getText(),lobby);
                 checkHereNow(Server.LOBBY_CHANNEL,controller.getHereNowCallBack());*/
-                loadFXML(usernameField, root);
+                    loadFXML(usernameField, root);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        //}
+       // else
+       //     System.out.println(msg);
 
     }
 
     // insert a new user into the database using data entered into the text fields
     private void insertUser() throws java.sql.SQLException, ClassNotFoundException {
         // reference the driver being used to connect to the database
-        Class.forName("org.sqlite.JDBC");
+        Class.forName(PostgresqlExample.driver);
 
         // connect to database
-        Connection databaseConn = DriverManager.getConnection("jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db");
+        Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe,PostgresqlExample.USER, PostgresqlExample.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
 
         // create a statement
         Statement query = databaseConn.createStatement();
@@ -106,10 +114,10 @@ public class LoginController extends pubnubWrappers.Subscriber {
 
     private boolean queryUser() throws java.sql.SQLException, ClassNotFoundException {
         // reference the driver being used to connect to the database
-        Class.forName("org.sqlite.JDBC");
+        Class.forName(PostgresqlExample.driver);
 
         // connect to database
-        Connection databaseConn = DriverManager.getConnection("jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db");
+        Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER, PostgresqlExample.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
 
         // create a statement
         Statement query = databaseConn.createStatement();
@@ -132,6 +140,7 @@ public class LoginController extends pubnubWrappers.Subscriber {
     }
 
     public void loginClicked(MouseEvent click) throws java.io.IOException, java.sql.SQLException, ClassNotFoundException {
+        //publish(connection, new User(emailField.getText(), usernameField.getText(), passwordField.getText()), Server.NEW_ACCOUNT_CHANNEL);
         boolean userFound = queryUser();
         if(userFound) {
             System.out.println("Login Successful");
@@ -143,6 +152,7 @@ public class LoginController extends pubnubWrappers.Subscriber {
     }
 
     public void signUpClicked(MouseEvent click) throws java.io.IOException, java.sql.SQLException, ClassNotFoundException {
+        //publish(connection, new User(emailField.getText(), usernameField.getText(), passwordField.getText()), Server.NEW_ACCOUNT_CHANNEL);
         boolean userExists = queryUser();
         if(!userExists) { // if the user being signed up does not yet exist
             insertUser(); // add new user to database
