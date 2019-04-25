@@ -10,16 +10,20 @@ public class GameEngine
     public  static boolean takeSpace(GameState state, Move move){ return takeSpace(state, move.getRow(), move.getCol());}
 
     public static boolean takeSpace(GameState state, int xcoord, int ycoord) {
+
         if(state.getBoardSpaces().get(xcoord, ycoord) == ' ') {
             state.getBoardSpaces().set(state.getCurrentTurn(), xcoord, ycoord); // if this board space is empty then take the space
-            return true;
-        } else {
+            return true; //ret = true;
+        } ///** DELETED
+         else {
             return false; // else return that a space has not been taken
-        }
+        }//*/
+        //state.nextTurn();/** added */
+        //return ret;
     }
 
     // take a random space for the current player's turn
-    public static void takeRandomSpace(GameState state) {
+    public static Move takeRandomSpace(GameState state) {
         Random rand = new Random();
         int x, y;
 
@@ -28,14 +32,16 @@ public class GameEngine
             y = rand.nextInt(3);
         }
         while(state.getBoardSpaces().get(x, y) != ' '); // continue checking random spaces until an empty space is found
-
         takeSpace(state, x, y);
+
+        return new Move(x, y);
     }
 
     // calculate and take the best space for the current player's turn
-    public static void takeBestSpace(GameState state) {
+    public static Move takeBestSpace(GameState state) {
         ScoredMove bestMove = minmax(state);
         takeSpace(state, bestMove.x, bestMove.y);
+        return new Move(bestMove.x, bestMove.y);
     }
 
     private static ScoredMove minmax(GameState state)
@@ -130,6 +136,15 @@ public class GameEngine
 
         return 'T'; // if all other cases fail (no winner, and no empty spaces), then this game must be a draw
     }
+    public static char checkGameStatus_or_lastMover(GameState state){
+
+         char status = checkGameState(state);
+         //System.out.println("\n\n" + status + "\n\n");
+         if(status == ' ')
+             status = Character.toLowerCase(state.currentTurn);
+         return status;
+    }
+
 
     // return true or false whether there is a winner for this game state
     public static boolean winFound(GameState state)
@@ -140,8 +155,6 @@ public class GameEngine
         } else {
             return false;
         }
-
-
     }
 
     private static boolean matching(int a, int b, int c) {

@@ -6,7 +6,6 @@ import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import pubnubWrappers.Subscriber;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static pubnubWrappers.PubNubWrappers.publish;
@@ -21,6 +20,9 @@ public class Server extends Subscriber {
     public static final String LEAVE_LOBBY_CHANNEL = "leave_lobby";
     public static final String GAME_REQUEST_CHANNEL = "game_request";
     public static final String NEW_GAME_GRANTED = "game_granted";
+    public static final String REQUEST_CPU = "request_cpu";
+    public static final String CPU_GRANTED = "cpu_granted";
+    public static final String EASY = "easy";
 
 
 
@@ -30,7 +32,7 @@ public class Server extends Subscriber {
 
     public Server()
     {
-        super(Arrays.asList(NEW_ACCOUNT_CHANNEL,LOGIN_CHANNEL,JOIN_LOBBY_CHANNEL, GAME_REQUEST_CHANNEL));
+        super(Arrays.asList(NEW_ACCOUNT_CHANNEL,LOGIN_CHANNEL,JOIN_LOBBY_CHANNEL, GAME_REQUEST_CHANNEL, REQUEST_CPU));
     }
 
 
@@ -45,6 +47,8 @@ public class Server extends Subscriber {
             requestGame(message);
         else if(channel.equals(LEAVE_LOBBY_CHANNEL))
             leaveLobby(message);
+        else if(channel.equals(REQUEST_CPU))
+            requestCPU(message);
     }
 
     void addAccount(PNMessageResult message){
@@ -76,6 +80,10 @@ public class Server extends Subscriber {
     void login(PNMessageResult message){  // verify login information
         {
             User user = new Gson().fromJson(message.getMessage(),User.class);
+            user.getUsername();
+            user.getEmail();
+
+
             System.out.println(user);
             publish(user,message.getPublisher());
         }
@@ -87,13 +95,20 @@ public class Server extends Subscriber {
 
     void requestGame(PNMessageResult msg)
     {
-        new Thread(()->{
-            GameHandler handler = new GameHandler(msg.getPublisher(), msg.toString()); // (x,o)
-            publish(handler.getConnection(), handler.getX(), Server.NEW_GAME_GRANTED);
-        }).run();
+            GameHandler handler = new GameHandler(msg.getPublisher(), msg.getMessage().toString().replace("\"","")); // (x,o)
+            publish(handler.getConnection(), handler.getxPlayer(), Server.NEW_GAME_GRANTED);
+    }
 
+    void requestCPU(PNMessageResult msg){
+        GameHandler handler;
+        if(msg.getMessage().toString().replace("\"","").equals(EASY))
+            handler = new GameHandler(msg.getPublisher(),true);
+        else
+            handler = new GameHandler(msg.getPublisher(),false);
+        publish(handler.getConnection(), handler.getxPlayer(), CPU_GRANTED);
 
     }
+
 
     void leaveLobby(PNMessageResult msg)
     {

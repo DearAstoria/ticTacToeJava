@@ -33,9 +33,9 @@ public class GameSettings {
 
     public char getPlayerLetter() {
         if(playingX) {
-            return 'X';
+            return GameState.X;
         } else {
-            return 'O';
+            return GameState.O;
         }
     }
 

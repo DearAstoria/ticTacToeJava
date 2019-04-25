@@ -13,6 +13,9 @@ public class User {
     public String getEmail(){return email;}
     public String getUsername(){return username;}
     public String getPassword(){return password;}
+    public boolean addToDatabase(){ return true; }  // returns false if username or email is already in use
+    public boolean updateGames(){ return true;}    //  returns false if record doesn't exist
+
     @Override
     public String toString(){
         return new String(email + " " + username + " " + password);

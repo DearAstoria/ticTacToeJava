@@ -1,57 +1,98 @@
 package server;
 
-import client.raw_data.GameState;
-import client.raw_data.Move;
-import client.raw_data.MovePacket;
+import client.raw_data.*;
 import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import pubnubWrappers.Subscriber;
 
-import java.util.Arrays;
-
-import static client.raw_data.GameEngine.checkGameState;
-import static client.raw_data.GameEngine.takeSpace;
+import static client.raw_data.GameEngine.*;
+import static java.lang.Character.isUpperCase;
 import static pubnubWrappers.PubNubWrappers.publish;
 
 public class GameHandler extends Subscriber {
 
-    GameState game = new GameState();
-    private String x;
-    private String o;
+    GameState game = new GameState();  // new GameState, where currentPlayer is X
+    ScoredMove scoredMove;
+    private String xPlayer;
+    private String oPlayer;
+    private boolean twoPlayerMode = true;
+    private boolean easy;
+    int i=0;
 
-    public GameHandler(String x, String o) {
-        this.x = x;
-        this.o = o;
+    public GameHandler(String x, String o) {  // two players
+        init();
+        this.xPlayer = x;
+        this.oPlayer = o;
+    }
+    public GameHandler(String singlePlayer, boolean easy){  // one player
+        init();
+        xPlayer = singlePlayer;
+        this.easy = easy;
+        twoPlayerMode = false;
     }
 
-    public String getX() {
-        return x;
+    public String getxPlayer() {
+        return xPlayer;
     }
 
-    public String getO() {
-        return o;
+    public String getoPlayer() {
+        return oPlayer;
     }
+
 
     @Override
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message) {
-            String sender = message.getPublisher();
-            MovePacket move_n_status = new Gson().fromJson(message.getMessage(), MovePacket.class);
-            move_n_status = computeMove(move_n_status);
 
-            if(sender.equals(x))
-                publish(connection, move_n_status, o);
+            Move move = new Gson().fromJson(message.getMessage(), Move.class);//computeMove(new Gson().fromJson(message.getMessage(), Move.class));
+            if(twoPlayerMode)
+                computeMove(move, message.getPublisher());
             else
-                publish(connection, move_n_status, x);
-
-    }
-    public MovePacket computeMove(MovePacket move_n_status){
-
-        assert takeSpace(game, move_n_status.move) == true;
-        return  new MovePacket(move_n_status.move, checkGameState(game));
+                cpuMode(move);
+        System.out.println("check game state:   " + checkGameState(game));
+        System.out.println(game.getBoardSpaces());
+            game.nextTurn();
 
     }
 
+
+    public void cpuMode(Move playerMove){
+
+        takeSpace(game, playerMove);
+        Move cpuMove;
+        if(isUpperCase(checkGameStatus_or_lastMover(game))) {
+            publish(connection, new MovePacket(playerMove, checkGameStatus_or_lastMover(game)), xPlayer);
+            return; }
+
+        game.nextTurn();
+        if(easy)
+            cpuMove = takeRandomSpace(game);
+        else
+            cpuMove = takeBestSpace(game);
+
+        publish(connection, new MovePacket(cpuMove, checkGameStatus_or_lastMover(game)) , xPlayer);
+    }
+
+    public void computeMove(Move move, String sender){
+
+        takeSpace(game, move);
+        MovePacket p = new MovePacket(move, checkGameStatus_or_lastMover(game));
+        if(isUpperCase(p.status)) {         // send GameOver status
+            publish(connection, p, xPlayer);
+            publish(connection, p, oPlayer);
+        }
+        else if(sender.equals(xPlayer) && twoPlayerMode)             // always false in CPU mode
+            publish(connection, p, oPlayer);
+        else
+            publish(connection, p, xPlayer);
+
+    }
+
+
+
+    @Override public String toString(){
+        return new String("gameID " + getUUID() + " " + xPlayer + " " + oPlayer);
+    }
 
 
 }

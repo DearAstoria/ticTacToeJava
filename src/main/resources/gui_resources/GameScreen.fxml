@@ -67,13 +67,14 @@
                                 <Insets />
                             </VBox.margin>
                             <children>
-                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="player1" fx:id="myName">
+                                <Text fx:id="myName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="player1">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </Text>
                             </children>
                         </HBox>
+                  <Text fx:id="myToken" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0" spacing="10.0" style="-fx-border-color: gray;">
@@ -90,6 +91,7 @@
                                 </Text>
                             </children>
                         </HBox>
+                  <Text fx:id="opponentToken" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                     </children>
                 </VBox>
             </children>
