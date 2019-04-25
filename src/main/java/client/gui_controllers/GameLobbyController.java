@@ -19,7 +19,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.paint.Paint;
 import pubnubWrappers.*;
 import server.Server;
 
@@ -160,9 +162,14 @@ public class GameLobbyController extends Subscriber
 
     private void getLeaderBoard(String ar[]){
 
-       Platform.runLater(()->{
-           for(String elem : ar)
-           leaderBoardList.getChildren().add(new Button(elem));});
+       Platform.runLater(()-> {
+           Text txt;
+           for (String elem : ar) {
+               txt = new Text(elem);
+               txt.setFill(Paint.valueOf("white"));
+               leaderBoardList.getChildren().add(txt/*new Button(elem)*/);
+           }
+       });
 
     }
 
