@@ -16,12 +16,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pubnubWrappers.*;
 import server.Server;
+import server.databaseOperations.PostgresqlExample;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
 
 import static pubnubWrappers.PubNubWrappers.publish;
@@ -54,15 +60,58 @@ public class GameLobbyController extends Subscriber
 
 
     @FXML public VBox playerList;
-    //@FXML public Label requestedOpponent;
+    @FXML public VBox leaderBoardList;
+    @FXML public ScrollPane leaderBoard;
+    @FXML public ScrollPane playerScroll;
 
-    @FXML public void initialize(){
+    @FXML public void initialize() throws Exception{
+        playerScroll.setContent(playerList);
+        leaderBoard.setContent(leaderBoardList);
+
         getSubscribers(Server.LOBBY_CHANNEL);
         FXMLLoader loader = new FXMLLoader(GameController.class.getResource("../../gui_resources/GameScreen.fxml"));
         try{ root = (Parent)loader.load();
             gameController = loader.getController();
         }
         catch (Exception e){e.printStackTrace();}
+
+
+
+/*
+            String ar[] = new String[1000];
+            int i = 0;
+            StringBuilder b = new StringBuilder();
+
+            Class.forName(PostgresqlExample.driver);
+
+            // connect to database
+            Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER, PostgresqlExample.PASS);
+
+            // create a statement
+            Statement query = databaseConn.createStatement();
+
+            // execute SQL insert
+            ResultSet rs = query.executeQuery("SELECT username, wins FROM USERS" +
+                    " ORDER BY WINS DESC");
+            while (rs.next()) {
+                //ar[i] =
+                b = new StringBuilder();
+                b.append(rs.getString("username")).append("       ").append(String.valueOf(rs.getInt("wins")));
+                ar[i++] = new String(b);
+                System.out.println(b);
+            }
+            //publish(connection, Arrays.copyOf(ar, i), Server.NEW_ACCOUNT_CHANNEL);
+            for (String str : Arrays.copyOf(ar, i))
+                leaderBoardList.getChildren().add(new Button(str));
+
+            query.close();
+            databaseConn.close();
+*/
+
+
+
+
+
 
     }
 
@@ -104,18 +153,20 @@ public class GameLobbyController extends Subscriber
 
                 if(chan.equals(Server.LOBBY_CHANNEL) && !(sender.equals(getUUID())) && playerMap.get(sender) == null )
                     addPlayer(sender);
-                else if(chan.equals(Server.LEAVE_LOBBY_CHANNEL) && !(msg.equals(getUUID())) )
+                if(chan.equals(Server.LEAVE_LOBBY_CHANNEL) && !(msg.equals(getUUID())) )
                     removePlayer(sender);
-                else if(chan.equals(Server.NEW_GAME_GRANTED) && msg.equals(getUUID())) { // I requested to play someone
+                if(chan.equals(Server.NEW_GAME_GRANTED) && msg.equals(getUUID())) { // I requested to play someone
                         publish(connection, sender, requestedOpponent);
                         callInitializers(requestedOpponent, sender, true);
                 }
-                else if(chan.equals(getUUID())){   // someone requested to play me
+                if(chan.equals(getUUID())){   // someone requested to play me
                     callInitializers(sender, msg, false);
                 }
                 if(chan.equals(Server.CPU_GRANTED) && msg.equals(getUUID())) {
                     callInitializers("CPU", sender, true);
                 }
+                //if(chan.equals(Server.UPDATE_LEADER_BOARD) msg.equals(getUUID()))
+
 
 
                     //publish to lobby, then get lobby subscribers, then subscribe to lobby
@@ -180,20 +231,6 @@ public class GameLobbyController extends Subscriber
             default:
                 break;
         }
-//try{
-        // load the next scene
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("../../gui_resources/GameScreen.fxml")); // initialize FXMLLoader to load the next UI
-        loader.setController(controller); // initialize the FXMLLoader to tell the UI to use the controller initialized from parameters in this object
-        Scene GameScreenScene = new Scene(loader.load());
-
-        // get reference to the current stage
-        Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
-
-        // set current stage to display the next scene
-        window.setScene(GameScreenScene);
-
-        window.show();}*/ //launchGame();
-        //catch(Exception e){System.out.println(e.getCause()); e.printStackTrace();}
     }
 
     public void logout(MouseEvent click) throws java.io.IOException {

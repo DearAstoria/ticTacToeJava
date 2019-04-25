@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -218,46 +219,30 @@ public class GameController extends Subscriber {
 
     // display the restart button showing the winner, and when clicked restarts the game
     public void outputWinner() {
-        try {
-            Class.forName(PostgresqlExample.driver/*"org.sqlite.JDBC"*/);
-            // connect to database
-            Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER,PostgresqlExample.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
-            // create a statement
-            Statement query = databaseConn.createStatement();
+        //try {
+
 
             // overwrite initial properties on the button which made it hidden on the screen
             RESTART.setOpacity(1);              // make the hidden button visible
             RESTART.setMouseTransparent(false); // make false so that the hidden button can detect mouse events again
-            System.out.println("status    "  + status);
-            switch (status) {
-                case 'X':
-                    RESTART.setText("X wins");
-                    if (myToken.equals("X")) {
-                        query.executeUpdate("UPDATE USERS SET wins = wins + 1 WHERE username = " + "'" + myName.getText() + "'");
-                    } else {
-                        query.executeUpdate("UPDATE USERS SET losses = losses + 1 WHERE username = " + "'" +myName.getText() + "'");
-                    }
-                    break;
-                case 'O':
-                    RESTART.setText("O wins");
-                    if (myToken.equals("O")) {
-                        query.executeUpdate("UPDATE USERS SET wins = wins + 1 WHERE username = '"  + myName.getText()+ "'");
-                    } else {
-                        query.executeUpdate("UPDATE USERS SET losses = losses + 1 WHERE username = " + "'" + myName.getText()+ "'");
-                    }
-                    break;
-                case 'T':
-                    RESTART.setText("Draw");
-                    query.executeUpdate("UPDATE USERS SET draws = draws + 1 WHERE username = " + "'" + myName.getText()+ "'");
-                    break;
-                default:
-                    break;
+            System.out.println("status    "  + status + "\n" + "my token " + myToken.getText());
+            System.out.println("boolean   " + (status == settings.getPlayerLetter()));
+
+
+            if (status == 'T') {
+                RESTART.setText("DRAW");
+                RESTART.setTextFill(Paint.valueOf("YELLOW"));
             }
-        } catch(ClassNotFoundException e) {
-            System.out.println(e.toString());
-        } catch(SQLException e) {
-            System.out.println(e.toString());
-        }
+            else
+                RESTART.setText(status + " WINS");
+
+
+            if (status == myToken.getText().charAt(0))
+                RESTART.setTextFill(Paint.valueOf("GREEN"));
+            else if (status != 'T')
+                RESTART.setTextFill(Paint.valueOf("RED"));
+
+
     }
 
     // given the fxID of a space return the x-y coordinates of it in the GameState

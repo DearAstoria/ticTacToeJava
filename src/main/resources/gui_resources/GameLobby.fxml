@@ -19,7 +19,7 @@
                         <Insets left="80.0" top="20.0" />
                      </VBox.margin>
                   </Text>
-                  <ScrollPane fx:id="playerListScroll" prefHeight="200.0" prefWidth="200.0" style="-fx-background: black;">
+                  <ScrollPane fx:id="playerScroll" prefHeight="200.0" prefWidth="200.0" style="-fx-background: black;">
                      <content>
                         <VBox fx:id="playerList" prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -47,7 +47,10 @@
                      </VBox.margin>
                   </HBox>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-14px" text="LeaderBoard" />
-                  <ScrollPane fx:id="leaderBoard" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background: black;" />
+                  <ScrollPane fx:id="leaderBoard" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background: black;">
+                     <content>
+                        <VBox fx:id="leaderBoardList" prefHeight="200.0" prefWidth="100.0" />
+                     </content></ScrollPane>
                </children>
                <opaqueInsets>
                   <Insets />

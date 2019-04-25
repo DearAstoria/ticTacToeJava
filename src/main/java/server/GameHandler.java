@@ -5,6 +5,12 @@ import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import pubnubWrappers.Subscriber;
+import server.databaseOperations.PostgresqlExample;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import static client.raw_data.GameEngine.*;
 import static java.lang.Character.isUpperCase;
@@ -44,13 +50,11 @@ public class GameHandler extends Subscriber {
     @Override
     public void handleSubCallBack(PubNub pubnub, PNMessageResult message) {
 
-            Move move = new Gson().fromJson(message.getMessage(), Move.class);//computeMove(new Gson().fromJson(message.getMessage(), Move.class));
+            Move move = new Gson().fromJson(message.getMessage(), Move.class);
             if(twoPlayerMode)
                 computeMove(move, message.getPublisher());
             else
                 cpuMode(move);
-        System.out.println("check game state:   " + checkGameState(game));
-        System.out.println(game.getBoardSpaces());
             game.nextTurn();
 
     }
@@ -60,7 +64,7 @@ public class GameHandler extends Subscriber {
 
         takeSpace(game, playerMove);
         Move cpuMove;
-        if(isUpperCase(checkGameStatus_or_lastMover(game))) {
+        if(isUpperCase(checkGameStatus_or_lastMover(game))) {   // game over
             publish(connection, new MovePacket(playerMove, checkGameStatus_or_lastMover(game)), xPlayer);
             return; }
 
@@ -73,21 +77,58 @@ public class GameHandler extends Subscriber {
         publish(connection, new MovePacket(cpuMove, checkGameStatus_or_lastMover(game)) , xPlayer);
     }
 
-    public void computeMove(Move move, String sender){
+    public void computeMove(Move move, String sender) {
 
-        takeSpace(game, move);
-        MovePacket p = new MovePacket(move, checkGameStatus_or_lastMover(game));
-        if(isUpperCase(p.status)) {         // send GameOver status
-            publish(connection, p, xPlayer);
-            publish(connection, p, oPlayer);
-        }
-        else if(sender.equals(xPlayer) && twoPlayerMode)             // always false in CPU mode
-            publish(connection, p, oPlayer);
-        else
-            publish(connection, p, xPlayer);
+
+
+            takeSpace(game, move);
+            MovePacket p = new MovePacket(move, checkGameStatus_or_lastMover(game));
+            if (isUpperCase(p.status)) {         // send GameOver status
+                publish(connection, p, xPlayer);
+                publish(connection, p, oPlayer);
+                updateDB(p.status);
+            }
+            else if (sender.equals(xPlayer) && twoPlayerMode)
+                publish(connection, p, oPlayer);
+            else
+                publish(connection, p, xPlayer);
 
     }
 
+
+    private void updateDB(char status){
+        try {
+            Class.forName(PostgresqlExample.driver);
+            Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER, PostgresqlExample.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
+            Statement query = databaseConn.createStatement();
+
+            if(!twoPlayerMode)  // do not count games against CPU
+                return;
+
+            String loser = oPlayer, winner = xPlayer;
+            if (status == 'O') {
+                loser = xPlayer;
+                winner = oPlayer;
+            }
+
+            if (status == 'T') {
+                System.out.println("DRAW");
+                query.executeUpdate("UPDATE USERS SET draws = draws + 1 WHERE username = " + "'" + xPlayer + "'");
+                query.executeUpdate("UPDATE USERS SET draws = draws + 1 WHERE username = " + "'" + oPlayer + "'");
+            } else
+                System.out.println(" winner is " + winner);
+            query.executeUpdate("UPDATE USERS SET wins = wins + 1 WHERE username = " + "'" + winner + "'");
+            query.executeUpdate("UPDATE USERS SET losses = losses + 1 WHERE username = " + "'" + loser + "'");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.toString());
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+
+
+    }
 
 
     @Override public String toString(){

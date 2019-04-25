@@ -1,6 +1,9 @@
 package server.databaseOperations;
 
+import javafx.scene.control.Button;
+
 import java.sql.*;
+import java.util.Arrays;
 
 
 public class PostgresqlExample {
@@ -22,7 +25,7 @@ public class PostgresqlExample {
 
 
 
-    public static boolean queryUser(String email, String username) throws java.sql.SQLException, ClassNotFoundException {
+    public static boolean signUpQuery(String stm) throws java.sql.SQLException, ClassNotFoundException {
         // reference the driver being used to connect to the database
         Class.forName(PostgresqlExample.driver);
 
@@ -33,7 +36,7 @@ public class PostgresqlExample {
         Statement query = databaseConn.createStatement();
 
         // execute SQL query
-        ResultSet rs = query.executeQuery("SELECT email, username, password FROM USERS WHERE email = '" + email+ "' AND username = '" + username);// + "' AND password = '" + passwordField.getText() + "'");
+        ResultSet rs = query.executeQuery("SELECT email, username, password FROM USERS WHERE " + stm);// sql email = '" + email+ "' AND username = '" + username + "'");// + "' AND password = '" + passwordField.getText() + "'");
 
         // if the query results in a ResultSet, then the user entered was found in the database
         if(rs.next()) {
@@ -163,27 +166,26 @@ public class PostgresqlExample {
         }
 
 
-    public static ResultSet executeQuery(String sql) throws Exception{
+    public static boolean loginQuery(String sql) {
 
         Connection conn = null;
         Statement stmt = null;
         ResultSet result = null;
-       // try {
+        try {
 
             Class.forName(driver);
             conn = DriverManager.getConnection(tictactoe,USER,PASS);
             stmt = conn.createStatement();
             result = stmt.executeQuery(sql);
-        //}
-        /*catch(
-                SQLException se){
-            //Handle errors for JDBC
-            se.printStackTrace();
-        }catch(Exception e){
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        }finally{
-            //finally block used to close resources
+
+            return result.next();
+
+
+        }
+        catch(SQLException se){ se.printStackTrace(); }
+        catch(Exception e){ e.printStackTrace(); }
+        finally{
+
             try{
                 if(stmt!=null)
                     stmt.close();
@@ -195,9 +197,8 @@ public class PostgresqlExample {
             }catch(SQLException se){
                 se.printStackTrace();
             }//end finally try
-        }*/
-
-        return result;
+        }
+        return false;
     }
 
     public static boolean execute(String sql){
@@ -275,6 +276,39 @@ public class PostgresqlExample {
     }
 
 
+    public synchronized String[] getLeaderBoard() throws  Exception {
+
+        String ar[] = new String[1000];
+        int i = 0;
+        StringBuilder b = new StringBuilder();
+
+        Class.forName(PostgresqlExample.driver);
+
+        // connect to database
+        Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER, PostgresqlExample.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
+
+        // create a statement
+        Statement query = databaseConn.createStatement();
+
+        // execute SQL insert
+        ResultSet rs = query.executeQuery("SELECT username, wins FROM USERS" +
+                " ORDER BY WINS DESC");
+        while (rs.next()) {
+            //ar[i] =
+            b = new StringBuilder();
+            b.append(rs.getString("username")).append(" ").append(String.valueOf(rs.getInt("wins")));
+            ar[i++] = new String(b);
+            System.out.println(b);
+        }
+        //publish(connection, Arrays.copyOf(ar, i), Server.NEW_ACCOUNT_CHANNEL);
+        //for (String str : Arrays.copyOf(ar, i))
+        //    leaderBoardList.getChildren().add(new Button(str));
+
+        query.close();
+        databaseConn.close();
+
+        return Arrays.copyOf(ar, i);
+    }
 
 
 

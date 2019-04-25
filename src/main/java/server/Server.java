@@ -1,7 +1,6 @@
 package server;
 
 import client.User;
-import client.gui_controllers.GameLobbyController;
 import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
@@ -11,7 +10,6 @@ import server.databaseOperations.PostgresqlExample;
 import java.util.Arrays;
 
 import static pubnubWrappers.PubNubWrappers.publish;
-import static server.databaseOperations.PostgresqlExample.executeQuery;
 import static pubnubWrappers.PubNubWrappers.new_PubNub;
 
 public class Server extends Subscriber {
@@ -58,15 +56,21 @@ public class Server extends Subscriber {
     void addAccount(PNMessageResult message) throws Exception{
 
         User user = new Gson().fromJson(message.getMessage(), User.class);
-/*
+
         boolean emailExists, nameExists;
-        boolean userExists = PostgresqlExample.queryUser( user.getEmail(), user.getUsername());
-        if(!userExists) { // if the user being signed up does not yet exist
-            PostgresqlExample.insertUser(user.getEmail(), user.getUsername(), user.getPassword()); // add new user to database
-            publish(connection,"success",message.getPublisher());//System.out.println("New user created");
-            //loginClicked(click); // log into the game server
-        } else {*/
-            publish(connection,"user already exists",message.getPublisher());;
+
+        if(PostgresqlExample.signUpQuery( "email = '" + user.getEmail() + "'" ) ) { // if the user being signed up does not yet exist
+            publish(connection, "email", message.getPublisher());
+            if (PostgresqlExample.signUpQuery("username = '" + user.getUsername() + "'"))
+                publish(connection, "username", message.getPublisher());
+            return;
+        }
+
+
+        else{
+            PostgresqlExample.insertUser(user.getEmail(), user.getUsername(), user.getPassword());
+            publish(connection,"success",message.getPublisher()); }
+
 
         /*emailExists = userExists(user.getEmail());
         nameExists = userExists(user.getUsername());
@@ -77,27 +81,28 @@ public class Server extends Subscriber {
                 if(nameExists)
                     System.out.println("username already used");
             }
-        else { try{ executeQuery("signup successful"); }
+        else { try{ loginQuery("signup successful"); }
             catch (Exception e){e.printStackTrace();}*/
-       // }
+
 
 
 
     }
 
     boolean userExists(String identifier){
-        return false;//!executeQuery("SELECT username FROM USERS WHERE username=" + identifier).next();
+        return false;//!loginQuery("SELECT username FROM USERS WHERE username=" + identifier).next();
     }
 
-    void login(PNMessageResult message){  // verify login information
+    void login(PNMessageResult message) {  // verify login information
         {
             User user = new Gson().fromJson(message.getMessage(),User.class);
-            user.getUsername();
-            user.getEmail();
 
-
-            System.out.println(user);
-            publish(user,message.getPublisher());
+            if(PostgresqlExample.loginQuery("SELECT email, username, password FROM USERS WHERE email = '"
+                                        + user.getEmail() + "' AND username = '" + user.getUsername()
+                                         + "' AND password = '" + user.getPassword() + "'"))
+                publish(connection, "success" ,message.getPublisher());
+            else
+                publish(connection,"login fail", message.getPublisher());
         }
 
     }
