@@ -1,4 +1,4 @@
-# ticTacToeJava first version
+# ticTacToeJava version 1
 
 - players can play tictactoe sharing a singal computer
 - player can play computer in easy or hard mode
