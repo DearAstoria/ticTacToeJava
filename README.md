@@ -1,4 +1,4 @@
-# ticTacToeJava version 3
+# version 3
 
 a networked version of the game, with added features
 - player lobby 
