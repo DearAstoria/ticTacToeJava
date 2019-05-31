@@ -1,6 +1,10 @@
-# ticTacToeJava latest version
+# ticTacToeJava version 3
 
-new app features: player lobby, leaderboard, login/signup, database storage of user and game data
+a networked version of the game, with added features
+- player lobby 
+- leaderboard 
+- login/signup
+- database storage of user and game data
 
 tech:
 - PubNub for messaging
