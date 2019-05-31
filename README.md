@@ -1,7 +1,5 @@
-# ticTacToeJava latest version
+# ticTacToeJava first version
 
-new app features: player lobby, leaderboard, login/signup, database storage of user and game data
-
-tech:
-- PubNub for messaging
-- JDBC to interact with PostgreSQL 
+- players can play tictactoe sharing a singal computer
+- player can play computer in easy or hard mode
+- player can resume an unfinished game if he/she closes the app before finishing the game
