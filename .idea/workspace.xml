@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39c35665-ba41-49d1-b0fe-459693628170" name="Default Changelist" comment="" />
+    <list default="true" id="39c35665-ba41-49d1-b0fe-459693628170" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/db.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubnub.png" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -290,25 +293,26 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559688848590" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559688860249" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/wiki" />
+      <recent name="$PROJECT_DIR$/src/main/resources/gui_resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/gui_controllers" />
+      <recent name="$PROJECT_DIR$/src/main/resources/client" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/client/gui_controllers" />
       <recent name="$PROJECT_DIR$/src/main/java/pubnubWrappers" />
       <recent name="$PROJECT_DIR$/src/main/java/SceneLoader" />
       <recent name="$PROJECT_DIR$/src/main/java/server/databaseOperations" />
       <recent name="$PROJECT_DIR$/src/main/java/server" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/gui_resources" />
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/src/main/resources/gui_controllers" />
-      <recent name="$PROJECT_DIR$/src/main/resources/client" />
     </key>
   </component>
   <component name="RunDashboard">
