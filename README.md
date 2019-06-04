@@ -11,6 +11,8 @@ tech:
 - JDBC to interact with PostgreSQL 
 
 
+## set up and run
+
 Sign up with PubNub.com to get your pub/sub keys, then copy/paste them here
 
 ![alt text](https://github.com/justisketcham/ticTacToeJava/blob/v3/wiki/pubnub.png)
