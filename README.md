@@ -9,3 +9,8 @@ a networked version of the game, with added features
 tech:
 - PubNub for messaging
 - JDBC to interact with PostgreSQL 
+
+
+
+![alt text](https://github.com/justisketcham/ticTacToeJava/blob/v3/pubnub.png)
+![alt text](https://github.com/justisketcham/ticTacToeJava/blob/v3/db.png)
