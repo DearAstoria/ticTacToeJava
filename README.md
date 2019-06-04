@@ -13,7 +13,7 @@ tech:
 
 Sign up with PubNub.com to get your pub/sub keys, then copy/paste them here
 
-![alt text](https://github.com/justisketcham/ticTacToeJava/blob/v3/pubnub.png)
+![alt text](https://github.com/justisketcham/ticTacToeJava/blob/v3/wiki/pubnub.png)
 
 and set these add-ons in PubNub admin console
 
