@@ -1,4 +1,4 @@
-package pubnubWrappers;
+package pubnub_things;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.PNCallback;
 import com.pubnub.api.callbacks.SubscribeCallback;
@@ -9,7 +9,7 @@ import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 
 import java.util.*;
 
-import static pubnubWrappers.PubNubWrappers.new_PubNub;
+import static pubnub_things.PubNubWrappers.new_PubNub;
 
     abstract public class Subscriber extends SubscribeCallback
     {

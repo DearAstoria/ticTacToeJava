@@ -6,10 +6,6 @@ import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -18,21 +14,10 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
-import pubnubWrappers.Subscriber;
-import server.Server;
-import server.databaseOperations.PostgresqlExample;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
+import pubnub_things.Subscriber;
 
 import static java.lang.Character.toUpperCase;
-import static pubnubWrappers.PubNubWrappers.publish;
+import static pubnub_things.PubNubWrappers.publish;
 import static sceneLoader.SceneLoader.loadFXML;
 
 public class GameController extends Subscriber {
@@ -66,7 +51,7 @@ public class GameController extends Subscriber {
         if(!gameOver && myTurn) {
             Pane space = (Pane)event.getSource(); // get the space that is hovered over
             if(space.getChildren().isEmpty()) { // if the space is empty
-                takeSpace(space, settings.getPlayerLetter()/**game.getCurrentTurn()*/,true); // then generate a temporary letter in that space to provide feedback
+                takeSpace(space, settings.getPlayerLetter(),true); // then generate a temporary letter in that space to provide feedback
             }
         }
     }
@@ -84,13 +69,11 @@ public class GameController extends Subscriber {
     }
 
     public void spaceClicked(MouseEvent event) {
-        if(/**!game.isGameOver()*/ !gameOver && myTurn) { // if the game is not over...
+        if(!gameOver && myTurn) { // if the game is not over...
             Pane space = (Pane)event.getSource(); // then get the space that is clicked on
             if(space.getChildren().get(0).getId() != "Permanent") { // ...and if the space is not taken then
                 int coord[] = getSpace(space.getId()); // get the numerical coordinates of the space
-                /** replaced */ //GameEngine.takeSpace(game, coord[0],coord[1]); // take that space within the GameState
-
-                takeSpace(space, settings.getPlayerLetter()/**game.getCurrentTurn()*/, false); // take that space within the UI
+                takeSpace(space, settings.getPlayerLetter(), false); // take that space within the UI
                 myTurn = false;
                 publish(connection, new Move(coord[0], coord[1]), gameID);
 
@@ -122,15 +105,12 @@ public class GameController extends Subscriber {
                 {cell20, cell21, cell22} };
         update(); // update spaces to match with GameState
         myName.setText(settings.getPlayer()); // set the player's name in the top-left box
-        if(humanOpponent) { // if playing against a human requestedOpponent
-            // get the requestedOpponent's name from the server
-            // set the requestedOpponent's name in the top-right box
-        } else if(settings.isEasy()) { // if playing against the easy mode AI
+        if(humanOpponent) { }
+        else if(settings.isEasy())
             opponentName.setText("Easy CPU");
-        }
-        else { // else playing against the hard mode AI
+        else
             opponentName.setText("Hard CPU");
-        }
+
 
     }
 

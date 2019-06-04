@@ -22,12 +22,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.paint.Paint;
-import pubnubWrappers.*;
+import pubnub_things.*;
 import server.Server;
 
 import java.util.*;
 
-import static pubnubWrappers.PubNubWrappers.publish;
+import static pubnub_things.PubNubWrappers.publish;
 import static sceneLoader.SceneLoader.loadFXML;
 
 
@@ -139,11 +139,6 @@ public class GameLobbyController extends Subscriber
                         needLeaderBoard = !needLeaderBoard;
                     }
 
-
-
-
-
-                    //publish to lobby, then get lobby subscribers, then subscribe to lobby
     }
 
 
@@ -192,7 +187,6 @@ public class GameLobbyController extends Subscriber
             playerList.getChildren().remove(playerMap.get(uuid_username));
             playerMap.remove(uuid_username);
         });
-        //connection.unsubscribe().channels(Arrays.asList(Server.LOBBY_CHANNEL));
 
     }
     private void addPlayer(String username){
@@ -202,13 +196,10 @@ public class GameLobbyController extends Subscriber
             playerList.getChildren().add((Node)playerMap.get(username));
             ((Button)playerMap.get(username)).setOnMouseClicked(new playerSelected(username));
         });
-        //new Button().setO
 
     }
 
     public void joinGame(MouseEvent click) throws java.io.IOException {
-        //GameController controller = new GameController();
-        //gameController.initData(new GameSettings(getUUID(), true ,true));
         switch(((Button)click.getSource()).getText()) {
             case "CPU (Easy)":
                 publish(connection, Server.EASY, Server.REQUEST_CPU);

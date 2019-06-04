@@ -24,17 +24,7 @@ public class StartupMenuController
     }
 
     public void resumeClicked(MouseEvent click) throws Exception {
-        /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameScreen.fxml"));
-        Scene GameScreenScene = new Scene((Pane)loader.load());
 
-        GameState game = GameState.restore();
-        game.setUI(loader.<GameController>getController());
-
-        Stage window = (Stage)((Node)click.getSource()).getScene().getWindow();
-
-        window.setScene(GameScreenScene);
-        */
     }
 
 }

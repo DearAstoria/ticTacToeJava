@@ -5,5 +5,5 @@ module TicTacToe {
     opens client.gui_resources;
     opens client.gui_controllers;
     opens client.raw_data;
-    opens pubnubWrappers;
+    opens pubnub_things;
 }

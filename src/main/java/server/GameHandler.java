@@ -4,8 +4,8 @@ import client.raw_data.*;
 import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
-import pubnubWrappers.Subscriber;
-import server.databaseOperations.PostgresqlExample;
+import pubnub_things.Subscriber;
+import server.databaseOperations.DBOperations;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,12 +14,11 @@ import java.sql.Statement;
 
 import static client.raw_data.GameEngine.*;
 import static java.lang.Character.isUpperCase;
-import static pubnubWrappers.PubNubWrappers.publish;
+import static pubnub_things.PubNubWrappers.publish;
 
 public class GameHandler extends Subscriber {
 
     GameState game = new GameState();  // new GameState, where currentPlayer is X
-    ScoredMove scoredMove;
     private String xPlayer;
     private String oPlayer;
     private boolean twoPlayerMode = true;
@@ -98,8 +97,8 @@ public class GameHandler extends Subscriber {
 
     private void updateDB(char status){
         try {
-            Class.forName(PostgresqlExample.driver);
-            Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER, PostgresqlExample.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
+            Class.forName(DBOperations.driver);
+            Connection databaseConn = DriverManager.getConnection(DBOperations.tictactoe, DBOperations.USER, DBOperations.PASS/*"jdbc:sqlite:/Users/austinrosario/Desktop/Java/TicTacToe/TicTacToe/TicTacToe.db"*/);
             Statement query = databaseConn.createStatement();
 
             if(!twoPlayerMode)  // do not count games against CPU

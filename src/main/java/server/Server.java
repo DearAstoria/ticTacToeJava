@@ -4,8 +4,8 @@ import client.User;
 import com.google.gson.Gson;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
-import pubnubWrappers.Subscriber;
-import server.databaseOperations.PostgresqlExample;
+import pubnub_things.Subscriber;
+import server.databaseOperations.DBOperations;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,8 +13,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Arrays;
 
-import static pubnubWrappers.PubNubWrappers.publish;
-import static pubnubWrappers.PubNubWrappers.new_PubNub;
+import static pubnub_things.PubNubWrappers.publish;
+import static pubnub_things.PubNubWrappers.new_PubNub;
 
 public class Server extends Subscriber {
     public static final String NEW_ACCOUNT_CHANNEL = "new_account";
@@ -29,10 +29,6 @@ public class Server extends Subscriber {
     public static final String GET_LEADER_BOARD = "get_update_leader";
     public static final String REQUEST_LEADER_BOARD = "request_update_leader";
     public static final String EASY = "easy";
-
-
-
-
 
 
 
@@ -68,26 +64,23 @@ public class Server extends Subscriber {
 
         boolean emailExists, nameExists;
 
-        if(PostgresqlExample.signUpQuery( "email = '" + user.getEmail() + "'" ) ) { // if the user being signed up does not yet exist
+        if(DBOperations.signUpQuery( "email = '" + user.getEmail() + "'" ) ) { // if the user being signed up does not yet exist
             publish(connection, "email", message.getPublisher());
-            if (PostgresqlExample.signUpQuery("username = '" + user.getUsername() + "'"))
+            if (DBOperations.signUpQuery("username = '" + user.getUsername() + "'"))
                 publish(connection, "username", message.getPublisher());
             return;
         }
         else{
-            PostgresqlExample.insertUser(user.getEmail(), user.getUsername(), user.getPassword());
+            DBOperations.insertUser(user.getEmail(), user.getUsername(), user.getPassword());
             publish(connection,"success",message.getPublisher()); }
     }
 
-    boolean userExists(String identifier){
-        return false;//!loginQuery("SELECT username FROM USERS WHERE username=" + identifier).next();
-    }
 
     void login(PNMessageResult message) {  // verify login information
         {
             User user = new Gson().fromJson(message.getMessage(),User.class);
 
-            if(PostgresqlExample.loginQuery("SELECT email, username, password FROM USERS WHERE email = '"
+            if(DBOperations.loginQuery("SELECT email, username, password FROM USERS WHERE email = '"
                                         + user.getEmail() + "' AND username = '" + user.getUsername()
                                          + "' AND password = '" + user.getPassword() + "'"))
                 publish(connection, "success" ,message.getPublisher());
@@ -134,10 +127,10 @@ public class Server extends Subscriber {
             int i = 0;
             StringBuilder b = new StringBuilder();
 
-            Class.forName(PostgresqlExample.driver);
+            Class.forName(DBOperations.driver);
 
 
-            Connection databaseConn = DriverManager.getConnection(PostgresqlExample.tictactoe, PostgresqlExample.USER, PostgresqlExample.PASS);
+            Connection databaseConn = DriverManager.getConnection(DBOperations.tictactoe, DBOperations.USER, DBOperations.PASS);
 
             // create a statement
             Statement query = databaseConn.createStatement();
@@ -153,11 +146,6 @@ public class Server extends Subscriber {
                 System.out.println(ar[i++]);
             }
 
-
-
-            //for (String str : Arrays.copyOf(ar, i))
-            //    leaderBoardList.getChildren().add(new Button(str));
-
             query.close();
             databaseConn.close();
             publish(connection, Arrays.copyOf(ar,i), GET_LEADER_BOARD);
@@ -167,9 +155,6 @@ public class Server extends Subscriber {
 
     public static void main(String args[]){
         Server server = new Server();
-        //server.startReceivingMessage();
-        //server.createDatabase();
-
     }
 }
 

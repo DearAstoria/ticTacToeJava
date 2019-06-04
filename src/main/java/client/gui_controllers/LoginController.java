@@ -5,24 +5,16 @@ import com.pubnub.api.PubNub;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import server.Server;
-import server.databaseOperations.PostgresqlExample;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static pubnubWrappers.PubNubWrappers.*;
+import static pubnub_things.PubNubWrappers.*;
 import static sceneLoader.SceneLoader.loadFXML;
 import static server.Server.LOGIN_CHANNEL;
 
-import java.sql.ResultSet;
-
-public class LoginController extends pubnubWrappers.Subscriber {
+public class LoginController extends pubnub_things.Subscriber {
     //PubNub connection = new_PubNub();
 
     public LoginController() throws java.sql.SQLException, ClassNotFoundException {
