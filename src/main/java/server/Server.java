@@ -62,12 +62,11 @@ public class Server extends Subscriber {
 
         User user = new Gson().fromJson(message.getMessage(), User.class);
 
-        boolean emailExists, nameExists;
-
         if(DBOperations.signUpQuery( "email = '" + user.getEmail() + "'" ) ) { // if the user being signed up does not yet exist
-            publish(connection, "email", message.getPublisher());
             if (DBOperations.signUpQuery("username = '" + user.getUsername() + "'"))
-                publish(connection, "username", message.getPublisher());
+                publish(connection, "email and username already used", message.getPublisher());
+            else
+                publish(connection, "email already used", message.getPublisher());
             return;
         }
         else{

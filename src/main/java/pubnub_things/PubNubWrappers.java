@@ -9,8 +9,8 @@ import java.util.List;
 public class PubNubWrappers {
 
     //publish/subscribe keys are provided when you sign up for pubnub at pubnub.com
-    private static final String pubKey = "pub-c-d24d4938-2288-4171-88f5-a5a2c9d5ce06";
-    private static final String subKey = "sub-c-668aab96-56a4-11e9-ba0e-562f9424774e";
+    private static final String pubKey = "my pub key";
+    private static final String subKey = "my sub key";
 
     public static PubNub new_PubNub() {    // returns a new PubNub
         PNConfiguration config = new PNConfiguration();
