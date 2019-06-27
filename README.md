@@ -11,6 +11,9 @@ tech:
 - JDBC to interact with PostgreSQL 
 
 
+# Demo video
+[![IMAGE ALT TEXT](https://github.com/justisketcham/ticTacToeJava/blob/v3/wiki/youtubeDemo.png)](https://www.youtube.com/watch?v=HRSSBLtHc1U "demo")
+
 ## set up and run
 
 Sign up with PubNub.com to get your pub/sub keys, then copy/paste them here
